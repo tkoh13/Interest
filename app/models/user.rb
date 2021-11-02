@@ -36,7 +36,7 @@ class User < ApplicationRecord
         elsif username == nil
             self.username = self.email.split("@").first
         else
-            self.username = username
+            self.username = self.email.split("@").first
         end
     end
 

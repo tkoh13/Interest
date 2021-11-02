@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default ({ currentUser, logout }) => { // destructuring currentUser and logout which we are getting from our container
   const display = currentUser ? ( 
     <div>
-      <p>Heyyyyyy {currentUser.username}!</p>
+      <p>Heyyyyyy {currentUser.email}!</p>
       <button onClick={logout}>Logout</button>
     </div>
   ) : (

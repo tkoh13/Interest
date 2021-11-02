@@ -151,7 +151,7 @@ __webpack_require__.r(__webpack_exports__);
   var currentUser = _ref.currentUser,
       logout = _ref.logout;
   // destructuring currentUser and logout which we are getting from our container
-  var display = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Heyyyyyy ", currentUser.username, "!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  var display = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Heyyyyyy ", currentUser.email, "!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: logout
   }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     className: "btn",
@@ -191,12 +191,18 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.session.currentUser
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    login: function login() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.login)());
+    },
+    signup: function signup() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.signup)());
+    },
     logout: function logout() {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.logout)());
     }
@@ -480,11 +486,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/*
-Export a `RootReducer` that sets up a `posts` slice of state, which delegates
-to the `PostsReducer`.
-*/
 
 var RootReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   entities: _entities_Reducer__WEBPACK_IMPORTED_MODULE_0__["default"],

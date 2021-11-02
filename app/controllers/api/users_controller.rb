@@ -24,7 +24,7 @@ class Api::UsersController < ApplicationController
             # render :show
             render :update
         else
-            render json: @user.errors.full_messages, status: 422
+            render json: ['Invalid login credentials'], status: 422
         end
     end
 

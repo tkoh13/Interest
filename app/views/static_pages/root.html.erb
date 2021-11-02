@@ -1,13 +1,13 @@
 <% if logged_in? %>
   <script type="text/javascript">
     window.currentUser = {
-    "id": <%= current_user.id %>,
+    "id": "<%= current_user.id %>",
     "email": "<%= current_user.email %>",
-    "username": "<%= current_user.username %>"
+    "username": "<%= current_user.username %>",
     };
   </script>
 <% end %>
 
 <main id="root">
-  <div>hello???</div>
+  <div>root static page - something broke</div>
 </main> 
