@@ -1,16 +1,16 @@
 class User < ApplicationRecord
-    validates :session_token, :email, presence: true, uniqueness: true
-    validates :username,  uniqueness: true
+    validates :email, presence: true, uniqueness: true
+    validates :session_token, uniqueness: true
     validates :password_digest, presence: true
-    validates :password, length: {minimum: 6}, allow_nil: true
+    validates :password, length: {minimum: 6, allow_nil: true }
 
-    after_initialize :ensure_session_token
+    after_initialize :ensure_session_token, :email #
 
     attr_reader :password
 
-    def self.find_by_credentials(username, password)
-        user = User.find_by(username: username)
-        user && user.is_password?(password) ? user : nil
+    def self.find_by_credentials(user_params)
+        user = User.find_by(email: user_params[:email])
+        user && user.is_password?(user_params[:password]) ? user : nil
     end
 
     def password=(password)
@@ -23,9 +23,21 @@ class User < ApplicationRecord
     end
 
     def reset_session_token!
-        @session_token ||= SecureRandom::urlsafe_base64
+        self.session_token ||= SecureRandom::urlsafe_base64
         self.save!
-        @session_token
+        self.session_token
+        # puts self.session_token
+        # @session_token
+    end
+
+    def username=(username)
+        if username == '' 
+            self.username = self.email.split("@").first
+        elsif username == nil
+            self.username = self.email.split("@").first
+        else
+            self.username = username
+        end
     end
 
     private
