@@ -1,11 +1,10 @@
 class Api::UsersController < ApplicationController
     def create
-        # debugger
         @user = User.new(user_params)
         @user.reset_session_token!
         if @user.save
             login!(@user)
-            render :show
+            render "api/users/show"
         else
             render json: @user.errors.full_messages, status: 422
         end
@@ -16,12 +15,9 @@ class Api::UsersController < ApplicationController
     end
 
     def update
-        # @user = User.find(params[:id])
         @user = User.find_by_credentials(user_params)
 
-        # if @user.update(user_params)
         if !@user.nil?
-            # render :show
             render :update
         else
             render json: ['Invalid login credentials'], status: 422
@@ -30,7 +26,7 @@ class Api::UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:email, :password)
+        params.require(:user).permit(:email, :password, :username)
     end
 
 end

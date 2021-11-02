@@ -5,15 +5,23 @@ class SessionForm extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      username: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   update(field) {
-    return e => this.setState({
-      [field]: e.currentTarget.value
-    });
+    if (field === "email") {
+      return e => this.setState({
+        [field]: e.currentTarget.value,
+        ["username"]: e.currentTarget.value.split("@")[0]
+      })
+    } else {
+      return e => this.setState({
+        [field]: e.currentTarget.value
+      });
+    }
   }
 
   handleSubmit(e) {

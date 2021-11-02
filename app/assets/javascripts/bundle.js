@@ -340,7 +340,8 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       email: '',
-      password: ''
+      password: '',
+      username: ''
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -351,9 +352,17 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
     value: function update(field) {
       var _this2 = this;
 
-      return function (e) {
-        return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
-      };
+      if (field === "email") {
+        return function (e) {
+          var _this2$setState;
+
+          return _this2.setState((_this2$setState = {}, _defineProperty(_this2$setState, field, e.currentTarget.value), _defineProperty(_this2$setState, "username", e.currentTarget.value.split("@")[0]), _this2$setState));
+        };
+      } else {
+        return function (e) {
+          return _this2.setState(_defineProperty({}, field, e.currentTarget.value));
+        };
+      }
     }
   }, {
     key: "handleSubmit",

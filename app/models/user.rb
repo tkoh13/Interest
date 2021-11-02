@@ -1,10 +1,10 @@
 class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true
-    validates :session_token, uniqueness: true
+    validates :session_token, presence: true
     validates :password_digest, presence: true
-    validates :password, length: {minimum: 6, allow_nil: true }
+    validates :password, length: {minimum: 6}, allow_nil: true
 
-    after_initialize :ensure_session_token, :email #
+    after_initialize :ensure_session_token, :email 
 
     attr_reader :password
 
@@ -26,18 +26,6 @@ class User < ApplicationRecord
         self.session_token ||= SecureRandom::urlsafe_base64
         self.save!
         self.session_token
-        # puts self.session_token
-        # @session_token
-    end
-
-    def username=(username)
-        if username == '' 
-            self.username = self.email.split("@").first
-        elsif username == nil
-            self.username = self.email.split("@").first
-        else
-            self.username = self.email.split("@").first
-        end
     end
 
     private
