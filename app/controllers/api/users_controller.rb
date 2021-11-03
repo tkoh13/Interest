@@ -1,7 +1,7 @@
 class Api::UsersController < ApplicationController
     def create
         @user = User.new(user_params)
-        @user.reset_session_token!
+
         if @user.save
             login!(@user)
             render "api/users/show"

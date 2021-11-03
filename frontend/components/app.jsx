@@ -12,13 +12,13 @@ const App = () => (
     <div>
         <header>
             {/* Modal */}
-            {/* <NavBarContainer /> */}
+            <h1 id="interest-logo">I</h1>
             <Link to="/">
-                <h1>Interest</h1>
+                <h1 id="interest-logo-name">Interest</h1>
             </Link>
+                <NavBarContainer />
         </header>
         {/* <Switch> */}
-            <NavBarContainer />
             <AuthRoute exact path="/login" component={LogInFormContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
         {/* </Switch> */}
