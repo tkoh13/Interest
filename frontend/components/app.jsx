@@ -12,10 +12,10 @@ const App = () => (
     <div>
         <header>
             {/* Modal */}
-            <h1 id="interest-logo">I</h1>
-            <Link to="/">
+            
+            {/* <Link to="/">
                 <h1 id="interest-logo-name">Interest</h1>
-            </Link>
+            </Link> */}
                 <NavBarContainer />
         </header>
         {/* <Switch> */}

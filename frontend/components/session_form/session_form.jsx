@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
+import DemoUserContainer from '../demo_user/demo_user_container';
 
-class SessionForm extends React.Component {
+class SessionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +34,6 @@ class SessionForm extends React.Component {
   renderErrors() {
     const { errors } = this.props;
     if(errors === undefined) return null; 
-    // debugger
     return(
       <ul>
         {errors.map((error, i) => (
@@ -48,14 +48,16 @@ class SessionForm extends React.Component {
   render() {
     const { formType, navLink } = this.props;
     return (
-      <div>
-        <h3>Interest Session Form</h3>
-        <form onSubmit={this.handleSubmit}>
+      <div className="session-form-container">
+        <h3>Interest Session Form</h3> 
+        <form onSubmit={this.handleSubmit} className="session-form-form">
           {this.renderErrors()}
           <label>
             Email
             <input
               type="text"
+              className="session-form-input"
+              placeholder="Email"
               value={this.state.email}
               onChange={this.update("email")}
             />
@@ -64,6 +66,8 @@ class SessionForm extends React.Component {
             Password
             <input
               type="password"
+              className="session-form-input"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.update("password")}
             />
@@ -72,7 +76,10 @@ class SessionForm extends React.Component {
             <button>
               {formType === "login" ? "Log In" : "Sign Up"}
             </button>
+            {/* <button> */}
               {navLink}
+            {/* </button> */}
+              <DemoUserContainer/>
           </div>
         </form>
       </div>
