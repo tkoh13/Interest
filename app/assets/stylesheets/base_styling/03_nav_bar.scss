@@ -25,44 +25,20 @@
   font-size: 20px;
 }
 
-.home-link {
+.home-link, .today-link {
   color: $varBlack;
   font-weight: 600;
   font-size: 20px;
-  border: none;
   padding: 10px;
   margin: 15px;
   border-radius: 30px;
+  border: none;
   text-align: center;
   cursor: pointer;
   text-decoration: none;
 }
-
-.today-link {
-  color: $varBlack;
-  font-weight: 600;
-  font-size: 20px;
-  border: none;
-  padding: 10px;
-  margin: 15px;
-  border-radius: 30px;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.home-link:hover {
-  background-color: $varGray;
-  border: none;
-  padding: 10px;
-  margin: 15px;
-  border-radius: 30px;
-  text-align: center;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.today-link:hover {
+// Maybe add an active property?
+.home-link:hover, .today-link:hover {
   background-color: $varGray;
   border: none;
   padding: 10px;
