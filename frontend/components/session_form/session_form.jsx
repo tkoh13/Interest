@@ -34,11 +34,12 @@ class SessionForm extends Component {
   renderErrors() {
     const { errors } = this.props;
     if(errors === undefined) return null; 
+    // need to add in css for errors
     return(
       <ul>
         {errors.map((error, i) => (
           <li key={`error-${i}`}>
-            {error}
+            Why you lying to me?! Fix this shit: {error}
           </li>
         ))}
       </ul>
