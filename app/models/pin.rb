@@ -5,4 +5,6 @@ class Pin < ApplicationRecord
         foreign_key: :creator_id,
         class_name: :User
 
+    has_one_attached :photo
+
 end

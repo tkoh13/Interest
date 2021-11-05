@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 
 const Modal = ({ open, children, onClose }) => {
     if (!open) return null; 
-    return createPortal(
+    return createPortal( // for CSS stacking context issue
         <>
             <div className="modal-overlay"/>
             <div className="modal">

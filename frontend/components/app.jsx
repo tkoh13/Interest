@@ -19,7 +19,7 @@ const App = () => {
             <div className="modal-button">
                 <button onClick={() => setIsOpen(true)}>Open Modal</button>
                 <Modal open={isOpen} onClose={()=>setIsOpen(false)}>
-                    modal children that is being rendered
+                    <LogInFormContainer/>
                 </Modal>
             </div>
                 {/* will need to refactor for all modal forms */}
@@ -28,7 +28,7 @@ const App = () => {
             <NavBarContainer />
         </header>
         
-        {/* <Route exact path="/pins" component={PinIndexContainer}/> */}
+        <Route exact path="/pins" component={PinIndexContainer}/>
         <Switch>
             <AuthRoute exact path="/login" component={LogInFormContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
