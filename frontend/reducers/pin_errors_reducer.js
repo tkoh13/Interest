@@ -1,5 +1,6 @@
 import { 
     RECEIVE_PINS,
+    RECEIVE_PIN,
     RECEIVE_PIN_ERRORS
 } from '../actions/pin_actions';
 
@@ -9,6 +10,8 @@ const pinErrorsReducer = (state = [], action) => {
         case RECEIVE_PIN_ERRORS:
             return Object.values(action.errors.responseJSON);    
         case RECEIVE_PINS:
+            return [];
+        case RECEIVE_PIN:
             return [];
         default:
             return state;

@@ -11,12 +11,15 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_PINS": () => (/* binding */ RECEIVE_PINS),
+/* harmony export */   "RECEIVE_PIN": () => (/* binding */ RECEIVE_PIN),
 /* harmony export */   "RECEIVE_PIN_ERRORS": () => (/* binding */ RECEIVE_PIN_ERRORS),
-/* harmony export */   "fetchPins": () => (/* binding */ fetchPins)
+/* harmony export */   "fetchPins": () => (/* binding */ fetchPins),
+/* harmony export */   "fetchPin": () => (/* binding */ fetchPin)
 /* harmony export */ });
 /* harmony import */ var _utils_pin_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/pin_api_util */ "./frontend/utils/pin_api_util.js");
 
 var RECEIVE_PINS = 'RECEIVE_PINS';
+var RECEIVE_PIN = 'RECEIVE_PIN';
 var RECEIVE_PIN_ERRORS = 'RECEIVE_PIN_ERRORS';
 
 var receivePins = function receivePins(pins) {
@@ -26,12 +29,20 @@ var receivePins = function receivePins(pins) {
   };
 };
 
+var receivePin = function receivePin(pin) {
+  return {
+    type: RECEIVE_PIN,
+    pin: pin
+  };
+};
+
 var receive_pin_errors = function receive_pin_errors(errors) {
   return {
     type: RECEIVE_PIN_ERRORS,
     errors: errors
   };
-};
+}; // remove pin
+
 
 var fetchPins = function fetchPins() {
   return function (dispatch) {
@@ -42,6 +53,15 @@ var fetchPins = function fetchPins() {
     });
   };
 };
+var fetchPin = function fetchPin() {
+  return function (dispatch) {
+    return _utils_pin_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPin().then(function (fetchedPin) {
+      return dispatch(receivePin(fetchedPin));
+    }, function (errors) {
+      return dispatch(receive_pin_errors(errors));
+    });
+  };
+}; // delete pin
 
 /***/ }),
 
@@ -179,7 +199,9 @@ var App = function App() {
       isOpen = _useState2[0],
       setIsOpen = _useState2[1];
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "appl-de-ap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "modal-button"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: function onClick() {
@@ -936,6 +958,9 @@ var pinErrorsReducer = function pinErrorsReducer() {
     case _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PINS:
       return [];
 
+    case _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PIN:
+      return [];
+
     default:
       return state;
   }
@@ -957,6 +982,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/pin_actions */ "./frontend/actions/pin_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 var pinsReducer = function pinsReducer() {
@@ -967,6 +994,9 @@ var pinsReducer = function pinsReducer() {
   switch (action.type) {
     case _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PINS:
       return action.pins;
+
+    case _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PIN:
+      return Object.assign({}, state, _defineProperty({}, action.pin.id, action.pin));
 
     default:
       return state;
@@ -1188,7 +1218,9 @@ var fetchPin = function fetchPin(pinId) {
     url: "api/pin/".concat(pinId),
     method: 'GET'
   });
-};
+}; // create pin
+// delete pin
+// update pin
 
 /***/ }),
 

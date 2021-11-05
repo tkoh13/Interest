@@ -12,7 +12,7 @@ import PinIndexContainer from './pins/pin_index_container';
 const App = () => {
     const [isOpen, setIsOpen] = useState(false);
     return (
-    <div>
+    <div className="appl-de-ap">
         <header>
 
             {/* will need to refactor for all modal forms */}

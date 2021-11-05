@@ -11,3 +11,7 @@ export const fetchPin = (pinId) => (
         method: 'GET'
     })
 )
+
+// create pin
+// delete pin
+// update pin
