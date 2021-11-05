@@ -28,7 +28,7 @@ const App = () => {
             <NavBarContainer />
         </header>
         
-        <Route exact path="/pins" component={PinIndexContainer}/>
+        {/* <Route exact path="/pins" component={PinIndexContainer}/> */}
         <Switch>
             <AuthRoute exact path="/login" component={LogInFormContainer} />
             <AuthRoute exact path="/signup" component={SignUpFormContainer} />
