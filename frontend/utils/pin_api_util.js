@@ -1,7 +1,13 @@
-export const fetchPins = pins => (
+export const fetchPins = () => (
     $.ajax({
         url: 'api/pins',
-        method: 'GET',
-        pins
+        method: 'GET'
     })
 );
+
+export const fetchPin = (pinId) => (
+    $.ajax({
+        url: `api/pin/${pinId}`,
+        method: 'GET'
+    })
+)

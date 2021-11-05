@@ -1174,13 +1174,19 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchPins": () => (/* binding */ fetchPins)
+/* harmony export */   "fetchPins": () => (/* binding */ fetchPins),
+/* harmony export */   "fetchPin": () => (/* binding */ fetchPin)
 /* harmony export */ });
-var fetchPins = function fetchPins(pins) {
+var fetchPins = function fetchPins() {
   return $.ajax({
     url: 'api/pins',
-    method: 'GET',
-    pins: pins
+    method: 'GET'
+  });
+};
+var fetchPin = function fetchPin(pinId) {
+  return $.ajax({
+    url: "api/pin/".concat(pinId),
+    method: 'GET'
   });
 };
 
