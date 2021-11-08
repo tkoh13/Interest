@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { openModal } from '../../actions/modal_actions';
 import DemoUserContainer from '../demo_user/demo_user_container';
 
 class SessionForm extends Component {
@@ -28,7 +29,7 @@ class SessionForm extends Component {
   handleSubmit(e) {
     e.preventDefault();   
     const user = Object.assign({}, this.state);
-    this.props.processForm(this.state);
+    this.props.processForm(this.state).then(()=>this.props.closeModal());
   }
 
   renderErrors() {
@@ -47,7 +48,7 @@ class SessionForm extends Component {
   }
 
   render() {
-    const { formType, navLink } = this.props;
+    const { formType, navLink, navLinkText, openModal } = this.props;
     return (
       <div className="session-form-container">
         <h3>Interest Session Form</h3> 
@@ -77,12 +78,13 @@ class SessionForm extends Component {
             <button>
               {formType === "login" ? "Log In" : "Sign Up"}
             </button>
-            {/* <button> */}
-              {navLink}
-            {/* </button> */}
-              <DemoUserContainer/>
+            <DemoUserContainer/>
           </div>
         </form>
+        {/* need to add in className and corresponding styling */}
+        <button onClick={() => openModal(navLink)}> 
+          {navLinkText}
+        </button>
       </div>
     );
   }

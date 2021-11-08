@@ -1,22 +1,5 @@
 @import './base_styling/01_variables.scss';
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);// scale(0);
-  background-color: $varWhite;
-  border-radius: 30px;
-  padding: 50px;
-  z-index: 1000;
-  min-width: 80%;
-  max-width: 80%;
-}
-
-// .modal.active {
-//   transform: translate(-50%, -50%) scale(1);
-// }
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -25,19 +8,20 @@
   bottom: 0;
   background-color: rgba(0,0,0,.8);
   z-index: 1000;
-  pointer-events: none;
 }
 
-// .modal-overlay.active {
-//   opacity: 1;
-//   pointer-events: all;
-// }
-
-// modal left and right? 
-
-// #modal-close-button { // not sure if I want this or not
-
-// }
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $varWhite;
+  border-radius: 30px;
+  padding: 50px;
+  z-index: 1000;
+  min-width: 80%;
+  max-width: 80%;
+}
 
 #modal-close-button {
     cursor: pointer;

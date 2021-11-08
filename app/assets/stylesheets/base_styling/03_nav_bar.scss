@@ -1,12 +1,27 @@
 @import './base_styling/01_variables.scss';
 
-// Logo Area
-.nav-bar-header {
+.nb {
+  // margin: 50px;
+  height: 80px; 
+  width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  align-items: baseline;
+  flex: 1 1 auto;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
 }
+
+.nb-content {
+
+}
+// Logo Area
+// .nav-bar-header {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: baseline;
+// }
 
 .interest-logo {
   font-family: $fontLogo;
@@ -15,7 +30,7 @@
   background-color: $varRed;
   border-radius: 100px;
   width: 20px;
-  padding: 4px 2px 2px 9px; //top right bottom left
+  padding: 3px 15px 3px 15px; //top right bottom left
   // text-align: center;
   margin: 1%;
 }
@@ -50,12 +65,12 @@
 }
 
 // Navigation Bar
-.nav-bar-display {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: baseline;
-}
+// .nav-bar-display {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-end;
+//   align-items: baseline;
+// }
 
 #login-button {
   font-family: $font;

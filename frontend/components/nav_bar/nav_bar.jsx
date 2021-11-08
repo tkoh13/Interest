@@ -1,49 +1,44 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SignUpFormContainer from '../session_form/signup_form_container'
-import LogInFormContainer from '../session_form/login_form_container';
-import Modal from '../modal/modal'
+// import SignUpFormContainer from '../session_form/signup_form_container'
+// import LogInFormContainer from '../session_form/login_form_container';
 
-export default ({ currentUser, logout }) => { 
-  const [isOpen, setIsOpen] = useState(false);
 
-  const navBarHeader = currentUser ? (
-    <span className="nav-bar-header">
+const NavBar = ({ currentUser, logout, openModal, closeModal }) => { 
+  // const [isOpen, setIsOpen] = useState(false);
+  console.log("this is the NavBar!!")
+
+  const navBarLeft = currentUser ? (
+    <div className="nb nb-content-left">
       <Link to="/" >
-        <span className="interest-logo">I</span>
-        <span className="home-link">HomePlaceholder</span>
+        <div className="interest-logo">I</div>
+        <div className="home-link">HomePlaceholder</div>
       </Link>
       <Link to="/" className="today-link">TodayPlaceholder</Link>
-    </span>
+    </div>
   ) : (
-    <span className="nav-bar-header">
+    <div className="nb nb-content-left">
       <Link to="/" >
-        <span className="interest-logo">I</span>
-        <span className="interest-logo-name">Interest</span>
+        <div className="interest-logo">I</div>
+        <div className="interest-logo-name">Interest</div>
       </Link>
-    </span>
+    </div>
   );
 
-  const navBarDisplay = currentUser ? ( 
-    <span className="nav-bar-display">
+  const navBarRight = currentUser ? ( 
+    <div className="nb nb-content-right">
       <p>Heyyyyyy {currentUser.username}!</p>
       <Link to="/">ProfilePlaceholder</Link>
       <button onClick={logout}>Logout</button>
-    </span>
+    </div>
   ) : (
-    <div>
+    <div className="nb nb-content-right">
       <div>
-          <button onClick={() => setIsOpen(true)} id="login-button">Log In</button>
-          <Modal open={isOpen} onClose={()=>setIsOpen(false)}>
-              <LogInFormContainer/>
-          </Modal>
+          <button onClick={() => openModal('login')} id="login-button">Log In</button>
       </div>
 
       <div>
-          <button onClick={() => setIsOpen(true)} id="signup-button">Sign Up</button>
-          <Modal open={isOpen} onClose={()=>setIsOpen(false)}>
-              <SignUpFormContainer/>
-          </Modal>
+          <button onClick={() => openModal('signup')} id="signup-button">Sign Up</button>
       </div>
     </div>
 
@@ -54,9 +49,11 @@ export default ({ currentUser, logout }) => {
   );
 
   return (
-    <header className="nav-bar-container">
-      {navBarHeader}
-      {navBarDisplay}
-    </header>
+    <nav className="nb nb-content">
+      {navBarLeft}
+      {navBarRight}
+    </nav>
   );
 };
+
+export default NavBar
