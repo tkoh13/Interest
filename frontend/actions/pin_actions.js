@@ -13,7 +13,7 @@ const receivePin = (pin) => ({
     pin
 })
 
-const receive_pin_errors = (errors) => ({
+const receivePinErrors = (errors) => ({
     type: RECEIVE_PIN_ERRORS,
     errors
 })
@@ -22,10 +22,10 @@ const receive_pin_errors = (errors) => ({
 
 export const fetchPins = () => dispatch => PinApiUtil.fetchPins()
     .then(fetchedPins => dispatch(receivePins(fetchedPins)),
-    errors => dispatch(receive_pin_errors(errors)));
+    errors => dispatch(receivePinErrors(errors)));
 
-export const fetchPin = () => dispatch => PinApiUtil.fetchPin()
+export const fetchPin = (pinId) => dispatch => PinApiUtil.fetchPin(pinId)
     .then(fetchedPin => dispatch(receivePin(fetchedPin)),
-    errors => dispatch(receive_pin_errors(errors)));
+    errors => dispatch(receivePinErrors(errors)));
 
 // delete pin

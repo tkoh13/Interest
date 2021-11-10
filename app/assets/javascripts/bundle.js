@@ -1,6 +1,69 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./frontend/actions/board_actions.js":
+/*!*******************************************!*\
+  !*** ./frontend/actions/board_actions.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_BOARDS": () => (/* binding */ RECEIVE_BOARDS),
+/* harmony export */   "RECEIVE_BOARD": () => (/* binding */ RECEIVE_BOARD),
+/* harmony export */   "RECEIVE_BOARD_ERRORS": () => (/* binding */ RECEIVE_BOARD_ERRORS),
+/* harmony export */   "fetchBoards": () => (/* binding */ fetchBoards),
+/* harmony export */   "fetchBoard": () => (/* binding */ fetchBoard)
+/* harmony export */ });
+/* harmony import */ var _utils_board_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/board_api_util */ "./frontend/utils/board_api_util.js");
+
+var RECEIVE_BOARDS = 'RECEIVE_BOARDS';
+var RECEIVE_BOARD = 'RECEIVE_BOARD';
+var RECEIVE_BOARD_ERRORS = 'RECEIVE_BOARD_ERRORS';
+
+var receiveBoards = function receiveBoards(boards) {
+  return {
+    type: RECEIVE_BOARDS,
+    boards: boards
+  };
+};
+
+var receiveBoard = function receiveBoard(board) {
+  return {
+    type: RECEIVE_BOARD,
+    board: board
+  };
+};
+
+var receiveBoardErrors = function receiveBoardErrors(errors) {
+  return {
+    type: RECEIVE_BOARD_ERRORS,
+    errors: errors
+  };
+};
+
+var fetchBoards = function fetchBoards() {
+  return function (dispatch) {
+    return _utils_board_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBoards().then(function (fetchedBoards) {
+      return dispatch(receiveBoards(fetchedBoards));
+    }, function (errors) {
+      return dispatch(receiveBoardErrors(errors));
+    });
+  };
+};
+var fetchBoard = function fetchBoard(boardId) {
+  return function (dispatch) {
+    return _utils_board_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBoard(boardId).then(function (fetchedBoard) {
+      return dispatch(receiveBoard(fetchedBoard));
+    }, function (errors) {
+      return dispatch(receiveBoardErrors(errors));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/modal_actions.js":
 /*!*******************************************!*\
   !*** ./frontend/actions/modal_actions.js ***!
@@ -66,7 +129,7 @@ var receivePin = function receivePin(pin) {
   };
 };
 
-var receive_pin_errors = function receive_pin_errors(errors) {
+var receivePinErrors = function receivePinErrors(errors) {
   return {
     type: RECEIVE_PIN_ERRORS,
     errors: errors
@@ -79,16 +142,16 @@ var fetchPins = function fetchPins() {
     return _utils_pin_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPins().then(function (fetchedPins) {
       return dispatch(receivePins(fetchedPins));
     }, function (errors) {
-      return dispatch(receive_pin_errors(errors));
+      return dispatch(receivePinErrors(errors));
     });
   };
 };
-var fetchPin = function fetchPin() {
+var fetchPin = function fetchPin(pinId) {
   return function (dispatch) {
-    return _utils_pin_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPin().then(function (fetchedPin) {
+    return _utils_pin_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchPin(pinId).then(function (fetchedPin) {
       return dispatch(receivePin(fetchedPin));
     }, function (errors) {
-      return dispatch(receive_pin_errors(errors));
+      return dispatch(receivePinErrors(errors));
     });
   };
 }; // delete pin
@@ -1132,6 +1195,43 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/board_reducer.js":
+/*!********************************************!*\
+  !*** ./frontend/reducers/board_reducer.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/board_actions */ "./frontend/actions/board_actions.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+var boardsReducer = function boardsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARDS:
+      return action.boards;
+
+    case _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARD:
+      return Object.assign({}, state, _defineProperty({}, action.board.id, action.board));
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (boardsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -1143,15 +1243,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 /* harmony import */ var _pins_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pins_reducer */ "./frontend/reducers/pins_reducer.js");
+/* harmony import */ var _board_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./board_reducer */ "./frontend/reducers/board_reducer.js");
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   users: _users_reducer__WEBPACK_IMPORTED_MODULE_0__["default"],
-  pins: _pins_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  pins: _pins_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  boards: _board_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1168,15 +1271,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
 /* harmony import */ var _pin_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pin_errors_reducer */ "./frontend/reducers/pin_errors_reducer.js");
+/* harmony import */ var _board_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./board_reducer */ "./frontend/reducers/board_reducer.js");
 
 
 
-var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
+
+var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__["default"],
-  pins: _pin_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"]
+  pins: _pin_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  board: _board_reducer__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (errorsReducer);
 
@@ -1504,6 +1610,33 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
+/***/ "./frontend/utils/board_api_util.js":
+/*!******************************************!*\
+  !*** ./frontend/utils/board_api_util.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchBoards": () => (/* binding */ fetchBoards),
+/* harmony export */   "fetchBoard": () => (/* binding */ fetchBoard)
+/* harmony export */ });
+var fetchBoards = function fetchBoards() {
+  return $.ajax({
+    url: 'api/boards',
+    method: 'GET'
+  });
+};
+var fetchBoard = function fetchBoard(boardId) {
+  return $.ajax({
+    url: "api/boards/".concat(boardId),
+    method: 'GET'
+  });
+};
+
+/***/ }),
+
 /***/ "./frontend/utils/pin_api_util.js":
 /*!****************************************!*\
   !*** ./frontend/utils/pin_api_util.js ***!
@@ -1514,7 +1647,10 @@ var configureStore = function configureStore() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchPins": () => (/* binding */ fetchPins),
-/* harmony export */   "fetchPin": () => (/* binding */ fetchPin)
+/* harmony export */   "fetchPin": () => (/* binding */ fetchPin),
+/* harmony export */   "createPin": () => (/* binding */ createPin),
+/* harmony export */   "deletePin": () => (/* binding */ deletePin),
+/* harmony export */   "updatePin": () => (/* binding */ updatePin)
 /* harmony export */ });
 var fetchPins = function fetchPins() {
   return $.ajax({
@@ -1527,9 +1663,31 @@ var fetchPin = function fetchPin(pinId) {
     url: "api/pin/".concat(pinId),
     method: 'GET'
   });
-}; // create pin
-// delete pin
-// update pin
+};
+var createPin = function createPin(formData) {
+  return $.ajax({
+    url: '/api/pins/',
+    method: 'POST',
+    data: formData,
+    contentType: false,
+    processData: false
+  });
+};
+var deletePin = function deletePin(pinId) {
+  return $.ajax({
+    url: "api/pins/".concat(pinId),
+    method: 'DELETE'
+  });
+};
+var updatePin = function updatePin(formData, pin) {
+  return $.ajax({
+    url: "api/pins/".concat(pin.id),
+    method: "PATCH",
+    data: formData,
+    contentType: false,
+    processData: false
+  });
+};
 
 /***/ }),
 
