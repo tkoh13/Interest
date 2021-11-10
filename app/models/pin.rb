@@ -7,6 +7,8 @@ class Pin < ApplicationRecord
         foreign_key: :creator_id,
         class_name: :User
 
+    has_and_belongs_to_many :boards , dependent: :nullify
+
     def unique_key
         @key = self.created_at.to_i
     end
