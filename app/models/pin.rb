@@ -7,6 +7,9 @@ class Pin < ApplicationRecord
         foreign_key: :creator_id,
         class_name: :User
 
+    def unique_key
+        @key = self.created_at.to_i
+    end
     # belongs to mutliple boards?
     # photo file validation? 
 

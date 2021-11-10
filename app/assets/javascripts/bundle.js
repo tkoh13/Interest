@@ -38984,7 +38984,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.store = store;
-  window.fetchPins = _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPins; // TESTING END
+  window.fetchPins = _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPins;
+  window.fetchPin = _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPin; // TESTING END
 
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store
