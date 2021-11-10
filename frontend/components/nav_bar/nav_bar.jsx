@@ -6,33 +6,57 @@ import { Link } from 'react-router-dom';
 
 const NavBar = ({ currentUser, logout, openModal, closeModal }) => { 
   // const [isOpen, setIsOpen] = useState(false);
-  console.log("this is the NavBar!!")
 
   const navBarLeft = currentUser ? (
-    <div className="nb nb-content-left">
+    <section className="nb nb-content-left">
+      <div className="icon-container">
+        <div>
+          <Link to="/"><img className="interest-logo" src={window.logo}/></Link>
+        </div>
+      </div>
       <Link to="/" >
-        <div className="interest-logo">I</div>
-        <div className="home-link">HomePlaceholder</div>
+        <div className="home-link">Home</div>
       </Link>
-      <Link to="/" className="today-link">TodayPlaceholder</Link>
-    </div>
+      <Link to="/" className="today-link">Today</Link>
+    </section>
   ) : (
-    <div className="nb nb-content-left">
-      <Link to="/" >
-        <div className="interest-logo">I</div>
-        <div className="interest-logo-name">Interest</div>
-      </Link>
-    </div>
+    <section className="nb nb-content-left">
+      <div className="icon-container">
+        <div>
+          <Link to="/"><img className="interest-logo" src={window.logo}/></Link>
+        </div>
+      </div>
+      <Link to="/" ><div className="interest-logo-name">Interest</div></Link>
+    </section>
+  );
+
+  const searchBar = currentUser? (
+    <input type="text" className="search-bar" placeholder="Search Bar Placeholder" />
+  ) : (
+    <div className="search-bar"></div>
   );
 
   const navBarRight = currentUser ? ( 
-    <div className="nb nb-content-right">
-      <p>Heyyyyyy {currentUser.username}!</p>
-      <Link to="/">ProfilePlaceholder</Link>
-      <button onClick={logout}>Logout</button>
-    </div>
+    <section className="nb nb-content-right">
+      {/* <p>Heyyyyyy {currentUser.username}!</p> */}
+      <div className="icon-container">
+          <Link to="/">img</Link>
+      </div>
+      {/* <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </div> */}
+      {/* <button onClick={logout}>Logout</button> */}
+    </section>
   ) : (
-    <div className="nb nb-content-right">
+    <section className="nb nb-content-right">
+      <div className="about-link">
+        <Link to="/about">About</Link>
+      </div>
       <div>
           <button onClick={() => openModal('login')} id="login-button">Log In</button>
       </div>
@@ -40,7 +64,7 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
       <div>
           <button onClick={() => openModal('signup')} id="signup-button">Sign Up</button>
       </div>
-    </div>
+    </section>
 
     // <div className="nav-bar-display">
     //   <Link id="login-button" to="/login">Log In</Link>
@@ -51,6 +75,7 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
   return (
     <nav className="nb nb-content">
       {navBarLeft}
+      {searchBar}
       {navBarRight}
     </nav>
   );

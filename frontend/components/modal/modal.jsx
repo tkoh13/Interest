@@ -6,7 +6,6 @@ import LogInFormContainer from '../session_form/login_form_container';
 
 const Modal = ({ modal, openModal, closeModal }) => {
     if (!modal) {
-        console.log("hello?")
         return null;
     }
     let component;
@@ -21,10 +20,10 @@ const Modal = ({ modal, openModal, closeModal }) => {
             return null;
 
     }
-    return createPortal( // for CSS stacking context issue
-    // return(
+    return createPortal( 
         <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
+                <button onClick={closeModal} id="modal-close-button">&times;</button>
                 { component }
             </div>
         </div>,

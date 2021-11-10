@@ -1,5 +1,9 @@
 @import './base_styling/01_variables.scss';
 
+// #portal {
+
+// }
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -10,7 +14,11 @@
   z-index: 1000;
 }
 
-.modal {
+.modal-overlay:hover {
+  cursor: zoom-out;
+}
+
+.modal-content {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -23,14 +31,18 @@
   max-width: 80%;
 }
 
+.modal-content {
+  cursor: default;
+}
+
 #modal-close-button {
     cursor: pointer;
     border: none;
     outline: none;
     background: none;
     font-size: 2rem;
-    font-weight: bold;
-      border-radius: 100px;
+    // font-weight: bold;
+    border-radius: 100px;
 }
 
 #modal-close-button:hover {

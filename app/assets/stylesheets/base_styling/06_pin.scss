@@ -1,1 +1,15 @@
 @import './base_styling/01_variables.scss';
+
+.pin {
+    border-radius: 16px;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    min-width: 240px;
+    min-height: 240px;
+    // med height: 300px;
+    // lag height: 360px;
+    // x-lg height: 420px; 
+    overflow: hidden;
+    cursor: zoom-in;
+}

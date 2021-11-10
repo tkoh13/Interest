@@ -20,13 +20,12 @@ body {
 //   color: $varWhite;
 // }
 
-a:link {
+a, a:link, a:visited, a:focus, a:hover, a:active {
+  color: $varBlack;
   text-decoration: none;
 }
 
-a:visited {
-  text-decoration: none;
-}
+
 
 
 // header {
@@ -41,5 +40,5 @@ a:visited {
 input {
   border-radius: 30px;
   padding: 2px 5px 2px 5px; // top left bottom right
-  margin: 3px;
+  // margin: 3px;
 }
