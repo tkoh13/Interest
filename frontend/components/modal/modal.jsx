@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { createPortal } from "react-dom";
 import SignUpFormContainer from '../session_form/signup_form_container'
 import LogInFormContainer from '../session_form/login_form_container';
+import PinFormCreateContainer from '../pins/pin_form_create_container';
 
 const Modal = ({ modal, openModal, closeModal }) => {
     if (!modal) {
@@ -16,6 +16,8 @@ const Modal = ({ modal, openModal, closeModal }) => {
         case 'signup':
             component = <SignUpFormContainer />; 
             break;
+        case 'createPin':
+            component = <PinFormCreateContainer />;
         default:
             return null;
 

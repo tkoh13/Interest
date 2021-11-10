@@ -7,6 +7,7 @@ import NavBarContainer from './nav_bar/nav_bar_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import ContentDisplayContainer from './content_display/content_display_container';
+import Footer from './footer/footer';
 
 
 
@@ -24,7 +25,7 @@ const App = () => {
                 {/* <AuthRoute/> LandingPage */}
             {/* </Switch> */}
         {/* <Route exact path="/pins" component={ContentDisplay}/> */}
-        <div className="main-content">
+        <main className="main-content">
             
             <Switch>
                 {/* <Route exact path="/pins/:pinId" /> component={PinDetailsContainer}  */}
@@ -32,13 +33,10 @@ const App = () => {
                 {/* interest/:userId/:boardId */}
                 <ProtectedRoute exact path='/home' component={ContentDisplayContainer} />
             </Switch>
-        </div>
+        </main>
 
         <footer>
-
-            {/* createPin */}
-            {/* createBoard */}
-            {/* questionMark: about */}
+            <Footer/>
         </footer>
     </div>
     )

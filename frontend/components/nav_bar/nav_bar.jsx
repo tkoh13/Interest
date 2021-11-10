@@ -50,7 +50,7 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
           <a href="#">Link 3</a>
         </div>
       </div> */}
-      {/* <button onClick={logout}>Logout</button> */}
+      <button onClick={logout}>Logout</button>
     </section>
   ) : (
     <section className="nb nb-content-right">

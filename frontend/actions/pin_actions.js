@@ -28,4 +28,8 @@ export const fetchPin = (pinId) => dispatch => PinApiUtil.fetchPin(pinId)
     .then(fetchedPin => dispatch(receivePin(fetchedPin)),
     errors => dispatch(receivePinErrors(errors)));
 
+export const createPin = (formData) => dispatch => PinApiUtil.createPin(formData)
+    .then(createdPin => dispatch(receivePin(createdPin)),
+    errors => dispatch(receivePinErrors(errors)));
+
 // delete pin

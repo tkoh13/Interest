@@ -10,6 +10,8 @@ class ContentDisplay extends Component {
              boardContent: null,
         }
     }
+// let height = Math.floor(document.documentElement.clientHeight * .75);
+// let width = Math.floor(document.documentElement.clientWidth * .9);
 
     componentDidMount() {
         const { fetchPins } = this.props;
@@ -20,7 +22,7 @@ class ContentDisplay extends Component {
     renderPins() {
         const { pins } = this.props;
 
-        const pinsToDisplay = pins.map((content) =>{
+        const pinsToDisplay = pins.map((content) => {
             return (
                 <PinDisplayContainer content={content}/>
                 // key and location?
@@ -33,13 +35,32 @@ class ContentDisplay extends Component {
 
         if (!pinContent) return null
         return (
-            <div className="home-pin-index">
-                {pinContent}
+            <div className="pin-display-container">
+                <div className="pin-display">
+                    {pinContent}
+                </div>
+
             </div>
         )
     }
 
-    
+    add_pin = pinDetails => {
+        this.setState(_state => {
+            const new_pins = [
+                ..._state.pins
+            ]
+
+            new_pins.push(
+                <Pin pinDetails={pinDetails} key={_state.pins.length} />
+            )
+
+            return {
+                pins: new_pins,
+                show_modal: false
+            }
+        });
+    }
+
     render() {
         return (
             <div className="content-display">
