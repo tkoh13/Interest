@@ -1300,7 +1300,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "deleteSession": () => (/* binding */ deleteSession)
 /* harmony export */ });
 var postUser = function postUser(user) {
-  // debugger
   return $.ajax({
     url: '/api/users',
     method: 'POST',
