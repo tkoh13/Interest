@@ -8,38 +8,15 @@ body {
     height: 100vh;
 }
 
-// button {
-//   border: none;
-//   padding: 10px;
-//   margin: 15px;
-//   border-radius: 30px;
-//   text-align: center;
-//   cursor: pointer;
-//   text-decoration: none;
-//   background-color: $varRed;
-//   color: $varWhite;
-// }
-
-a:link {
-  text-decoration: none;
-}
-
-a:visited {
+a, a:link, a:visited, a:focus, a:hover, a:active {
+  color: $varBlack;
   text-decoration: none;
 }
 
 
-header {
-  // display: inline-flex;
-  // flex-direction: row;
-  // justify-content: space-between;
-  // padding: 1%; 
-  margin: 1%;
-  // align-items: baseline;
-}
 
 input {
   border-radius: 30px;
   padding: 2px 5px 2px 5px; // top left bottom right
-  margin: 3px;
+  // margin: 3px;
 }

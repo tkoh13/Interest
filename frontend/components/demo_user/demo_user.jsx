@@ -8,7 +8,7 @@ class DemoUser extends Component {
 
     handleClick(e) {
         e.preventDefault();
-        this.props.login(this.props.demoUser);
+        this.props.login(this.props.demoUser).then(() => this.props.closeModal());
     }
     
     render() {

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { login } from '../../actions/session_actions'
+import { closeModal } from '../../actions/modal_actions';
 import DemoUser from './demo_user';
 
 const mapStateToProps = ({session}) => {
@@ -16,6 +17,7 @@ const mapStateToProps = ({session}) => {
 const mapDispatchToProps = dispatch => {
     return {
         login: (demoUser) => dispatch(login(demoUser)),
+        closeModal: () => dispatch(closeModal()),
     };
 };
 

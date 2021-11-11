@@ -1,20 +1,7 @@
 @import './base_styling/01_variables.scss';
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);// scale(0);
-  background-color: $varWhite;
-  border-radius: 30px;
-  padding: 50px;
-  z-index: 1000;
-  min-width: 80%;
-  max-width: 80%;
-}
+// #portal {
 
-// .modal.active {
-//   transform: translate(-50%, -50%) scale(1);
 // }
 
 .modal-overlay {
@@ -25,19 +12,28 @@
   bottom: 0;
   background-color: rgba(0,0,0,.8);
   z-index: 1000;
-  pointer-events: none;
 }
 
-// .modal-overlay.active {
-//   opacity: 1;
-//   pointer-events: all;
-// }
+.modal-overlay:hover {
+  cursor: zoom-out;
+}
 
-// modal left and right? 
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $varWhite;
+  border-radius: 30px;
+  padding: 50px;
+  z-index: 1000;
+  min-width: 80%;
+  max-width: 80%;
+}
 
-// #modal-close-button { // not sure if I want this or not
-
-// }
+.modal-content {
+  cursor: default;
+}
 
 #modal-close-button {
     cursor: pointer;
@@ -45,8 +41,8 @@
     outline: none;
     background: none;
     font-size: 2rem;
-    font-weight: bold;
-      border-radius: 100px;
+    // font-weight: bold;
+    border-radius: 100px;
 }
 
 #modal-close-button:hover {

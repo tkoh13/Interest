@@ -1,23 +1,61 @@
 @import './base_styling/01_variables.scss';
 
-// Logo Area
-.nav-bar-header {
+
+.nb {
+  display: flex;
+  flex-direction: row;
+  height: 80px; 
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  // box-sizing: border-box;
+  // padding: 0 5px 0 5px;
+}
+
+.nb .icon-container {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 1% 2% 1% 2%; 
+
+}
+
+.nb a {
+  display: flex;
+  text-decoration: none;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.nb .icon-container:hover {
+  background-color: $varDarkGray;
+}
+
+.nb .nb-content-left {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: baseline;
+  align-items: center;
+  // margin: 1%;
+}
+
+.nb .nb-content-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  // margin: 1%;
 }
 
 .interest-logo {
-  font-family: $fontLogo;
-  color: $varWhite;
-  font-size: 25px;
-  background-color: $varRed;
-  border-radius: 100px;
-  width: 20px;
-  padding: 4px 2px 2px 9px; //top right bottom left
-  // text-align: center;
-  margin: 1%;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+
 }
 .interest-logo-name {
   color: $varRed;
@@ -49,17 +87,22 @@
   text-decoration: none;
 }
 
-// Navigation Bar
-.nav-bar-display {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: baseline;
+.about-link {
+  font-family: $font;
+  border: none;
+  padding: 10px;
+  margin: 15px;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  font-size: 15px;
 }
 
 #login-button {
   font-family: $font;
-  font-size:large;
   border: none;
   padding: 10px;
   margin: 15px;
@@ -70,12 +113,11 @@
   background-color: $varRed;
   color: $varWhite;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 #signup-button {
   font-family: $font;
-  font-size:large;
   border: none;
   padding: 10px;
   margin: 15px;
@@ -86,7 +128,7 @@
   background-color: $varGray;
   color: $varBlack;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 #login-button:hover {
@@ -95,4 +137,10 @@
 
 #signup-button:hover {
   background-color: $varDarkGray;
+}
+
+.search-bar {
+  height: 30px;
+  // min-width: 60px;
+  flex-grow: 1;
 }

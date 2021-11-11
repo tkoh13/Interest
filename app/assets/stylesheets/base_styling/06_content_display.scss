@@ -1,0 +1,13 @@
+@import './base_styling/01_variables.scss';
+
+// .content-display {
+    // width: 99vw;
+// }
+.pin-display-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    grid-auto-rows: 11px;
+    justify-content: center;
+}
+
