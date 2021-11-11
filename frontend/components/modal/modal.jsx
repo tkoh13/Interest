@@ -8,6 +8,7 @@ const Modal = ({ modal, openModal, closeModal }) => {
     if (!modal) {
         return null;
     }
+
     let component;
     switch (modal) {
         case 'login':
@@ -18,6 +19,7 @@ const Modal = ({ modal, openModal, closeModal }) => {
             break;
         case 'createPin':
             component = <PinFormCreateContainer />;
+            break;
         default:
             return null;
 

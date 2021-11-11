@@ -67,22 +67,26 @@ class PinForm extends Component {
 
     
     render() {
-        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} /> : <img src={window.upArrow}/>;
+        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} /> : <div className="icon-container"><img src={window.arrowUp} className="icon"/></div>;
         const { formType } = this.props
         return (
             <div className="pfc">
                 <form className="pfc pin-form" onSubmit={this.handleSubmit}>
-                    <section className="pfc pin-preview">
+                    <section className="pfc upload-img-container">
                         <div className="pfc img-preview">
-                            {preview}
-                            <label className="pfc image-input">
-                                <input
-                                    type="file"
-                                    field="photo"
-                                    className="pin-file-input"
-                                    onChange={this.handleFile}
-                                />
-                            </label>
+                            <div id="dotted-border">
+                                {preview}
+                                <div>Click to upload</div>
+                                <div>Recommendation: Use high-quality .jpg less than 20MB</div>
+                                <label className="pfc image-input">
+                                    <input
+                                        type="file"
+                                        field="photo"
+                                        className="pin-file-input"
+                                        onChange={this.handleFile}
+                                    />
+                                </label>
+                            </div>
                         </div>
                     </section>
                     <section className="pfc pin-details">
@@ -92,8 +96,8 @@ class PinForm extends Component {
                             </h1>
                         </header>
                         <label className="pfc details-input">
-                            <input type="text" field="title" className="pin-title-input" value={this.state.title} placeholder="Add your title"/>
-                            <input type="textarea" field="description" className="pin-description-input" value={this.state.description}/>
+                            <input type="text" field="title" className="pin-title-input" value={this.state.title} placeholder="Add your title" onChange={this.update}/>
+                            <input type="textarea" field="description" className="pin-description-input" value={this.state.description} placeholder="Tell everyone what your Pin is about" onChange={this.update}/>
                         </label>
                         {this.renderErrors()}
                     </section>

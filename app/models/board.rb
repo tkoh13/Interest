@@ -3,7 +3,11 @@ class Board < ApplicationRecord
 
     belongs_to :user,
         primary_key: :id,
-        foreign_key: :user_id
+        foreign_key: :creator_id
 
-    has_and_belongs_to_many :pins , dependent: :nullify
+    has_many :board_to_pin
+
+    has_many :pins, 
+        through: :board_to_pin
+
 end

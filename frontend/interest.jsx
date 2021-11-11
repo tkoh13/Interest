@@ -4,6 +4,7 @@ import Root from './components/root';
 import configureStore from './store/store';
 
 import { fetchPins, fetchPin } from './actions/pin_actions'
+// import {fetchUser} from './actions/user_actions'
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById('root');
@@ -27,6 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     window.store = store
     window.fetchPins = fetchPins
     window.fetchPin = fetchPin
+    // window.fetchUser = fetchUser
+
     // TESTING END
 
     ReactDOM.render(<Root store={store} />, root);

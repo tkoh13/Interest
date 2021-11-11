@@ -274,7 +274,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _content_display_content_display_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./content_display/content_display_container */ "./frontend/components/content_display/content_display_container.js");
-/* harmony import */ var _footer_footer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./footer/footer */ "./frontend/components/footer/footer.jsx");
+/* harmony import */ var _footer_footer_container__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./footer/footer_container */ "./frontend/components/footer/footer_container.js");
 
 
 
@@ -298,7 +298,7 @@ var App = function App() {
     exact: true,
     path: "/home",
     component: _content_display_content_display_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_footer_footer__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_footer_footer_container__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -619,8 +619,6 @@ var Footer = function Footer(_ref) {
   var currentUser = _ref.currentUser,
       openModal = _ref.openModal;
   var footer = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "no-session-footer"
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     onClick: function onClick() {
       return openModal('createPin');
     },
@@ -629,13 +627,52 @@ var Footer = function Footer(_ref) {
     src: window.plus,
     alt: "create-pin",
     className: "create-pin-icon"
-  }));
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "no-session-footer"
+  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "footer-container"
   }, footer);
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Footer);
+
+/***/ }),
+
+/***/ "./frontend/components/footer/footer_container.js":
+/*!********************************************************!*\
+  !*** ./frontend/components/footer/footer_container.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/modal_actions */ "./frontend/actions/modal_actions.js");
+/* harmony import */ var _footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./footer */ "./frontend/components/footer/footer.jsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.entities.users[state.session.id]
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    openModal: function openModal(modal) {
+      return dispatch((0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__.openModal)(modal));
+    } // closeModal: () => dispatch(closeModal()),
+
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_footer__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -683,6 +720,7 @@ var Modal = function Modal(_ref) {
 
     case 'createPin':
       component = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pins_pin_form_create_container__WEBPACK_IMPORTED_MODULE_4__["default"], null);
+      break;
 
     default:
       return null;
@@ -770,6 +808,7 @@ var NavBar = function NavBar(_ref) {
       openModal = _ref.openModal,
       closeModal = _ref.closeModal;
   // const [isOpen, setIsOpen] = useState(false);
+  // console.log(currentUser.photoUrl)
   var navBarLeft = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
     className: "nb nb-content-left"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -813,7 +852,15 @@ var NavBar = function NavBar(_ref) {
     className: "icon-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "/"
-  }, "img")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    src: currentUser.photoUrl,
+    style: {
+      width: "32px",
+      height: "32px",
+      borderRadius: "100%",
+      objectFit: "cover"
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: logout
   }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
     className: "nb nb-content-right"
@@ -1138,9 +1185,12 @@ var PinForm = /*#__PURE__*/function (_Component) {
     value: function render() {
       var preview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: this.state.photoUrl
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: window.upArrow
-      });
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "icon-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: window.arrowUp,
+        className: "icon"
+      }));
       var formType = this.props.formType;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "pfc"
@@ -1148,17 +1198,19 @@ var PinForm = /*#__PURE__*/function (_Component) {
         className: "pfc pin-form",
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
-        className: "pfc pin-preview"
+        className: "pfc upload-img-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "pfc img-preview"
-      }, preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        id: "dotted-border"
+      }, preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Click to upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Recommendation: Use high-quality .jpg less than 20MB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "pfc image-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "file",
         field: "photo",
         className: "pin-file-input",
         onChange: this.handleFile
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         className: "pfc pin-details"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
         className: "pfc pin-header"
@@ -1171,12 +1223,15 @@ var PinForm = /*#__PURE__*/function (_Component) {
         field: "title",
         className: "pin-title-input",
         value: this.state.title,
-        placeholder: "Add your title"
+        placeholder: "Add your title",
+        onChange: this.update
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "textarea",
         field: "description",
         className: "pin-description-input",
-        value: this.state.description
+        value: this.state.description,
+        placeholder: "Tell everyone what your Pin is about",
+        onChange: this.update
       })), this.renderErrors())));
     }
   }]);
@@ -39433,6 +39488,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+ // import {fetchUser} from './actions/user_actions'
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
@@ -39458,7 +39514,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.dispatch = store.dispatch;
   window.store = store;
   window.fetchPins = _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPins;
-  window.fetchPin = _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPin; // TESTING END
+  window.fetchPin = _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPin; // window.fetchUser = fetchUser
+  // TESTING END
 
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_2__["default"], {
     store: store

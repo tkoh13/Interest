@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = ({ currentUser, logout, openModal, closeModal }) => { 
   // const [isOpen, setIsOpen] = useState(false);
-
+  // console.log(currentUser.photoUrl)
   const navBarLeft = currentUser ? (
     <section className="nb nb-content-left">
       <div className="icon-container">
@@ -40,7 +40,9 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
     <section className="nb nb-content-right">
       {/* <p>Heyyyyyy {currentUser.username}!</p> */}
       <div className="icon-container">
-          <Link to="/">img</Link>
+        <Link to="/">
+          <img src={currentUser.photoUrl} style={{ width: "32px", height: "32px", borderRadius: "100%", objectFit: "cover" }} />
+        </Link>
       </div>
       {/* <div class="dropdown">
         <button onclick="myFunction()" class="dropbtn">Dropdown</button>

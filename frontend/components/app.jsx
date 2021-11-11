@@ -7,7 +7,7 @@ import NavBarContainer from './nav_bar/nav_bar_container';
 import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import ContentDisplayContainer from './content_display/content_display_container';
-import Footer from './footer/footer';
+import FooterContainer from './footer/footer_container';
 
 
 
@@ -26,7 +26,7 @@ const App = () => {
             {/* </Switch> */}
         {/* <Route exact path="/pins" component={ContentDisplay}/> */}
         <main className="main-content">
-            
+
             <Switch>
                 {/* <Route exact path="/pins/:pinId" /> component={PinDetailsContainer}  */}
                 {/* interest/:userId/_saved */}
@@ -36,7 +36,7 @@ const App = () => {
         </main>
 
         <footer>
-            <Footer/>
+            <FooterContainer/>
         </footer>
     </div>
     )
