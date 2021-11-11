@@ -284,7 +284,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
+ // import content_display_container from './content_display/content_display_container';
 
 var App = function App() {
   // const [isOpen, setIsOpen] = useState(false);
@@ -294,11 +294,7 @@ var App = function App() {
     className: "nb"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_bar_nav_bar_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
     className: "main-content"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_utils_route_util__WEBPACK_IMPORTED_MODULE_1__.ProtectedRoute, {
-    exact: true,
-    path: "/home",
-    component: _content_display_content_display_container__WEBPACK_IMPORTED_MODULE_6__["default"]
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_footer_footer_container__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content_display_content_display_container__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_footer_footer_container__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -320,18 +316,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pins_pin_display_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pins/pin_display_container */ "./frontend/components/pins/pin_display_container.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -352,8 +336,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -368,56 +350,64 @@ var ContentDisplay = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, ContentDisplay);
 
     _this = _super.call(this, props);
-
-    _defineProperty(_assertThisInitialized(_this), "add_pin", function (pinDetails) {
-      _this.setState(function (_state) {
-        var new_pins = _toConsumableArray(_state.pins);
-
-        new_pins.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Pin, {
-          pinDetails: pinDetails,
-          key: _state.pins.length
-        }));
-        return {
-          pins: new_pins,
-          show_modal: false
-        };
-      });
-    });
-
     _this.state = {
-      pinContent: null,
-      boardContent: null
+      pinContent: null //  boardContent: null,
+
     };
     return _this;
-  } // let height = Math.floor(document.documentElement.clientHeight * .75);
-  // let width = Math.floor(document.documentElement.clientWidth * .9);
-
+  }
 
   _createClass(ContentDisplay, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var fetchPins = this.props.fetchPins;
-      fetchPins();
+      this.props.fetchPins();
     }
   }, {
-    key: "renderPins",
-    value: function renderPins() {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.pins !== this.props.pins) {
+        this.buildPinsDisplay();
+      }
+    }
+  }, {
+    key: "buildPinsDisplay",
+    value: function buildPinsDisplay() {
+      var shuffle = function shuffle(array) {
+        var currentIndex = array.length,
+            randomIndex;
+
+        while (currentIndex != 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+          var _ref = [array[randomIndex], array[currentIndex]];
+          array[currentIndex] = _ref[0];
+          array[randomIndex] = _ref[1];
+        }
+
+        return array;
+      };
+
+      if (!this.props.pins.length) return null;
       var pins = this.props.pins;
-      var pinsToDisplay = pins.map(function (content) {
+      var size = ["small", "medium", "large"];
+      var pinsToDisplay = shuffle(pins).map(function (content) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_pins_pin_display_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          content: content
-        }) // key and location?
-        ;
+          content: content,
+          key: content.id,
+          size: size[Math.floor(Math.random() * size.length)]
+        });
       });
       this.setState({
         pinContent: pinsToDisplay
       });
-      if (!pinContent) return null;
+    }
+  }, {
+    key: "renderPins",
+    value: function renderPins() {
+      if (!this.state.pinContent) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "pin-display-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "pin-display"
-      }, pinContent));
+      }, this.state.pinContent);
     }
   }, {
     key: "render",
@@ -455,11 +445,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(_ref) {
-  var entities = _ref.entities;
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    pins: Object.values(entities.pins) // boards: Object.values(entities.board),
-
+    pins: Object.values(state.entities.pins),
+    // boards: Object.values(entities.board),
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
@@ -860,9 +850,11 @@ var NavBar = function NavBar(_ref) {
       borderRadius: "100%",
       objectFit: "cover"
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "icon-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     onClick: logout
-  }, "Logout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+  }, "Logout"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
     className: "nb nb-content-right"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "about-link"
@@ -954,7 +946,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -998,17 +989,48 @@ var PinDisplay = /*#__PURE__*/function (_Component) {
           id = _this$props$content.id,
           creator_id = _this$props$content.creator_id,
           title = _this$props$content.title,
-          photoUrl = _this$props$content.photoUrl,
-          created_at = _this$props$content.created_at;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/pins/".concat(id)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "pin-display"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        className: "pin-display-image",
-        src: photoUrl,
-        alt: title
-      })));
+          photoUrl = _this$props$content.photoUrl;
+      return (
+        /*#__PURE__*/
+        // <Link to={`/pins/${id}`}>
+        react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd pin-".concat(this.props.size)
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-action-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-action-head"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "save-pin"
+        }, "Save")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-action-footer"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "destination"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-icon-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: window.arrowUpRight,
+          alt: "destination",
+          className: "pd-icon"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-icon-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: window.share,
+          alt: "share",
+          className: "pd-icon"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-icon-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: window.ellipse,
+          alt: "more",
+          className: "pd-icon"
+        }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "pd-image"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: photoUrl,
+          alt: title
+        }))) // {/* </Link> */}
+
+      );
     }
   }]);
 
@@ -1039,7 +1061,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     userId: state.session.id
   };
@@ -1184,13 +1206,14 @@ var PinForm = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var preview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: this.state.photoUrl
+        src: this.state.photoUrl,
+        className: "create-pin-preview"
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "icon-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         src: window.arrowUp,
         className: "icon"
-      }));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Click to upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Recommendation: Use high-quality .jpg less than 20MB"));
       var formType = this.props.formType;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "pfc"
@@ -1199,13 +1222,13 @@ var PinForm = /*#__PURE__*/function (_Component) {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         className: "pfc upload-img-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "pfc image-input"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "pfc img-preview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "dotted-border"
-      }, preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Click to upload"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "Recommendation: Use high-quality .jpg less than 20MB"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: "pfc image-input"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, preview, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "file",
         field: "photo",
         className: "pin-file-input",
@@ -1224,15 +1247,17 @@ var PinForm = /*#__PURE__*/function (_Component) {
         className: "pin-title-input",
         value: this.state.title,
         placeholder: "Add your title",
-        onChange: this.update
+        onChange: this.update("title")
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "textarea",
         field: "description",
         className: "pin-description-input",
         value: this.state.description,
         placeholder: "Tell everyone what your Pin is about",
-        onChange: this.update
-      })), this.renderErrors())));
+        onChange: this.update("description")
+      })), this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit"
+      })));
     }
   }]);
 

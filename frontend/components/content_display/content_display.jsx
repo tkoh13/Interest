@@ -7,59 +7,54 @@ class ContentDisplay extends Component {
     
         this.state = {
              pinContent: null,
-             boardContent: null,
+            //  boardContent: null,
         }
     }
-// let height = Math.floor(document.documentElement.clientHeight * .75);
-// let width = Math.floor(document.documentElement.clientWidth * .9);
 
     componentDidMount() {
-        const { fetchPins } = this.props;
-
-        fetchPins()
+        this.props.fetchPins()
     }
 
-    renderPins() {
-        const { pins } = this.props;
+    componentDidUpdate(prevProps) {
+        if (prevProps.pins !== this.props.pins) {
+            this.buildPinsDisplay();
+        }
+    }
 
-        const pinsToDisplay = pins.map((content) => {
+    buildPinsDisplay() {
+        const shuffle = (array) => {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+
+        if (!this.props.pins.length) return null;
+        const { pins } = this.props;
+        const size = ["small", "medium", "large"]
+        const pinsToDisplay = shuffle(pins).map((content) => {
             return (
-                <PinDisplayContainer content={content}/>
-                // key and location?
+                <PinDisplayContainer content={content} key={content.id} size={size[Math.floor(Math.random()*size.length)]}/>
             )
         })
-
         this.setState({
             pinContent: pinsToDisplay
         })
+    }
 
-        if (!pinContent) return null
+    renderPins() {
+        if (!this.state.pinContent) return null
         return (
             <div className="pin-display-container">
-                <div className="pin-display">
-                    {pinContent}
-                </div>
-
+                    {this.state.pinContent}
             </div>
         )
     }
 
-    add_pin = pinDetails => {
-        this.setState(_state => {
-            const new_pins = [
-                ..._state.pins
-            ]
-
-            new_pins.push(
-                <Pin pinDetails={pinDetails} key={_state.pins.length} />
-            )
-
-            return {
-                pins: new_pins,
-                show_modal: false
-            }
-        });
-    }
 
     render() {
         return (

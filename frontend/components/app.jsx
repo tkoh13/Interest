@@ -8,6 +8,7 @@ import SignUpFormContainer from './session_form/signup_form_container';
 import LogInFormContainer from './session_form/login_form_container';
 import ContentDisplayContainer from './content_display/content_display_container';
 import FooterContainer from './footer/footer_container';
+// import content_display_container from './content_display/content_display_container';
 
 
 
@@ -26,12 +27,12 @@ const App = () => {
             {/* </Switch> */}
         {/* <Route exact path="/pins" component={ContentDisplay}/> */}
         <main className="main-content">
-
+            <ContentDisplayContainer/>
             <Switch>
                 {/* <Route exact path="/pins/:pinId" /> component={PinDetailsContainer}  */}
                 {/* interest/:userId/_saved */}
                 {/* interest/:userId/:boardId */}
-                <ProtectedRoute exact path='/home' component={ContentDisplayContainer} />
+                {/* <ProtectedRoute exact path='/home' component={ContentDisplayContainer} /> */}
             </Switch>
         </main>
 

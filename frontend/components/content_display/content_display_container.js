@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { fetchPins } from '../../actions/pin_actions';
 import ContentDisplay from './content_display';
 
-const mapStateToProps = ({ entities }) => ({
-    pins: Object.values(entities.pins),
+const mapStateToProps = (state) => ({
+    pins: Object.values(state.entities.pins),
     // boards: Object.values(entities.board),
+    currentUser: state.entities.users[state.session.id]
 })
 
 const mapDispatchToProps = dispatch => ({

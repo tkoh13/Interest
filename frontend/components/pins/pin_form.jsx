@@ -16,7 +16,6 @@ class PinForm extends Component {
         this.update = this.update.bind(this);
         this.handleFile = this.handleFile.bind(this); 
         this.handleSubmit = this.handleSubmit.bind(this);
-
     }
 
     update(field) {
@@ -67,27 +66,31 @@ class PinForm extends Component {
 
     
     render() {
-        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} /> : <div className="icon-container"><img src={window.arrowUp} className="icon"/></div>;
+        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} className="create-pin-preview"/> : 
+        <div className="icon-container">
+            <img src={window.arrowUp} className="icon"/>
+            <div>Click to upload</div>
+            <div>Recommendation: Use high-quality .jpg less than 20MB</div>
+        </div>;
         const { formType } = this.props
         return (
             <div className="pfc">
                 <form className="pfc pin-form" onSubmit={this.handleSubmit}>
                     <section className="pfc upload-img-container">
-                        <div className="pfc img-preview">
-                            <div id="dotted-border">
-                                {preview}
-                                <div>Click to upload</div>
-                                <div>Recommendation: Use high-quality .jpg less than 20MB</div>
-                                <label className="pfc image-input">
-                                    <input
-                                        type="file"
-                                        field="photo"
-                                        className="pin-file-input"
-                                        onChange={this.handleFile}
-                                    />
-                                </label>
+                        <label className="pfc image-input">
+                            <div className="pfc img-preview">
+                                <div id="dotted-border">
+                                    {preview}
+                                    
+                                        <input
+                                            type="file"
+                                            field="photo"
+                                            className="pin-file-input"
+                                            onChange={this.handleFile}
+                                        />
+                                </div>
                             </div>
-                        </div>
+                        </label>
                     </section>
                     <section className="pfc pin-details">
                         <header className="pfc pin-header">
@@ -96,11 +99,12 @@ class PinForm extends Component {
                             </h1>
                         </header>
                         <label className="pfc details-input">
-                            <input type="text" field="title" className="pin-title-input" value={this.state.title} placeholder="Add your title" onChange={this.update}/>
-                            <input type="textarea" field="description" className="pin-description-input" value={this.state.description} placeholder="Tell everyone what your Pin is about" onChange={this.update}/>
+                            <input type="text" field="title" className="pin-title-input" value={this.state.title} placeholder="Add your title" onChange={this.update("title")}/>
+                            <input type="textarea" field="description" className="pin-description-input" value={this.state.description} placeholder="Tell everyone what your Pin is about" onChange={this.update("description")}/>
                         </label>
                         {this.renderErrors()}
                     </section>
+                    <input type="submit" />
                 </form>
             </div>
         );

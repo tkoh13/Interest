@@ -14,7 +14,7 @@ class Pin < ApplicationRecord
 
 
     def unique_key
-        @key = self.created_at.to_i
+        @key = self.created_at.to_i/rand(100..200)
     end
     # belongs to mutliple boards?
     # photo file validation? 

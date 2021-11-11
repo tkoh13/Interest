@@ -3,7 +3,7 @@ import { openModal, closeModal } from '../../actions/modal_actions';
 import { fetchPin } from '../../actions/pin_actions';
 import PinDisplay from './pin_display';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
     userId: state.session.id,
 })
 
