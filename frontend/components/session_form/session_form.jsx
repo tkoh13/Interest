@@ -50,25 +50,26 @@ class SessionForm extends Component {
   render() {
     const { formType, navLink, navLinkText, openModal } = this.props;
     return (
-      <div className="session-form-container">
-        <h3>Interest Session Form</h3> 
-        <form onSubmit={this.handleSubmit} className="session-form-form">
+      <div className="sfc">
+        <img className="sf-interest-logo" src={window.logo}/>
+        <h1 className="sf-welcome">Welcome to</h1>
+        <h2 className="sf-logo-name">Interest</h2>
+        <h3 className="sf-h3">Find new ideas to try</h3>
+        <form onSubmit={this.handleSubmit} className="sf-form">
           {this.renderErrors()}
           <label>
-            Email
             <input
               type="text"
-              className="session-form-input"
+              className="sf-input"
               placeholder="Email"
               value={this.state.email}
               onChange={this.update("email")}
             />
           </label>
           <label>
-            Password
             <input
               type="password"
-              className="session-form-input"
+              className="sf-input"
               placeholder="Password"
               value={this.state.password}
               onChange={this.update("password")}

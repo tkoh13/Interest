@@ -1,1 +1,49 @@
 @import './base_styling/01_variables.scss';
+
+.sfc {
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // margin: 15px 0px;
+    // width: 500px;
+    text-align: center;
+}
+
+.sf-interest-logo{
+    width: 50px;
+    height: 50px;
+}
+
+.sf-welcome {
+    font-size: x-large;
+    font-weight: 600;
+    margin: 5px;
+}
+
+.sf-logo-name{
+    color: $varRed;
+    font-weight: 600;
+    font-size:larger;
+    margin: 5px;
+}
+
+.sf-h3 {
+    font-size: medium;
+    margin: 5px;
+}
+
+.sf-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.sf-input {
+    margin: 5px;
+    border-color: $varGray;
+    height: 50px;
+    width: 250px;
+    box-sizing: border-box;
+    padding: 5px;
+}
