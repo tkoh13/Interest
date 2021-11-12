@@ -292,7 +292,7 @@ var App = function App() {
     className: "appl-de-ap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "nb"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_bar_nav_bar_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
     className: "main-content"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_content_display_content_display_container__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_footer_footer_container__WEBPACK_IMPORTED_MODULE_7__["default"], null)));
 };
@@ -1137,6 +1137,7 @@ var PinForm = /*#__PURE__*/function (_Component) {
       photoFile: null,
       photoUrl: null
     };
+    _this.state.errors = _this.props.errors || null;
     _this.update = _this.update.bind(_assertThisInitialized(_this));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
@@ -1175,23 +1176,32 @@ var PinForm = /*#__PURE__*/function (_Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var formData = new FormData();
-      var _this$state = this.state,
-          title = _this$state.title,
-          creator_id = _this$state.creator_id,
-          description = _this$state.description,
-          photoFile = _this$state.photoFile;
-      formData.append('pin[title]', title);
-      formData.append('pin[creator_id]', creator_id);
-      formData.append('pin[description]', description);
-
-      if (photoFile) {
-        formData.append('pin[photo]', photoFile);
-      }
-
-      this.props.createPin(formData).then(function () {
-        return (0,_actions_modal_actions__WEBPACK_IMPORTED_MODULE_1__.closeModal)();
+      if (this.state.errors) this.setState({
+        errors: null
       });
+
+      if (!this.state.photoFile) {
+        return this.setState({
+          errors: 'No pic, no pin'
+        });
+      } else if (!this.state.title) {
+        return this.setState({
+          errors: 'Needs a title!'
+        });
+      } else {
+        var formData = new FormData();
+        var _this$state = this.state,
+            title = _this$state.title,
+            creator_id = _this$state.creator_id,
+            description = _this$state.description,
+            photoFile = _this$state.photoFile;
+        formData.append('pin[title]', title);
+        formData.append('pin[photo]', photoFile);
+        formData.append('pin[creator_id]', creator_id);
+        formData.append('pin[description]', description);
+        this.props.createPin(formData);
+        this.props.closeModal();
+      }
     }
   }, {
     key: "renderErrors",
@@ -1255,9 +1265,9 @@ var PinForm = /*#__PURE__*/function (_Component) {
         value: this.state.description,
         placeholder: "Tell everyone what your Pin is about",
         onChange: this.update("description")
-      })), this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "submit"
-      })));
+      })), this.renderErrors()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "button-link"
+      }, this.props.formType)));
     }
   }]);
 
@@ -2061,7 +2071,7 @@ var fetchPin = function fetchPin(pinId) {
 };
 var createPin = function createPin(formData) {
   return $.ajax({
-    url: '/api/pins/',
+    url: 'api/pins',
     method: 'POST',
     data: formData,
     contentType: false,

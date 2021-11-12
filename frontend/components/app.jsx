@@ -19,7 +19,7 @@ const App = () => {
     <div className="appl-de-ap">
         <ModalContainer/>
         <header className="nb">
-            {/* <NavBarContainer /> */}
+            <NavBarContainer />
         </header>
             {/* <Switch> */}
                 {/* <AuthRoute/> */}

@@ -4,7 +4,7 @@ import { closeModal } from '../../actions/modal_actions';
 class PinForm extends Component {
     constructor(props) {
         super(props);
-    
+        
         this.state = {
             title: this.props.pin.title,
             description: this.props.pin.description,
@@ -12,6 +12,7 @@ class PinForm extends Component {
             photoFile: null,
             photoUrl: null
         };
+        this.state.errors = this.props.errors || null;
 
         this.update = this.update.bind(this);
         this.handleFile = this.handleFile.bind(this); 
@@ -40,18 +41,25 @@ class PinForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        if (this.state.errors) this.setState({ errors: null })
+
+        if (!this.state.photoFile) {
+            return this.setState({ errors: 'No pic, no pin' })
+        } else if (!this.state.title) {
+            return this.setState({ errors: 'Needs a title!' })
+        } else {
+
         const formData = new FormData();
         const { title, creator_id, description, photoFile } = this.state;
         formData.append('pin[title]', title);
+        formData.append('pin[photo]', photoFile)
         formData.append('pin[creator_id]', creator_id);
         formData.append('pin[description]', description);
 
-        if (photoFile) {
-            formData.append('pin[photo]', photoFile);
-        }
 
         this.props.createPin(formData)
-            .then(() => closeModal());
+        this.props.closeModal()
+        }
     }
 
     renderErrors() {
@@ -104,7 +112,7 @@ class PinForm extends Component {
                         </label>
                         {this.renderErrors()}
                     </section>
-                    <input type="submit" />
+                    <button className="button-link">{this.props.formType}</button>
                 </form>
             </div>
         );
