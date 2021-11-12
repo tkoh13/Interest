@@ -76,14 +76,14 @@ class SessionForm extends Component {
             />
           </label>
           <div>
-            <button>
+            <button id="sf-login">
               {formType === "login" ? "Log In" : "Sign Up"}
             </button>
             <DemoUserContainer/>
           </div>
         </form>
         {/* need to add in className and corresponding styling */}
-        <button onClick={() => openModal(navLink)}> 
+        <button onClick={() => openModal(navLink)} className="sf-or"> 
           {navLinkText}
         </button>
       </div>

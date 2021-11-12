@@ -16,7 +16,7 @@ class DemoUser extends Component {
             <button
                 onClick={this.handleClick}
                 className="demo-user-button">
-                Demo
+                Try the Demo 
             </button>
         )
     }

@@ -40,10 +40,55 @@
 }
 
 .sf-input {
-    margin: 5px;
+    margin: 10px;
     border-color: $varGray;
     height: 50px;
     width: 250px;
     box-sizing: border-box;
     padding: 5px;
+}
+
+#sf-login {
+    font-family: $font;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $varRed;
+    color: $varWhite;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.demo-user-button {
+    font-family: $font;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $varGray;
+    color: $varBlack;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.sf-or {
+    font-family: $font;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $varGray;
+    color: $varBlack;
+    font-weight: 600;
+    font-size: 15px;
 }
