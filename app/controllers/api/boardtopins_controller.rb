@@ -4,7 +4,7 @@ class BoardToPins < ApplicationController
         if @board_to_pin.save
             render 'api/boardtopins/show'
         else
-            render json: @board_to_pin.errors.full_messages, status 422
+            render json: @board_to_pin.errors.full_messages, status: 422
         end
     end
 
