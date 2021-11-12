@@ -8,6 +8,10 @@ body {
     height: 100vh;
 }
 
+main {
+  margin: 1%;
+}
+
 a, a:link, a:visited, a:focus, a:hover, a:active {
   color: $varBlack;
   text-decoration: none;
