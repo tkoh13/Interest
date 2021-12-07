@@ -10,6 +10,7 @@ class Api::UsersController < ApplicationController
     end
 
     def show
+        @user = User.find_by_credentials(user_params)
         render :show
         # need to factor in showing users from follows
     end
