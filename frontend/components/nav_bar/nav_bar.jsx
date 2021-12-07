@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 // import SignUpFormContainer from '../session_form/signup_form_container'
 // import LogInFormContainer from '../session_form/login_form_container';
 
