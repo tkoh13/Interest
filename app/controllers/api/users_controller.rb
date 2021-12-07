@@ -10,9 +10,10 @@ class Api::UsersController < ApplicationController
     end
 
     def show
-        @user = User.find_by_credentials(user_params)
-        render :show
+        @user = User.find_by(id: params[:id])
+        render "api/users/show"
         # need to factor in showing users from follows
+        # @user = User.where(id: params[:id]).includes(:followers, :followees)first
     end
 
     def update
