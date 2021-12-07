@@ -40,7 +40,7 @@ class SessionForm extends Component {
       <ul>
         {errors.map((error, i) => (
           <li key={`error-${i}`}>
-            Why you lying to me?! Fix this shit: {error}
+            Invalid login credentials: {error}
           </li>
         ))}
       </ul>

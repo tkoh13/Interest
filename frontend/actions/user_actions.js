@@ -1,4 +1,4 @@
-import { fetchUser } from "../utils/user_api_utli";
+import * as UserApiUtil from "../utils/user_api_utli";
 
 export const RECEIVE_USER = 'RECEIVE_USER';
 export const RECEIVE_USER_ERRORS = 'RECEIVE_USER_ERRORS'
@@ -13,6 +13,6 @@ const receiveUserErrors = errors => ({
     errors
 });
 
-export const fetchUser = userId => dispatch => fetchUser(userId)
+export const fetchUser = userId => dispatch => UserApiUtil.fetchUser(userId)
     .then(user => dispatch(receiveUser(user)),
         errors => dispatch(receiveUserErrors(errors)));
