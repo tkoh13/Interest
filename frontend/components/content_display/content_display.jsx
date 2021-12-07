@@ -7,7 +7,6 @@ class ContentDisplay extends Component {
     
         this.state = {
              pinContent: null,
-            //  boardContent: null,
         }
     }
 
