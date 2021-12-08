@@ -936,8 +936,16 @@ var NavBar = function NavBar(_ref) {
     className: "icon-container"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
     to: "users/".concat(currentUser.id)
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+  }, currentUser.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     src: currentUser.photoUrl,
+    style: {
+      width: "32px",
+      height: "32px",
+      borderRadius: "100%",
+      objectFit: "cover"
+    }
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+    src: window.userIcon,
     style: {
       width: "32px",
       height: "32px",

@@ -40,7 +40,9 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
       {/* <p>Heyyyyyy {currentUser.username}!</p> */}
       <div className="icon-container">
         <Link to={`users/${currentUser.id}`}>
-          <img src={currentUser.photoUrl} style={{ width: "32px", height: "32px", borderRadius: "100%", objectFit: "cover" }} />
+          {currentUser.photoUrl ?
+          <img src={currentUser.photoUrl} style={{ width: "32px", height: "32px", borderRadius: "100%", objectFit: "cover" }} /> :
+            <img src={window.userIcon} style={{ width: "32px", height: "32px", borderRadius: "100%", objectFit: "cover" }} />}
         </Link>
       </div>
       {/* <div class="dropdown">
