@@ -321,7 +321,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _utils_route_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../utils/route_util */ "./frontend/utils/route_util.jsx");
-/* harmony import */ var _modal_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal/modal */ "./frontend/components/modal/modal.jsx");
+/* harmony import */ var _modal_Modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modal/Modal */ "./frontend/components/modal/Modal.jsx");
 /* harmony import */ var _nav_bar_NavBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./nav_bar/NavBar */ "./frontend/components/nav_bar/NavBar.jsx");
 /* harmony import */ var _content_display_HomeDisplay__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./content_display/HomeDisplay */ "./frontend/components/content_display/HomeDisplay.jsx");
 /* harmony import */ var _footer_Footer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./footer/Footer */ "./frontend/components/footer/Footer.jsx");
@@ -343,7 +343,7 @@ var App = function App() {
   // const [isOpen, setIsOpen] = useState(false);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "appl-de-ap"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_modal__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_modal_Modal__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("header", {
     className: "nb"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_nav_bar_NavBar__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", {
     className: "main-content"
@@ -779,9 +779,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
-/***/ "./frontend/components/modal/modal.jsx":
+/***/ "./frontend/components/modal/Modal.jsx":
 /*!*********************************************!*\
-  !*** ./frontend/components/modal/modal.jsx ***!
+  !*** ./frontend/components/modal/Modal.jsx ***!
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 

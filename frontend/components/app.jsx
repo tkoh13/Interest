@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route, Redirect, Switch, Link } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util';
-import Modal from './modal/modal'
+import Modal from './modal/Modal'
 import NavBarContainer from './nav_bar/NavBar';
 import HomeDisplay from './content_display/HomeDisplay';
 import Footer from './footer/Footer';
