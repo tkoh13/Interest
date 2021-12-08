@@ -841,7 +841,8 @@ var Modal = function Modal(_ref) {
 
   if (!modal) {
     return null;
-  }
+  } // on signup welcome to interest (edit username) -> How do you identify? (gender) -> region and language -> topics
+
 
   var component;
 
@@ -1813,7 +1814,7 @@ var Splash = function Splash(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "splash-container"
-  }, loggedIn ? null : renderSplash());
+  }, "scroll-snap-type & carousel with transform (vertically)", loggedIn ? null : renderSplash());
 };
 
  // import { fetchUser } from '../../actions/user_actions';

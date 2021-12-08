@@ -8,7 +8,7 @@ const Modal = ({ modal, openModal, closeModal }) => {
     if (!modal) {
         return null;
     }
-
+// on signup welcome to interest (edit username) -> How do you identify? (gender) -> region and language -> topics
     let component;
     switch (modal) {
         case 'login':
