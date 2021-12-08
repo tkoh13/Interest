@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Redirect, Switch, Link } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util';
 import Modal from './modal/modal'
 import NavBarContainer from './nav_bar/NavBar';
-import HomeDisplay from './content_display/HomeDisplay';
 import Footer from './footer/footer';
 import Splash from './splash/splash';
 import HomePage from './home/HomePage';
