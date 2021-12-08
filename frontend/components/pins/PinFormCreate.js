@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { createPin } from '../../actions/pin_actions';
 import { closeModal } from '../../actions/modal_actions';
-import PinForm from './pin_form';
+import PinForm from './PinForm';
 
 const mapStateToProps = (state) => ({
     pin: {

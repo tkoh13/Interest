@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 
 class ProfileShow extends Component {
+    constructor(props) {
+        super(props)
+        // console.log(props.history)
+        // this.state = {
+
+        // }
+    }
+
     componentDidMount() {
         // const { userId, fetchUser } = this.props
         // if (userId) {
         //     fetchUser(this.props.userId)
         // }
     }
-    
+
     render() {
         const { currentUser } = this.props
         // console.log(currentUser)
@@ -43,4 +51,25 @@ class ProfileShow extends Component {
     }
 }
 
-export default ProfileShow
+
+import { connect } from 'react-redux';
+import { fetchUser } from '../../actions/user_actions';
+// import { openModal } from '../../actions/modal_actions';
+
+// const mapStateToProps = (state, ownProps) => {
+//     console.log(state.entities.users[state.session.id])
+//     return{
+//         currentUser: state.entities.users[state.session.id],
+//         userId: ownProps.match.params.userId
+//     }
+// }
+const mapStateToProps = (state, ownProps) => ({
+    currentUser: state.entities.users[state.session.id],
+    users: ownProps.match.params.userId
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchUser: (userId) => dispatch(fetchUser(userId)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileShow);

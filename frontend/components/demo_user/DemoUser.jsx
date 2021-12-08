@@ -1,9 +1,32 @@
+import React, { Component } from 'react'
+
+class DemoUser extends Component {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        this.props.login(this.props.demoUser).then(() => this.props.closeModal());
+    }
+    
+    render() {
+        return (
+            <button
+                onClick={this.handleClick}
+                className="demo-user-button">
+                Try the Demo 
+            </button>
+        )
+    }
+}
+
 import { connect } from 'react-redux';
 import { login } from '../../actions/session_actions'
 import { closeModal } from '../../actions/modal_actions';
-import DemoUser from './demo_user';
 
-const mapStateToProps = ({session}) => {
+const mapStateToProps = ({ session }) => {
     return {
         currentUser: Boolean(session.id),
         demoUser: {

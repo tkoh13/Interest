@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { createPortal } from "react-dom";
-import SignUpFormContainer from '../session_form/signup_form_container'
-import LogInFormContainer from '../session_form/login_form_container';
-import PinFormCreateContainer from '../pins/pin_form_create_container';
+import SessionFormSignup from '../session_form/SessionFormSignup'
+import SessionFormLogin from '../session_form/SessionFormLogin';
+import PinFormCreate from '../pins/PinFormCreate';
 
 const Modal = ({ modal, openModal, closeModal }) => {
     if (!modal) {
@@ -12,27 +12,43 @@ const Modal = ({ modal, openModal, closeModal }) => {
     let component;
     switch (modal) {
         case 'login':
-            component = <LogInFormContainer />;
+            component = <SessionFormLogin />;
             break;
         case 'signup':
-            component = <SignUpFormContainer />; 
+            component = <SessionFormSignup />;
             break;
         case 'createPin':
-            component = <PinFormCreateContainer />;
+            component = <PinFormCreate />;
             break;
         default:
             return null;
 
     }
-    return createPortal( 
+    return createPortal(
         <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
                 <button onClick={closeModal} id="modal-close-button">&times;</button>
-                { component }
+                {component}
             </div>
         </div>,
         document.getElementById('portal')
     )
 }
 
-export default Modal;
+import { connect } from 'react-redux';
+import { openModal, closeModal } from '../../actions/modal_actions';
+
+const mapStateToProps = state => {
+    return {
+        modal: state.ui.modal
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        openModal: (modal) => dispatch(openModal(modal)),
+        closeModal: () => dispatch(closeModal())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

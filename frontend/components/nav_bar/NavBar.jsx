@@ -4,13 +4,13 @@ import { Link, NavLink } from 'react-router-dom';
 // import LogInFormContainer from '../session_form/login_form_container';
 
 
-const NavBar = ({ currentUser, logout, openModal, closeModal }) => { 
-  
+const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
+
   const navBarLeft = currentUser ? (
     <section className="nb nb-content-left">
       <div className="icon-container">
         <div>
-          <Link to="/"><img className="interest-logo" src={window.logo}/></Link>
+          <Link to="/"><img className="interest-logo" src={window.logo} /></Link>
         </div>
       </div>
       <Link to="/" >
@@ -22,20 +22,20 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
     <section className="nb nb-content-left">
       <div className="icon-container">
         <div>
-          <Link to="/"><img className="interest-logo" src={window.logo}/></Link>
+          <Link to="/"><img className="interest-logo" src={window.logo} /></Link>
         </div>
       </div>
       <Link to="/" ><div className="interest-logo-name">Interest</div></Link>
     </section>
   );
 
-  const searchBar = currentUser? (
+  const searchBar = currentUser ? (
     <input type="text" className="search-bar" placeholder="Search Bar Placeholder" />
   ) : (
     <div className="search-bar"></div>
   );
 
-  const navBarRight = currentUser ? ( 
+  const navBarRight = currentUser ? (
     <section className="nb nb-content-right">
       {/* <p>Heyyyyyy {currentUser.username}!</p> */}
       <div className="icon-container">
@@ -61,11 +61,11 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
         <Link to="/about">About</Link>
       </div>
       <div>
-          <button onClick={() => openModal('login')} id="login-button">Log In</button>
+        <button onClick={() => openModal('login')} id="login-button">Log In</button>
       </div>
 
       <div>
-          <button onClick={() => openModal('signup')} id="signup-button">Sign Up</button>
+        <button onClick={() => openModal('signup')} id="signup-button">Sign Up</button>
       </div>
     </section>
 
@@ -84,4 +84,20 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
   );
 };
 
-export default NavBar
+import { connect } from 'react-redux';
+import { login, signup, logout } from '../../actions/session_actions';  
+import { openModal, closeModal } from '../../actions/modal_actions';
+
+const mapStateToProps = state => ({ 
+  currentUser: state.entities.users[state.session.id],
+});
+
+const mapDispatchToProps = dispatch => ({
+  login: () => dispatch(login()),
+  signup: () => dispatch(signup()),
+  logout: () => dispatch(logout()),
+  openModal: (modal) => dispatch(openModal(modal)),
+  // closeModal: () => dispatch(closeModal()),
+}); 
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
