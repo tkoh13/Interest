@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { openModal } from '../../actions/modal_actions';
-import DemoUserContainer from '../demo_user/demo_user_container';
+import DemoUser from '../demo_user/DemoUser';
 
 class SessionForm extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class SessionForm extends Component {
             <button id="sf-login">
               {formType === "login" ? "Log In" : "Sign Up"}
             </button>
-            <DemoUserContainer/>
+            <DemoUser />
           </div>
         </form>
         {/* need to add in className and corresponding styling */}

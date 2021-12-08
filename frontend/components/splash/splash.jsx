@@ -8,6 +8,7 @@ const Splash = ({ loggedIn }) => {
     }
     return (
         <div className='splash-container'>
+            scroll-snap-type & carousel with transform (vertically)
             {loggedIn ? null : renderSplash()}
         </div>
     )
