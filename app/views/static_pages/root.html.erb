@@ -6,7 +6,7 @@
     "username": "<%= current_user.username %>",
     "boards": "<%= current_user.boards %>",
     "pins": "<%= current_user.pins %>",
-    "photoUrl": "<%= url_for(current_user.photo) %>"
+    "photoUrl": "<%= url_for(current_user.photo).html_safe %>"
     };
   </script>
 <% end %>

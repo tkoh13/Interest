@@ -1,39 +1,40 @@
 import React, { Component } from 'react'
 
 class ProfileShow extends Component {
-
+    componentDidMount() {
+        // const { userId, fetchUser } = this.props
+        // if (userId) {
+        //     fetchUser(this.props.userId)
+        // }
+    }
+    
     render() {
+        const { currentUser } = this.props
+        // console.log(currentUser)
         return (
             <div className="profile-container">
                 <section className="profile-header">
                     <div className="ph-main">
-                        <div className="profile-pic">
-                            <div className="profile-pic-container">
-                                <img src={currentUser.photoUrl}/>
-                            </div>
-                        </div>
-                        <div className="profile-name">
-                            <h1>{currentUser.name}</h1>
+                        <div className="profile-pic-container">
+                            {currentUser.photoUrl ? <img src={currentUser.photoUrl} /> : <img src={window.userIcon} />}
                         </div>
                         <div className="profile-username">
-                            <h2>@{currentUser.userName}</h2>
+                            <h2>@{currentUser.username}</h2>
                         </div>
                         <div className="profile-following">
-                            <div className="profile-followers">
-
-                            </div>
-                            <div className="profile-following">
-
-                            </div>
-                        </div>
-                        <div className="profile-actions">
-                            <div className="profile-edit">
-                                {/* open edit profile modal */}
-                            </div>
+                            <span className="profile-followers">
+                                # followers (modal)
+                            </span>
+                            <span className="profile-following">
+                                # following (modal)
+                            </span>
                         </div>
                     </div>
                 </section>
                 <section className="profile-content">
+                    Boards go here
+                    First board is "All Pins" board
+                    Each board should show the number of pins
                     {/* open create board or pin modal */}
                     {/* profile board display */}
                 </section>
