@@ -12,15 +12,22 @@
   // padding: 0 5px 0 5px;
 }
 
+.nb .nav-link.selected{
+  background-color: $varWhite;
+  color: $varBlack;
+}
+
 .nb .icon-container {
-  height: 50px;
-  width: 50px;
+  height: 46px;
+  width: 46px;
   border-radius: 50%;
   justify-content: center;
   align-items: center;
   display: flex;
-  margin: 1% 2% 1% 2%; 
+}
 
+.nb .icon-container.react-icon {
+  color: $varDarkestGray;
 }
 
 .nb a {
@@ -143,4 +150,47 @@
   height: 30px;
   // min-width: 60px;
   flex-grow: 1;
+}
+
+.nb-content-right .dropdown-button {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 100px;
+    right: 1%;
+    height: 22px;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+
+.nb-content-right .dropdown-button:hover {
+    background: $varDarkGray;
+}
+
+.nb-content-right .dropdown-menu {
+    z-index: 1000;
+    position: absolute;
+    right: 10%;
+    top: 150%;
+    background-color: $varOffWhite;
+    border-radius: 8px;
+    width: 272px;
+}
+
+.nb-content-right .dropdown-item {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0px 8px 8px 8px;
+    border-radius: 8px;
+    min-height: 35px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.nb-content-right .dropdown-item:hover {
+    background: $varDarkGray;
 }

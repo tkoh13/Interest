@@ -8,7 +8,7 @@ const DropDownButton = (props) => {
     const toggleDropDown = () => setShowDropDown(!showDropDown);
 
     return (
-        <div className={`dropdown-button-${props.type}`} onClick={toggleDropDown}>
+        <div className={`dropdown-button ${props.type}`} onClick={toggleDropDown}>
             <FaChevronDown size={13} />
             {showDropDown ? <DropDownMenu type={props.type} actions={props.actions} setShowDropDown={setShowDropDown} /> : null}
         </div>

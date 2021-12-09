@@ -11,6 +11,7 @@ const DropDownMenu = (props) => {
     closeOnEscape(setShowDropDown);
 
     let values = [];
+    let component
 
     switch (type) {
         case 'nav':          
