@@ -31,6 +31,7 @@ const App = () => {
         {/* <Route exact path="/pins" component={HomeDisplay}/> */}
             {/* <HomeDisplay /> */}
             <Switch>
+                <ProtectedRoute exact path='/users/:userId/settings' component={ProfilePage} />
                 <ProtectedRoute exact path='/users/:userId' component={ProfilePage} />
                 <ProtectedRoute exact path='/' component={HomePage} />
                 {/* <AuthRoute exact path='/' component={Splash} /> */}
