@@ -10,10 +10,18 @@ class UpdatePicture extends Component {
     
     render() {
         return (
-            <div className="sfc">
+            <div className="change-photo-container">
 
-                <h1>Change your picture</h1>
-                <button id="login-button">Choose photo</button>
+                <h1 className="cpc-h1">Change your picture</h1>
+                <label id="change-photo-button">
+                    <span>Choose Photo</span>
+                    <input 
+                        type="file" 
+                        id="change-photo-input" 
+                        style={{display:"none"}}
+                        onChange={this.handleFile} />
+                </label>
+
                 {/* need to make button fatter */}
 
             </div>
