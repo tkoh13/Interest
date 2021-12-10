@@ -10,6 +10,8 @@ class UpdatePicture extends Component {
             photoUrl: null,
             errors: null
         }
+        this.handleFile = this.handleFile.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleFile(e) {
@@ -32,24 +34,29 @@ class UpdatePicture extends Component {
             const formData = new FormData();
             const { photoFile } = this.state;
             formData.append('user[photo]', photoFile)
-
-            this.props.updateUser(formData)
+            this.props.updateUser(this.props.currentUser.id, formData)
             this.props.closeModal()
         }
     }
     
     render() {
+        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} className="create-pin-preview" />  : null
         return (
             <div className="change-photo-container">
                 <h1 className="cpc-h1">Change your picture</h1>
-                <label id="change-photo-button" onSubmit={this.handleSubmit}>
-                    <span>Choose Photo</span>
-                    <input 
-                        type="file" 
-                        id="change-photo-input" 
-                        style={{display:"none"}}
-                        onChange={this.handleFile} />
-                </label>
+                <form onSubmit={this.handleSubmit}>
+                    <label id="change-photo-button">
+                        <span>Choose Photo</span>
+                        <input 
+                            type="file" 
+                            id="change-photo-input" 
+                            style={{display:"none"}}
+                            onChange={this.handleFile}
+                            onSubmit={this.handleSubmit} />
+                    </label>
+                    <button>save</button>
+                    {preview}
+                </form>
             </div>
         );
     }   
