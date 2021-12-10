@@ -53,7 +53,7 @@ const NavBar = ({ currentUser, logout, openModal }) => {
           <img src={window.userIcon} style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} />}
         </NavLink>
       </div>
-      <DropDownButton type="nav" actions={{logout, openModal}} />
+      <DropDownButton type="nav" actions={{logout, openModal, currentUser}} />
     </section>
   ) : (
     <section className="nb nb-content-right">
@@ -81,7 +81,6 @@ const NavBar = ({ currentUser, logout, openModal }) => {
 import { connect } from 'react-redux';
 import { logout } from '../../actions/session_actions';  
 import { openModal } from '../../actions/modal_actions';
-import { closeModalOnEscape } from '../../utils/close_util';
 
 const mapStateToProps = state => ({ 
   currentUser: state.entities.users[state.session.id],
