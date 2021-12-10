@@ -1595,16 +1595,9 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(ProfileShow);
 
   function ProfileShow(props) {
-    var _this;
-
     _classCallCheck(this, ProfileShow);
 
-    _this = _super.call(this, props); // debugger
-
-    console.log('constructor'); // this.state = {
-    // }
-
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(ProfileShow, [{
@@ -1614,7 +1607,6 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
           fetchUser = _ref.fetchUser,
           userId = _ref.userId;
 
-      console.log('componentDidMount');
       fetchUser(userId);
     }
   }, {
@@ -1623,9 +1615,6 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
       var _this$props = this.props,
           fetchUser = _this$props.fetchUser,
           userId = _this$props.userId;
-      console.log('componentDidUpdate');
-      console.log('userId', userId);
-      console.log('prevProps.userId', prevProps.userId);
 
       if (prevProps.userId !== userId) {
         fetchUser(userId);
@@ -1635,7 +1624,6 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var user = this.props.user;
-      console.log(user);
       if (!user) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-container"
@@ -2042,6 +2030,8 @@ var UpdatePicture = /*#__PURE__*/function (_Component) {
       photoUrl: null,
       errors: null
     };
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2077,28 +2067,34 @@ var UpdatePicture = /*#__PURE__*/function (_Component) {
         var formData = new FormData();
         var photoFile = this.state.photoFile;
         formData.append('user[photo]', photoFile);
-        this.props.updateUser(formData);
+        this.props.updateUser(this.props.currentUser.id, formData);
         this.props.closeModal();
       }
     }
   }, {
     key: "render",
     value: function render() {
+      var preview = this.state.photoUrl ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        src: this.state.photoUrl,
+        className: "create-pin-preview"
+      }) : null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "change-photo-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
         className: "cpc-h1"
-      }, "Change your picture"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        id: "change-photo-button",
+      }, "Change your picture"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        id: "change-photo-button"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Choose Photo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "file",
         id: "change-photo-input",
         style: {
           display: "none"
         },
-        onChange: this.handleFile
-      })));
+        onChange: this.handleFile,
+        onSubmit: this.handleSubmit
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "save"), preview));
     }
   }]);
 
@@ -2167,7 +2163,7 @@ var UserSettings = function UserSettings(_ref) {
       return openModal('updatePicture');
     },
     id: "signup-button"
-  }, "Change")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, currentUser.username, ", ", currentUser.email, ", aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")));
+  }, "Change")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, currentUser.username, ", ", currentUser.email)));
 };
 
 
