@@ -4,8 +4,6 @@
     "id": <%= current_user.id %>,
     "email": "<%= current_user.email %>",
     "username": "<%= current_user.username %>",
-    "boards": "<%= current_user.boards %>",
-    "pins": "<%= current_user.pins %>",
     "photoUrl": "<%= current_user.photo.attached? ? url_for(current_user.photo).html_safe : image_url('user-icon.png') %>"
     };
   </script>
