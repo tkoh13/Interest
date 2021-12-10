@@ -1,33 +1,34 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class ProfileShow extends Component {
     constructor(props) {
         super(props)
-        // console.log(props.history)
-        // this.state = {
-
-        // }
     }
 
-    componentDidMount() {
-        // const { userId, fetchUser } = this.props
-        // if (userId) {
-        //     fetchUser(this.props.userId)
-        // }
+    componentDidMount({ fetchUser, userId } = this.props) {
+        fetchUser(userId)
+    }
+
+    componentDidUpdate(prevProps) {
+        const { fetchUser, userId } = this.props
+        if (prevProps.userId !== userId) {
+            fetchUser(userId)
+        }
     }
 
     render() {
-        const { currentUser } = this.props
-        // console.log(currentUser)
+        const { user, currentUser } = this.props
+        if (!user) return null; 
         return (
             <div className="profile-container">
                 <section className="profile-header">
                     <div className="ph-main">
                         <div className="profile-pic-container">
-                            {currentUser.photoUrl ? <img src={currentUser.photoUrl} /> : <img src={window.userIcon} />}
+                            {user.photoUrl ? <img src={user.photoUrl} /> : <img src={window.userIcon} />}
                         </div>
                         <div className="profile-username">
-                            <h2>@{currentUser.username}</h2>
+                            <h2>@{user.username}</h2>
                         </div>
                         <div className="profile-following">
                             <span className="profile-followers">
@@ -36,6 +37,9 @@ class ProfileShow extends Component {
                             <span className="profile-following">
                                 # following (modal)
                             </span>
+                            {user === currentUser ? 
+                            <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link> : null}
+                            {/* need to make button fatter */}
                         </div>
                     </div>
                 </section>
@@ -65,7 +69,10 @@ import { fetchUser } from '../../actions/user_actions';
 // }
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
-    users: ownProps.match.params.userId
+    user: state.entities.users[ownProps.match.params.userId],
+    userId: ownProps.match.params.userId,
+    ownProps,
+    state
 })
 
 const mapDispatchToProps = (dispatch) => ({

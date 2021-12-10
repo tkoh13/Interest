@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { openModal } from '../../actions/modal_actions';
 import DemoUser from '../demo_user/DemoUser';
 
 class SessionForm extends Component {

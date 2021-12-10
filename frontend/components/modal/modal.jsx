@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { createPortal } from "react-dom";
+import { closeModalOnEscape } from '../../utils/close_util';
 import SessionFormSignup from '../session_form/SessionFormSignup'
 import SessionFormLogin from '../session_form/SessionFormLogin';
 import PinFormCreate from '../pins/PinFormCreate';
+import UpdatePicture from '../settings/UpdatePicture'
 
-const Modal = ({ modal, openModal, closeModal }) => {
+const Modal = ({ modal, closeModal }) => {
     if (!modal) {
         return null;
     }
@@ -20,10 +22,15 @@ const Modal = ({ modal, openModal, closeModal }) => {
         case 'createPin':
             component = <PinFormCreate />;
             break;
+        case 'updatePicture':
+            component = <UpdatePicture />;
+            break;
         default:
             return null;
-
     }
+
+    closeModalOnEscape(closeModal);
+
     return createPortal(
         <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
@@ -36,7 +43,8 @@ const Modal = ({ modal, openModal, closeModal }) => {
 }
 
 import { connect } from 'react-redux';
-import { openModal, closeModal } from '../../actions/modal_actions';
+import { closeModal } from '../../actions/modal_actions';
+
 
 const mapStateToProps = state => {
     return {
@@ -46,8 +54,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        openModal: (modal) => dispatch(openModal(modal)),
+        // openModal: (modal) => dispatch(openModal(modal)),
         closeModal: () => dispatch(closeModal())
+
     };
 };
 

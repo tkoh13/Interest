@@ -21,3 +21,7 @@ const resetUserErrors = () => ({
 export const fetchUser = userId => dispatch => UserApiUtil.fetchUser(userId)
     .then(user => dispatch(receiveUser(user)),
         errors => dispatch(receiveUserErrors(errors)));
+
+export const updateUser = (userId, user) => dispatch => UserApiUtil.updateUser(userId, user)
+    .then(user => dispatch(receiveUser(user)),
+        errors => dispatch(receiveUserErrors(errors)));

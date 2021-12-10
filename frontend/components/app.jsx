@@ -7,6 +7,7 @@ import Footer from './footer/footer';
 import Splash from './splash/splash';
 import HomePage from './home/HomePage';
 import ProfilePage from './profile_page/ProfilePage';
+import UserSettings from './settings/UserSettings';
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
             {/* <HomeDisplay /> */}
             <Switch>
                 <ProtectedRoute exact path='/users/:userId' component={ProfilePage} />
+                <ProtectedRoute exact path='/settings' component={UserSettings} />
                 <ProtectedRoute exact path='/' component={HomePage} />
                 {/* <AuthRoute exact path='/' component={Splash} /> */}
                 {/* <ProtectedRoute exact path='/' component={HomePageContainer} /> */}

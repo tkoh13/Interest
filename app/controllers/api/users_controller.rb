@@ -17,18 +17,22 @@ class Api::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find_by_credentials(user_params)
+        @user = User.find_by(id: params[:id])
 
-        if !@user.nil?
-            render :update
+        if @user = current_user
+            if @user.update(user_params)
+                render 'api/users/show'
+            else
+                render json: @user.errors.full_messages, status: 422
+            end
         else
-            render json: ['Invalid login credentials'], status: 422
+            render json: ['Invalid credentials'], status: 422
         end
     end
 
     private
     def user_params
-        params.require(:user).permit(:email, :password, :username)
+        params.require(:user).permit(:email, :password, :username, :photo)
     end
 
 end

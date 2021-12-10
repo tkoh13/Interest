@@ -1,78 +1,72 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-// import SignUpFormContainer from '../session_form/signup_form_container'
-// import LogInFormContainer from '../session_form/login_form_container';
+import { NavLink } from 'react-router-dom';
+import DropDownButton from '../dropdown/DropDownButton';
+import { FaBell } from 'react-icons/fa'
+import { AiFillMessage } from 'react-icons/ai'
 
-
-const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
+const NavBar = ({ currentUser, logout, openModal }) => {
 
   const navBarLeft = currentUser ? (
     <section className="nb nb-content-left">
-      <div className="icon-container">
-        <div>
-          <Link to="/"><img className="interest-logo" src={window.logo} /></Link>
-        </div>
-      </div>
-      <Link to="/" >
+
+
+          <NavLink to="/"><img className="interest-logo" src={window.logo} /></NavLink>
+
+
+      <NavLink to="/" className={isActive => "nav-link" + (!isActive ? "" : "selected")}>
         <div className="home-link">Home</div>
-      </Link>
-      <Link to="/" className="today-link">Today</Link>
+      </NavLink>
+      <NavLink to="/" className={isActive => "nav-link" + (!isActive ? "" : "selected")}>
+        <div className="today-link">Today</div>
+      </NavLink>
     </section>
   ) : (
     <section className="nb nb-content-left">
-      <div className="icon-container">
-        <div>
-          <Link to="/"><img className="interest-logo" src={window.logo} /></Link>
-        </div>
-      </div>
-      <Link to="/" ><div className="interest-logo-name">Interest</div></Link>
+
+
+          <NavLink to="/"><img className="interest-logo" src={window.logo} /></NavLink>
+
+
+      <NavLink to="/" ><div className="interest-logo-name">Interest</div></NavLink>
     </section>
   );
-
+  
   const searchBar = currentUser ? (
-    <input type="text" className="search-bar" placeholder="Search Bar Placeholder" />
+    // <input type="text" className="search-bar" placeholder="Search Bar Placeholder" />
+    <div className="search-bar"></div>
   ) : (
     <div className="search-bar"></div>
   );
 
   const navBarRight = currentUser ? (
     <section className="nb nb-content-right">
-      {/* <p>Heyyyyyy {currentUser.username}!</p> */}
-      <div className="icon-container">
-        <Link to={`users/${currentUser.id}`}>
-          <img src={currentUser.photoUrl} style={{ width: "32px", height: "32px", borderRadius: "100%", objectFit: "cover" }} />
-        </Link>
+      <div className="icon-container react-icon">
+        <FaBell style={{ width: "28px", height: "28px", borderRadius: "100%", objectFit: "cover" }} />
       </div>
-      {/* <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn">Dropdown</button>
-        <div id="myDropdown" class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
-        </div>
-      </div> */}
-      <div className="icon-container">
-        <button onClick={logout}>Logout</button>
+      <div className="icon-container react-icon">
+        <AiFillMessage style={{ width: "28px", height: "28px", borderRadius: "100%", objectFit: "cover" }} />
       </div>
+      <div className="icon-container">
+        <NavLink to={`users/${currentUser.id}`}>
+          {currentUser.photoUrl ?
+          <img src={currentUser.photoUrl} style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} /> :
+          <img src={window.userIcon} style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} />}
+        </NavLink>
+      </div>
+      <DropDownButton type="nav" actions={{logout, openModal, currentUser}} />
     </section>
   ) : (
     <section className="nb nb-content-right">
       <div className="about-link">
-        <Link to="/about">About</Link>
-      </div>
+        <NavLink to="/about">About</NavLink>
+      </div>      
       <div>
         <button onClick={() => openModal('login')} id="login-button">Log In</button>
       </div>
-
       <div>
         <button onClick={() => openModal('signup')} id="signup-button">Sign Up</button>
       </div>
     </section>
-
-    // <div className="nav-bar-display">
-    //   <Link id="login-button" to="/login">Log In</Link>
-    //   <Link id="signup-button" to="/signup">Sign Up</Link>
-    // </div>
   );
 
   return (
@@ -85,19 +79,16 @@ const NavBar = ({ currentUser, logout, openModal, closeModal }) => {
 };
 
 import { connect } from 'react-redux';
-import { login, signup, logout } from '../../actions/session_actions';  
-import { openModal, closeModal } from '../../actions/modal_actions';
+import { logout } from '../../actions/session_actions';  
+import { openModal } from '../../actions/modal_actions';
 
 const mapStateToProps = state => ({ 
   currentUser: state.entities.users[state.session.id],
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: () => dispatch(login()),
-  signup: () => dispatch(signup()),
   logout: () => dispatch(logout()),
   openModal: (modal) => dispatch(openModal(modal)),
-  // closeModal: () => dispatch(closeModal()),
 }); 
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
