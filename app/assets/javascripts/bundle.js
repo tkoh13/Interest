@@ -1623,7 +1623,9 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var user = this.props.user;
+      var _this$props2 = this.props,
+          user = _this$props2.user,
+          currentUser = _this$props2.currentUser;
       if (!user) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-container"
@@ -1645,11 +1647,11 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
         className: "profile-followers"
       }, "# followers (modal)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "profile-following"
-      }, "# following (modal)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      }, "# following (modal)"), user === currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/settings"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         id: "signup-button"
-      }, "Edit Profile"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
+      }, "Edit Profile")) : null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         className: "profile-content"
       }, "Boards go here First board is \"All Pins\" board Each board should show the number of pins"));
     }

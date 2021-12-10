@@ -18,8 +18,8 @@ class ProfileShow extends Component {
     }
 
     render() {
-        const { user } = this.props
-        if(!user) return null; 
+        const { user, currentUser } = this.props
+        if (!user) return null; 
         return (
             <div className="profile-container">
                 <section className="profile-header">
@@ -37,7 +37,8 @@ class ProfileShow extends Component {
                             <span className="profile-following">
                                 # following (modal)
                             </span>
-                            <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link>
+                            {user === currentUser ? 
+                            <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link> : null}
                             {/* need to make button fatter */}
                         </div>
                     </div>
