@@ -20,9 +20,10 @@ class Api::UsersController < ApplicationController
         # @user = User.find_by_credentials(user_params)
         @user = User.find_by(id: params[:id])
 
-        if user_params[:photo] || @user.is_password?(user_params[:password])
+        if @user = current_user
+        # if user_params[:photo] || @user.is_password?(user_params[:password])
             # @user.photo.purge
-            if @user.update(photo: user_params[:photo])
+            if @user.update(user_params)
                 render 'api/users/show'
             else
                 render json: @user.errors.full_messages, status: 422
