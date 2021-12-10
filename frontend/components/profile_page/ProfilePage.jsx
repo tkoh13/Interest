@@ -4,23 +4,14 @@ import { Link } from 'react-router-dom'
 class ProfileShow extends Component {
     constructor(props) {
         super(props)
-        // debugger
-        console.log('constructor')
-        // this.state = {
-
-        // }
     }
 
     componentDidMount({ fetchUser, userId } = this.props) {
-        console.log('componentDidMount')
         fetchUser(userId)
     }
 
     componentDidUpdate(prevProps) {
         const { fetchUser, userId } = this.props
-        console.log('componentDidUpdate')
-        console.log('userId', userId)
-        console.log('prevProps.userId', prevProps.userId)
         if (prevProps.userId !== userId) {
             fetchUser(userId)
         }
@@ -28,7 +19,6 @@ class ProfileShow extends Component {
 
     render() {
         const { user } = this.props
-        console.log(user)
         if(!user) return null; 
         return (
             <div className="profile-container">
