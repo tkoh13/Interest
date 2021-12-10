@@ -23,7 +23,7 @@ const UserSettings = ({currentUser, ownProps, openModal}) => {
                 </div>
 
                 <div>
-                    {currentUser.username}, {currentUser.email}, {currentUser.boards}
+                    {currentUser.username}, {currentUser.email}
                 </div>
             </section>
         </div>
