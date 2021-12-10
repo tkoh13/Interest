@@ -17,13 +17,24 @@ class Api::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find_by_credentials(user_params)
+        # @user = User.find_by_credentials(user_params)
+        @user = User.find_by(id: params[:id])
 
-        if !@user.nil?
-            render :update
+        if user_params[:photo] || @user.is_password?(user_params[:password])
+            # @user.photo.purge
+            if @user.update(photo: user_params[:photo])
+                render 'api/users/show'
+            else
+                render json: @user.errors.full_messages, status: 422
+            end
         else
-            render json: ['Invalid login credentials'], status: 422
+            render json: ['Invalid credentials'], status: 422
         end
+        # if !@user.nil?
+        #     render "api/users/show"
+        # else
+        #     render json: ['Invalid login credentials'], status: 422
+        # end
     end
 
     private
