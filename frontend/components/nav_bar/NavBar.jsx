@@ -8,11 +8,11 @@ const NavBar = ({ currentUser, logout, openModal }) => {
 
   const navBarLeft = currentUser ? (
     <section className="nb nb-content-left">
-      <div className="icon-container">
-        <div>
+
+
           <NavLink to="/"><img className="interest-logo" src={window.logo} /></NavLink>
-        </div>
-      </div>
+
+
       <NavLink to="/" className={isActive => "nav-link" + (!isActive ? "" : "selected")}>
         <div className="home-link">Home</div>
       </NavLink>
@@ -22,11 +22,11 @@ const NavBar = ({ currentUser, logout, openModal }) => {
     </section>
   ) : (
     <section className="nb nb-content-left">
-      <div className="icon-container">
-        <div>
+
+
           <NavLink to="/"><img className="interest-logo" src={window.logo} /></NavLink>
-        </div>
-      </div>
+
+
       <NavLink to="/" ><div className="interest-logo-name">Interest</div></NavLink>
     </section>
   );
