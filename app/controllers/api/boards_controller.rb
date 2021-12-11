@@ -19,7 +19,8 @@ class Api::BoardsController < ApplicationController
     end
 
     def index
-        @boards = Board.all
+        user = User.find(params[:id])
+        @boards = user.boards
         render 'api/boards/index'
     end
 
