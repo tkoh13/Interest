@@ -43,9 +43,9 @@ var receiveBoardErrors = function receiveBoardErrors(errors) {
   };
 };
 
-var fetchBoards = function fetchBoards() {
+var fetchBoards = function fetchBoards(userId) {
   return function (dispatch) {
-    return _utils_board_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBoards().then(function (fetchedBoards) {
+    return _utils_board_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchBoards(userId).then(function (fetchedBoards) {
       return dispatch(receiveBoards(fetchedBoards));
     }, function (errors) {
       return dispatch(receiveBoardErrors(errors));
@@ -377,6 +377,46 @@ var App = function App() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/boards/BoardIndex.jsx":
+/*!***************************************************!*\
+  !*** ./frontend/components/boards/BoardIndex.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var BoardIndex = function BoardIndex(props) {
+  var currentUser = props.currentUser,
+      user = props.user,
+      userId = props.userId,
+      boards = props.boards;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "board-index-container"
+  }, "board-index-container!", JSON.stringify(boards));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BoardIndex); // import { connect } from 'react-redux';
+// import { fetchBoards } from '../../actions/board_actions';
+// const mapStateToProps = (state, ownProps) => ({
+//     currentUser: state.entities.users[state.session.id],
+//     user: state.entities.users[ownProps.match.params.userId],
+//     userId: ownProps.match.params.userId,
+//     ownProps,
+//     state
+// });
+// const mapDispatchToProps = (dispatch) => ({
+//     fetchBoards: () => dispatch(fetchBoards())
+// });
+// export default connect(mapStateToProps, mapDispatchToProps)(BoardIndex)
 
 /***/ }),
 
@@ -1561,9 +1601,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _boards_BoardIndex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../boards/BoardIndex */ "./frontend/components/boards/BoardIndex.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_board_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/board_actions */ "./frontend/actions/board_actions.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1589,6 +1631,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ProfileShow = /*#__PURE__*/function (_Component) {
   _inherits(ProfileShow, _Component);
 
@@ -1605,9 +1648,13 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.props,
           fetchUser = _ref.fetchUser,
+          fetchBoards = _ref.fetchBoards,
           userId = _ref.userId;
 
+      // debugger
+      console.log(this.props.ownProps.match);
       fetchUser(userId);
+      fetchBoards(userId);
     }
   }, {
     key: "componentDidUpdate",
@@ -1618,6 +1665,8 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
 
       if (prevProps.userId !== userId) {
         fetchUser(userId);
+
+        (0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_2__.fetchBoards)(userId);
       }
     }
   }, {
@@ -1625,7 +1674,9 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this$props2 = this.props,
           user = _this$props2.user,
-          currentUser = _this$props2.currentUser;
+          currentUser = _this$props2.currentUser,
+          userId = _this$props2.userId,
+          boards = _this$props2.boards;
       if (!user) return null;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "profile-container"
@@ -1647,18 +1698,24 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
         className: "profile-followers"
       }, "# followers (modal)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         className: "profile-following"
-      }, "# following (modal)"), user === currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+      }, "# following (modal)"), user === currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/settings"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         id: "signup-button"
       }, "Edit Profile")) : null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
         className: "profile-content"
-      }, "Boards go here First board is \"All Pins\" board Each board should show the number of pins"));
+      }, "Boards go here First board is \"All Pins\" board Each board should show the number of pins", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_boards_BoardIndex__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        currentUser: currentUser,
+        user: user,
+        userId: userId,
+        boards: boards
+      })));
     }
   }]);
 
   return ProfileShow;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
 
 
  // import { openModal } from '../../actions/modal_actions';
@@ -1675,6 +1732,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     currentUser: state.entities.users[state.session.id],
     user: state.entities.users[ownProps.match.params.userId],
     userId: ownProps.match.params.userId,
+    boards: Object.values(state.entities.boards),
     ownProps: ownProps,
     state: state
   };
@@ -1683,12 +1741,15 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchUser: function fetchUser(userId) {
-      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchUser)(userId));
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_5__.fetchUser)(userId));
+    },
+    fetchBoards: function fetchBoards(userId) {
+      return dispatch((0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_2__.fetchBoards)(userId));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapStateToProps, mapDispatchToProps)(ProfileShow));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_4__.connect)(mapStateToProps, mapDispatchToProps)(ProfileShow));
 
 /***/ }),
 
@@ -2708,9 +2769,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchBoards": () => (/* binding */ fetchBoards),
 /* harmony export */   "fetchBoard": () => (/* binding */ fetchBoard)
 /* harmony export */ });
-var fetchBoards = function fetchBoards() {
+var fetchBoards = function fetchBoards(userId) {
   return $.ajax({
-    url: 'api/boards',
+    url: "api/users/".concat(userId, "/boards"),
     method: 'GET'
   });
 };

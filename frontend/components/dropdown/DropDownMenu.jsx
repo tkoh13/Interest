@@ -41,4 +41,4 @@ const DropDownMenu = (props) => {
     )
 }
 
-export default DropDownMenu
+export default DropDownMenu;
