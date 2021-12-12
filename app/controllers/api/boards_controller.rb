@@ -19,9 +19,15 @@ class Api::BoardsController < ApplicationController
     end
 
     def index
-        user = User.find(params[:id])
-        @boards = user.boards
-        render 'api/boards/index'
+        user = User.find(params[:user_id])
+        # user = User.find_by(id: params[:id])
+        if (!user) 
+            render json: ["User does not exsist"], status: 422
+        else 
+            @boards = Board.where(creator_id: params[:user_id]).includes(:pins)
+            render 'api/boards/index'
+        end
+        
     end
 
     def update

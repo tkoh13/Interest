@@ -10,6 +10,7 @@ class Api::UsersController < ApplicationController
     end
 
     def show
+        # @user = User.find(params[:userId])
         @user = User.find_by(id: params[:id])
         render "api/users/show"
         # need to factor in showing users from follows
