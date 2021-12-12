@@ -1,24 +1,29 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import BoardIndex from '../boards/BoardIndex'
 
 class ProfileShow extends Component {
     constructor(props) {
         super(props)
     }
 
-    componentDidMount({ fetchUser, userId } = this.props) {
-        fetchUser(userId)
+    componentDidMount({ fetchUser, fetchBoards, userId } = this.props) {
+        // debugger
+        console.log(this.props.ownProps.match)
+        fetchUser(userId);
+        fetchBoards(userId);
     }
 
     componentDidUpdate(prevProps) {
         const { fetchUser, userId } = this.props
         if (prevProps.userId !== userId) {
-            fetchUser(userId)
+            fetchUser(userId);
+            fetchBoards(userId);
         }
     }
 
     render() {
-        const { user, currentUser } = this.props
+        const { user, currentUser, userId, boards } = this.props
         if (!user) return null; 
         return (
             <div className="profile-container">
@@ -47,6 +52,7 @@ class ProfileShow extends Component {
                     Boards go here
                     First board is "All Pins" board
                     Each board should show the number of pins
+                    <BoardIndex currentUser={currentUser} user={user} userId={userId} boards={boards}/>
                     {/* open create board or pin modal */}
                     {/* profile board display */}
                 </section>
@@ -58,6 +64,7 @@ class ProfileShow extends Component {
 
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
+import { fetchBoards } from '../../actions/board_actions';
 // import { openModal } from '../../actions/modal_actions';
 
 // const mapStateToProps = (state, ownProps) => {
@@ -71,12 +78,14 @@ const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
     user: state.entities.users[ownProps.match.params.userId],
     userId: ownProps.match.params.userId,
+    boards: Object.values(state.entities.boards),
     ownProps,
     state
 })
 
 const mapDispatchToProps = (dispatch) => ({
     fetchUser: (userId) => dispatch(fetchUser(userId)),
+    fetchBoards: (userId) => dispatch(fetchBoards(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileShow);
