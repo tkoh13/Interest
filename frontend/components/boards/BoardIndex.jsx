@@ -7,7 +7,9 @@ const BoardIndex = (props) => {
     return (
         <div className='board-index-container'>
             board-index-container!
-                <BoardPreview board={boards}/>
+            {boards.map((board) => (
+                <BoardPreview board={board} key={board.id}/>
+            ))}
         </div>
     )
 

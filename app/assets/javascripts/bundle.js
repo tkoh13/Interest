@@ -403,8 +403,11 @@ var BoardIndex = function BoardIndex(props) {
       boards = props.boards;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "board-index-container"
-  }, "board-index-container!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BoardPreview__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    board: boards
+  }, "board-index-container!", boards.map(function (board) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BoardPreview__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      board: board,
+      key: board.id
+    });
   }));
 };
 
@@ -439,12 +442,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var BoardPreview = function BoardPreview(props) {
-  var boards = props.boards; // console.log(boards.title)
+  var board = props.board; // console.log(boards.title)
   // console.log(boards.pins)
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "board-preview-container"
-  }, "board-preview!");
+  }, "board-preview!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", {
+    className: "board-preview-title"
+  }, board.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+    className: "board-preview-count"
+  }, board.pins.length, " Pins"));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BoardPreview);
