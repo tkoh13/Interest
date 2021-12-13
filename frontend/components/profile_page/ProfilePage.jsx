@@ -42,16 +42,13 @@ class ProfileShow extends Component {
                             <span className="profile-following">
                                 # following (modal)
                             </span>
+                        </div>
                             {user === currentUser ? 
                             <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link> : null}
                             {/* need to make button fatter */}
-                        </div>
                     </div>
                 </section>
                 <section className="profile-content">
-                    Boards go here
-                    First board is "All Pins" board
-                    Each board should show the number of pins
                     <BoardIndex currentUser={currentUser} user={user} userId={userId} boards={boards}/>
                     {/* open create board or pin modal */}
                     {/* profile board display */}

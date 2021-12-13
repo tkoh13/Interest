@@ -1,12 +1,8 @@
 import React from 'react';
 
 const BoardPreview = (props) => {
-    const { board } = props;
-    const { pins, title } = board;
-
-    // console.log(boards.title)
-    // console.log(boards.pins)
-
+    const { board, pins } = props;
+    const { title } = board;
 
     return (
         <div className='board-preview-container'>
