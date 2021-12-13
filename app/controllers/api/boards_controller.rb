@@ -19,8 +19,18 @@ class Api::BoardsController < ApplicationController
     end
 
     def index
-        @boards = Board.all
-        render 'api/boards/index'
+        user = User.find(params[:user_id])
+        if (!user) 
+            render json: ["User does not exsist"], status: 404
+        else
+            if (user == current_user) 
+                @boards = Board.where("creator_id = ?", params[:user_id])
+                render 'api/boards/index'
+            else 
+                @boards = Board.where("creator_id = ? AND private = ?", params[:user_id], false)
+                render 'api/boards/index'
+            end
+        end
     end
 
     def update
@@ -45,7 +55,7 @@ class Api::BoardsController < ApplicationController
     private
     
     def board_params
-        params.require(:board).permit(:id, :creator_id, :title, :description)
+        params.require(:board).permit(:id, :creator_id, :title, :description, :private)
     end
     
 end
