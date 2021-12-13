@@ -20,13 +20,16 @@ class Api::BoardsController < ApplicationController
 
     def index
         user = User.find(params[:user_id])
-        if (!user) render json: ["User does not exsist"], status: 404
-        if (user == current_user) 
-            @boards = Board.where("creator_id = ?", params[:user_id])
-            render 'api/boards/index'
-        else 
-            @boards = Board.where("creator_id = ? AND private = ?", params[:user_id], false)
-            render 'api/boards/index'
+        if (!user) 
+            render json: ["User does not exsist"], status: 404
+        else
+            if (user == current_user) 
+                @boards = Board.where("creator_id = ?", params[:user_id])
+                render 'api/boards/index'
+            else 
+                @boards = Board.where("creator_id = ? AND private = ?", params[:user_id], false)
+                render 'api/boards/index'
+            end
         end
     end
 
