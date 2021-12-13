@@ -9,7 +9,7 @@ class ProfileShow extends Component {
 
     componentDidMount({ fetchUser, fetchBoards, userId } = this.props) {
         // debugger
-        console.log(this.props.ownProps.match)
+        // console.log(this.props.ownProps.match)
         fetchUser(userId);
         fetchBoards(userId);
     }

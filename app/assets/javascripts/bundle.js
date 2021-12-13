@@ -392,6 +392,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _BoardPreview__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BoardPreview */ "./frontend/components/boards/BoardPreview.jsx");
+
 
 
 var BoardIndex = function BoardIndex(props) {
@@ -401,7 +403,9 @@ var BoardIndex = function BoardIndex(props) {
       boards = props.boards;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "board-index-container"
-  }, "board-index-container!", JSON.stringify(boards));
+  }, "board-index-container!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_BoardPreview__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    board: boards
+  }));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BoardIndex); // import { connect } from 'react-redux';
@@ -417,6 +421,33 @@ var BoardIndex = function BoardIndex(props) {
 //     fetchBoards: () => dispatch(fetchBoards())
 // });
 // export default connect(mapStateToProps, mapDispatchToProps)(BoardIndex)
+
+/***/ }),
+
+/***/ "./frontend/components/boards/BoardPreview.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/boards/BoardPreview.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var BoardPreview = function BoardPreview(props) {
+  var boards = props.boards; // console.log(boards.title)
+  // console.log(boards.pins)
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "board-preview-container"
+  }, "board-preview!");
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BoardPreview);
 
 /***/ }),
 
@@ -1652,7 +1683,7 @@ var ProfileShow = /*#__PURE__*/function (_Component) {
           userId = _ref.userId;
 
       // debugger
-      console.log(this.props.ownProps.match);
+      // console.log(this.props.ownProps.match)
       fetchUser(userId);
       fetchBoards(userId);
     }
@@ -2293,6 +2324,45 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/board_errors_reducer.js":
+/*!***************************************************!*\
+  !*** ./frontend/reducers/board_errors_reducer.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/board_actions */ "./frontend/actions/board_actions.js");
+
+
+var boardErrorsReducer = function boardErrorsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(state);
+
+  switch (action.type) {
+    case _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARD_ERRORS:
+      return action.errors;
+    // return Object.values(action.errors.responseJSON)
+
+    case _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARDS:
+      return [];
+
+    case _actions_board_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_BOARD:
+      return [];
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (boardErrorsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/board_reducer.js":
 /*!********************************************!*\
   !*** ./frontend/reducers/board_reducer.js ***!
@@ -2372,7 +2442,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./session_errors_reducer */ "./frontend/reducers/session_errors_reducer.js");
 /* harmony import */ var _pin_errors_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pin_errors_reducer */ "./frontend/reducers/pin_errors_reducer.js");
-/* harmony import */ var _board_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./board_reducer */ "./frontend/reducers/board_reducer.js");
+/* harmony import */ var _board_errors_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./board_errors_reducer */ "./frontend/reducers/board_errors_reducer.js");
 /* harmony import */ var _user_errors_reducer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_errors_reducer */ "./frontend/reducers/user_errors_reducer.js");
 
 
@@ -2382,7 +2452,7 @@ __webpack_require__.r(__webpack_exports__);
 var errorsReducer = (0,redux__WEBPACK_IMPORTED_MODULE_4__.combineReducers)({
   session: _session_errors_reducer__WEBPACK_IMPORTED_MODULE_0__["default"],
   pins: _pin_errors_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  board: _board_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  board: _board_errors_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
   user: _user_errors_reducer__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (errorsReducer);
@@ -2444,7 +2514,8 @@ var pinErrorsReducer = function pinErrorsReducer() {
 
   switch (action.type) {
     case _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PIN_ERRORS:
-      return Object.values(action.errors.responseJSON);
+      return action.errors;
+    // return Object.values(action.errors.responseJSON);    
 
     case _actions_pin_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_PINS:
       return [];
@@ -2644,19 +2715,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var userErrorsReducer = function userErrorsReducer() {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
 
   switch (action.type) {
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_USER:
-      return {};
+      return [];
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_USER_ERRORS:
       return action.errors;
 
     case _actions_user_actions__WEBPACK_IMPORTED_MODULE_0__.RESET_USER_ERRORS:
-      return {};
+      return [];
 
     default:
       return state;

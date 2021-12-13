@@ -1,4 +1,5 @@
 import React from 'react';
+import BoardPreview from './BoardPreview';
 
 const BoardIndex = (props) => {
     const { currentUser, user, userId, boards } = props
@@ -6,7 +7,7 @@ const BoardIndex = (props) => {
     return (
         <div className='board-index-container'>
             board-index-container!
-            {JSON.stringify(boards)}
+                <BoardPreview board={boards}/>
         </div>
     )
 
