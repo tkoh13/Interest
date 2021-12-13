@@ -20,14 +20,14 @@ class Api::BoardsController < ApplicationController
 
     def index
         user = User.find(params[:user_id])
-        # user = User.find_by(id: params[:id])
-        if (!user) 
-            render json: ["User does not exsist"], status: 422
+        if (!user) render json: ["User does not exsist"], status: 404
+        if (user == current_user) 
+            @boards = Board.where("creator_id = ?", params[:user_id])
+            render 'api/boards/index'
         else 
-            @boards = Board.where(creator_id: params[:user_id]).includes(:pins)
+            @boards = Board.where("creator_id = ? AND private = ?", params[:user_id], false)
             render 'api/boards/index'
         end
-        
     end
 
     def update
@@ -52,7 +52,7 @@ class Api::BoardsController < ApplicationController
     private
     
     def board_params
-        params.require(:board).permit(:id, :creator_id, :title, :description)
+        params.require(:board).permit(:id, :creator_id, :title, :description, :private)
     end
     
 end
