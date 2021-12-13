@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { BsPlusLg } from 'react-icons/bs';
 
 const Footer = ({ currentUser, openModal }) => {
 
     const footer = currentUser ? (
         <div onClick={() => openModal('createPin')} className="create-pin">
-            <img src={window.plus} alt="create-pin" className="create-pin-icon" />
+            <BsPlusLg className="create-pin-icon"/>
+            {/* <img src={window.plus} alt="create-pin" className="create-pin-icon" /> */}
         </div >
     ) : (
 
