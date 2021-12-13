@@ -47,7 +47,7 @@ const NavBar = ({ currentUser, logout, openModal }) => {
         <AiFillMessage style={{ width: "28px", height: "28px", borderRadius: "100%", objectFit: "cover" }} />
       </div>
       <div className="icon-container">
-        <NavLink to={`users/${currentUser.id}`}>
+        <NavLink to={`/users/${currentUser.id}`}>
           {currentUser.photoUrl ?
           <img src={currentUser.photoUrl} style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} /> :
           <img src={window.userIcon} style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} />}
