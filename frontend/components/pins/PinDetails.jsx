@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class PinDetails extends Component{
-    // setState for user
     constructor(props) {
         super(props)
         this.state = {
@@ -12,6 +11,7 @@ class PinDetails extends Component{
     componentDidMount() {
         const { fetchPin, pinId } = this.props;
         fetchPin(pinId)
+        console.log(this.props.ownProps)
     }
     
     componentDidUpdate(prevProps, prevState) {
@@ -33,18 +33,30 @@ class PinDetails extends Component{
             const date = new Date(pin.created_at);
             const { user } = this.state;
 
-            return(
+        return(
+            <div className='pin-details-overlay'>
                 <div className='pin-details-container'>
-                    <h1>{pin.title}</h1>
-                    <h2>Published on {date.toDateString()}</h2>
-                    <h2>{pin.description}</h2>
-                    <img src={user.photoUrl} alt="user-photo" style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} />
-                    <h3>{user.username}</h3> 
-                    <div>follower_count</div>
-                    <div>Follow Button</div>
-                    <img src={pin.photoUrl} alt={pin.title} />
+                    <div className='pin-details-left'>
+                        <div className='pin-details-img-container'>
+                            <img src={pin.photoUrl} alt={pin.title} 
+                            className='pin-details-img'/>
+
+                        </div>
+
+                    </div>
+                    <div className='pin-details-right'>
+                        <h1>{pin.title}</h1>
+                        <h2>Published on {date.toDateString()}</h2>
+                        <h2>{pin.description}</h2>
+                        <img src={user.photoUrl} alt="user-photo"
+                        style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }}/>
+                        <h3>{user.username}</h3> 
+                        <div>follower_count</div>
+                        <div>Follow Button</div>
+                    </div>
                 </div>
-            )
+            </div>
+        )
         }
     }
 }
@@ -53,11 +65,12 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchPin } from '../../actions/pin_actions';
 
-const mapStateToProps = ({ session, entities: { users, pins } }, { match }) => ({
+const mapStateToProps = ({ session, entities: { users, pins } }, ownProps) => ({
     currentUser: users[session.id],
-    pinId: match.params.pinId,
-    pin: pins[match.params.pinId],
-    users
+    pinId: ownProps.match.params.pinId,
+    pin: pins[ownProps.match.params.pinId],
+    users,
+    ownProps
 })
 
 const mapDispatchToProps = (dispatch) => ({
