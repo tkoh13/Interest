@@ -26,20 +26,20 @@ class SessionForm extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault();   
-    const user = Object.assign({}, this.state);
+    e.preventDefault();
+    this.props.resetUserErrors()   
+    // const user = Object.assign({}, this.state);
     this.props.processForm(this.state).then(()=>this.props.closeModal());
   }
 
   renderErrors() {
     const { errors } = this.props;
     if(errors === undefined) return null; 
-    // need to add in css for errors
     return(
       <ul>
         {errors.map((error, i) => (
           <li key={`error-${i}`}>
-            Invalid login credentials: {error}
+            {error}
           </li>
         ))}
       </ul>

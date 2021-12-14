@@ -1,8 +1,7 @@
 import { connect } from 'react-redux';
-import React from 'react';
-import { Link } from 'react-router-dom';
 import { login } from '../../actions/session_actions';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import { resetUserErrors } from '../../actions/user_actions';
 import SessionForm from './SessionForm';
 
 const mapStateToProps = ({ errors }) => {
@@ -19,6 +18,7 @@ const mapDispatchToProps = dispatch => {
     processForm: (user) => dispatch(login(user)),
     openModal: modal => dispatch(openModal(modal)),
     closeModal: () => dispatch(closeModal()),
+    resetUserErrors: () => dispatch(resetUserErrors())
   };
 };
 
