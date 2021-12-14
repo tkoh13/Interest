@@ -8,7 +8,7 @@ import Splash from './splash/splash';
 import HomePage from './home/HomePage';
 import ProfilePage from './profile_page/ProfilePage';
 import UserSettings from './settings/UserSettings';
-
+import PinDetails from './pins/PinDetails';
 
 
 
@@ -33,6 +33,7 @@ const App = () => {
             {/* <HomeDisplay /> */}
             <Switch>
                 <ProtectedRoute exact path='/users/:userId' component={ProfilePage} />
+                <ProtectedRoute exact path='/pins/:pinId' component={PinDetails} />
                 <ProtectedRoute exact path='/settings' component={UserSettings} />
                 <ProtectedRoute exact path='/' component={HomePage} />
                 {/* <AuthRoute exact path='/' component={Splash} /> */}
