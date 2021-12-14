@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class PinDetails extends Component{
     constructor(props) {
@@ -34,6 +35,7 @@ class PinDetails extends Component{
             const { user } = this.state;
 
         return(
+            <Link to='/'>
             <div className='pin-details-overlay'>
                 <div className='pin-details-container'>
                     <div className='pin-details-left'>
@@ -56,6 +58,7 @@ class PinDetails extends Component{
                     </div>
                 </div>
             </div>
+            </Link>
         )
         }
     }
