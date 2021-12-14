@@ -35,16 +35,14 @@ class PinDetails extends Component{
             const { user } = this.state;
 
         return(
-            <Link to='/'>
-            <div className='pin-details-overlay'>
+            <div>
+                <Link to='/'>
+                    <div className='pin-details-overlay'></div>
+                </Link>
                 <div className='pin-details-container'>
                     <div className='pin-details-left'>
-                        <div className='pin-details-img-container'>
                             <img src={pin.photoUrl} alt={pin.title} 
                             className='pin-details-img'/>
-
-                        </div>
-
                     </div>
                     <div className='pin-details-right'>
                         <h1>{pin.title}</h1>
@@ -57,8 +55,9 @@ class PinDetails extends Component{
                         <div>Follow Button</div>
                     </div>
                 </div>
+            {/* </div>
+            </Link> */}
             </div>
-            </Link>
         )
         }
     }
