@@ -3,7 +3,7 @@
 .pd {
     margin: 10px 10px;
     padding: 0;
-    border-radius: 20px;
+    border-radius: 25px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -79,17 +79,13 @@
 }
 
 .pd-action-container .pd-action-footer .destination {
-    width: 132px;
+    width: 100px;
     height: 32px;
     border-radius: 18px;
-
     display: flex;
     align-items: center;
-
     font-size: 16px;
     font-weight: 700;
-
-    background-color: $varGray;
     cursor: pointer;
 }
 
@@ -97,14 +93,16 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0; 
-
     background-color: $varGray;
     cursor: pointer;
+}
+
+.pd-icon-container:hover { 
+    background-color: $varDarkerGray;
 }
 
 .pd-icon {
@@ -120,5 +118,8 @@
     align-items: center;
 }
 
+.pin-url {
+    cursor: zoom-in;
+}
 
 
