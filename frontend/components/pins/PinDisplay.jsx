@@ -10,8 +10,8 @@ class PinDisplay extends Component {
         const { id, creator_id, title, photoUrl } = this.props.content;
 
         return (
-            // <Link to={`/pins/${id}`}>
             <div className={`pd pin-${this.props.size}`}>
+                <Link to={`/pins/${id}`} className='pin-url'>
                 <div className="pd-action-container">
                     <div className="pd-action-head">
                         <div className="save-pin">Save</div>
@@ -33,11 +33,11 @@ class PinDisplay extends Component {
                         </div>
                     </div>
                 </div>
+                </Link>
                 <div className="pd-image">
                     <img src={photoUrl} alt={title} />
                 </div>
             </div>
-            // {/* </Link> */}
         )
     }
 }

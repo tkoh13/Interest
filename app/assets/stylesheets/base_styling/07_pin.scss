@@ -3,7 +3,7 @@
 .pd {
     margin: 10px 10px;
     padding: 0;
-    border-radius: 20px;
+    border-radius: 32px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -79,17 +79,13 @@
 }
 
 .pd-action-container .pd-action-footer .destination {
-    width: 132px;
+    width: 100px;
     height: 32px;
     border-radius: 18px;
-
     display: flex;
     align-items: center;
-
     font-size: 16px;
     font-weight: 700;
-
-    background-color: $varGray;
     cursor: pointer;
 }
 
@@ -97,14 +93,16 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0; 
-
     background-color: $varGray;
     cursor: pointer;
+}
+
+.pd-icon-container:hover { 
+    background-color: $varDarkerGray;
 }
 
 .pd-icon {
@@ -120,5 +118,75 @@
     align-items: center;
 }
 
+.pin-url {
+    cursor: zoom-in;
+}
 
+// PinDetails ~~~~~ PinDetails ~~~~~ PinDetails ~~~~~ PinDetails ~~~~~ PinDetails ~~~~~
 
+.pin-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.1);
+    z-index: 1000;
+}
+
+.pin-details-overlay:hover {
+    cursor: zoom-out;
+}
+
+.pin-details-container {
+    position: fixed;
+    // position: relative;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -65%);
+    background-color: $varWhite;
+    border-radius: 32px;
+    width: 1000px;
+    height: 750px;
+    z-index: 1000;
+    cursor: default;
+    display: flex;
+    flex-direction: row;
+}
+
+.pin-details-left {
+    // width: 500px;
+    width: auto;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    justify-content: center;
+    border-radius: 32px 0px 0px 32px;
+}
+
+.pin-details-img-container {
+    flex-shrink: 0;
+    // width: 100%;
+    display: contents;
+    // height: 750px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.pin-details-img {
+    overflow: hidden;
+    // width: 500px;
+    width: 100%;
+    // height: 750px;
+    // position: absolute;
+    // height: 80%;
+    // border-radius: 32px 0px 0px 32px;
+}
+
+.pin-details-right {
+    width: 50%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+}

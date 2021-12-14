@@ -10,11 +10,11 @@ class Api::PinsController < ApplicationController
      end
 
     def show
-        @pin = Pin.find_by(id: params[:id])
+        @pin = Pin.find(params[:id])
         if !@pin.nil?
             render 'api/pins/show'
         else
-            render json: ["invalid request"], status: 400
+            render json: ["Pin does not exist"], status: 404
         end
     end
 
