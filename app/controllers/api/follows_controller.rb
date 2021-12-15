@@ -1,8 +1,8 @@
 class Api::FollowsController < ApplicationController
 
     def index
-        @follows = Follow.where("follower_id = ?", params[:user_id])
-        if !@follows 
+        @following = Follow.where("follower_id = ? OR followee_id = ?", params[:user_id], params[:user_id])
+        if !@following 
             render json: ["No followers or following"], status: 404
         else
             render "api/follows/index"
@@ -21,7 +21,7 @@ class Api::FollowsController < ApplicationController
     def destroy
         @follow = Follow.find(params[:id])
         if @follow && (@follow.follower_id == current_user.id)
-            @board.destroy
+            @follow.destroy
             render "api/follows/show"
         else
             render json: @follow.errors.full_messages, status: 422
