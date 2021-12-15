@@ -25,11 +25,12 @@ class Api::FollowsController < ApplicationController
             render "api/follows/show"
         else
             render json: @follow.errors.full_messages, status: 422
+        end
     end
 
     private
     def follow_params
-        params.require(:follow).permit(:follower_id, :followed_id)
+        params.require(:follow).permit(:follower_id, :followee_id)
     end
 
 end
