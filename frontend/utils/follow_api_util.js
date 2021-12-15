@@ -5,15 +5,15 @@ export const fetchFollows = (userId) => (
     })
 );
 
-export const createFollow = follow => (
+export const createFollow = (follow) => (
     $.ajax({
         url: `/api/follows`,
         method: 'POST',
-        data: follow
+        data: { follow }
     })
 );
 
-export const deleteFollow = followId => (
+export const deleteFollow = (followId) => (
     $.ajax({
         url: `/api/follows/${followId}`,
         method: 'DELETE'
