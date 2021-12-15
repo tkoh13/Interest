@@ -10,15 +10,17 @@ class PinDetails extends Component{
     }
 
     componentDidMount() {
-        const { fetchPin, pinId } = this.props;
+        const { fetchPin, fetchFollows, pinId, currentUser } = this.props;
         fetchPin(pinId)
+        fetchFollows(currentUser.id) 
         console.log(this.props.ownProps)
     }
     
     componentDidUpdate(prevProps, prevState) {
-        const { fetchUser, pin, users } = this.props;
+        const { fetchUser, fetchFollows, pin, users } = this.props;
         if (prevProps.pin !== pin) {
             fetchUser(pin.creator_id)
+            fetchFollows(pin.creator_id)
         }
         if (prevProps.users !== users) {
             this.setState({ user: users[pin.creator_id] })
@@ -55,8 +57,6 @@ class PinDetails extends Component{
                         <div>Follow Button</div>
                     </div>
                 </div>
-            {/* </div>
-            </Link> */}
             </div>
         )
         }
@@ -66,18 +66,25 @@ class PinDetails extends Component{
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchPin } from '../../actions/pin_actions';
+import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
 
-const mapStateToProps = ({ session, entities: { users, pins } }, ownProps) => ({
+const mapStateToProps = ({ session, entities: { users, pins, boards, follows } }, ownProps) => ({
     currentUser: users[session.id],
     pinId: ownProps.match.params.pinId,
     pin: pins[ownProps.match.params.pinId],
+    boards: Object.values(boards),
+    following: Object.values(follows).map(follow => follow.following),
+    followers: Object.values(follows).map(follow => follow.follower),
     users,
     ownProps
 })
 
 const mapDispatchToProps = (dispatch) => ({
     fetchUser: (userId) => dispatch(fetchUser(userId)),
-    fetchPin: (pinId) => dispatch(fetchPin(pinId))
+    fetchPin: (pinId) => dispatch(fetchPin(pinId)),
+    fetchFollows: (userId) => dispatch(fetchFollows(userId)),
+    createFollow: (follow) => dispatch(createFollow(follow)),
+    deleteFollow: (followId) => dispatch(deleteFollow(followId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PinDetails)

@@ -4,22 +4,52 @@ import BoardIndex from '../boards/BoardIndex'
 
 class ProfileShow extends Component {
     constructor(props) {
-        super(props)
+        super(props);
     }
 
-    componentDidMount({ fetchUser, fetchBoards, userId } = this.props) {
-        // debugger
-        // console.log(this.props.ownProps)
-        fetchUser(userId);
+    componentDidMount() {
+        const { fetchUser, fetchBoards, fetchFollows, userId } = this.props
+        fetchFollows(userId);
         fetchBoards(userId);
+        fetchUser(userId);
     }
 
     componentDidUpdate(prevProps) {
-        const { fetchUser, userId } = this.props
+        console.log("update")
+        const { fetchUser, fetchBoards, fetchFollows, userId, follows } = this.props;
         if (prevProps.userId !== userId) {
-            fetchUser(userId);
+            fetchFollows(userId); 
             fetchBoards(userId);
+            fetchUser(userId);
+        } 
+        if (prevProps.follows.length !== follows.length) {
+            console.log("update follows")
+            fetchFollows(userId); 
         }
+    }
+
+    renderFollowButton() {
+        const { follows, userId, currentUser } = this.props
+        if (follows.some(x => x.follower_id === currentUser.id)) {
+            const followId = follows.filter(e => e.followee_id === userId || e.follower_id === currentUser.id)[0]["id"]
+            return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
+        } else {
+            return <button onClick={() => this.handleFollow()}  id='signup-button'>Follow</button>
+        }
+    }
+
+    handleFollow() {
+        const { createFollow, currentUser, user } = this.props;
+        const follow = {
+            follower_id: currentUser.id,
+            followee_id: user.id,
+        }
+        createFollow(follow);
+    }
+
+    handleUnFollow(followId) {
+        const { deleteFollow } = this.props;
+        deleteFollow(followId);
     }
 
     render() {
@@ -43,9 +73,9 @@ class ProfileShow extends Component {
                                 # following (modal)
                             </span>
                         </div>
-                            {user === currentUser ? 
-                            <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link> : null}
-                            {/* need to make button fatter */}
+                            { user === currentUser ? 
+                            <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link> : 
+                            <div>{this.renderFollowButton()}</div> }
                     </div>
                 </section>
                 <section className="profile-content">
@@ -62,7 +92,8 @@ class ProfileShow extends Component {
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchBoards } from '../../actions/board_actions';
-// import { openModal } from '../../actions/modal_actions';
+import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
+import { openModal } from '../../actions/modal_actions';
 
 // const mapStateToProps = (state, ownProps) => {
 //     console.log(state.entities.users[state.session.id])
@@ -71,18 +102,21 @@ import { fetchBoards } from '../../actions/board_actions';
 //         userId: ownProps.match.params.userId
 //     }
 // }
-const mapStateToProps = (state, ownProps) => ({
-    currentUser: state.entities.users[state.session.id],
-    user: state.entities.users[ownProps.match.params.userId],
-    userId: ownProps.match.params.userId,
-    boards: Object.values(state.entities.boards),
-    ownProps,
-    state
+const mapStateToProps = ({ session, entities: { users, boards, follows } }, {match}) => ({
+    currentUser: users[session.id],
+    user: users[match.params.userId],
+    userId: match.params.userId,
+    boards: Object.values(boards),
+    follows: Object.values(follows),
 })
 
 const mapDispatchToProps = (dispatch) => ({
     fetchUser: (userId) => dispatch(fetchUser(userId)),
-    fetchBoards: (userId) => dispatch(fetchBoards(userId))
+    fetchBoards: (userId) => dispatch(fetchBoards(userId)),
+    fetchFollows: (userId) => dispatch(fetchFollows(userId)),
+    createFollow: (follow) => dispatch(createFollow(follow)),
+    deleteFollow: (followId) => dispatch(deleteFollow(followId)),
+    openModal: (modal) => dispatch(openModal(modal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileShow);
