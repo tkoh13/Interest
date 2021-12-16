@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BoardIndex from '../boards/BoardIndex'
+import ProfileModal from './ProfileModal';
 
 class ProfileShow extends Component {
     constructor(props) {
@@ -15,21 +16,20 @@ class ProfileShow extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log("update")
-        const { fetchUser, fetchBoards, fetchFollows, userId, follows } = this.props;
+        const { fetchUser, fetchBoards, fetchFollows, user, userId, follows } = this.props;
         if (prevProps.userId !== userId) {
             fetchFollows(userId); 
             fetchBoards(userId);
             fetchUser(userId);
         } 
         if (prevProps.follows.length !== follows.length) {
-            console.log("update follows")
             fetchFollows(userId); 
         }
     }
 
     renderFollowButton() {
         const { follows, userId, currentUser } = this.props
+        // debugger
         if (follows.some(x => x.follower_id === currentUser.id)) {
             const followId = follows.filter(e => e.followee_id === userId || e.follower_id === currentUser.id)[0]["id"]
             return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
@@ -53,10 +53,25 @@ class ProfileShow extends Component {
     }
 
     render() {
-        const { user, currentUser, userId, boards } = this.props
+        // debugger
+        const { user, currentUser, userId, boards, openModal } = this.props
         if (!user) return null; 
+
+        let followerCount, followingCount
+        if (!user.followers || !user) {
+            followerCount = 0
+        } else {
+            followerCount = user.followers.length
+        }
+        if (!user.following || !user) {
+            followingCount = 0
+        } else {
+            followingCount = user.following.length
+        }
+
         return (
             <div className="profile-container">
+                <ProfileModal user={user}/>
                 <section className="profile-header">
                     <div className="ph-main">
                         <div className="profile-pic-container">
@@ -66,11 +81,11 @@ class ProfileShow extends Component {
                             <h2>@{user.username}</h2>
                         </div>
                         <div className="profile-following">
-                            <span className="profile-followers">
-                                # followers (modal)
+                            <span className="profile-followers" onClick={() => openModal('followerModal')}>
+                                {followerCount} followers -
                             </span>
-                            <span className="profile-following">
-                                # following (modal)
+                            <span className="profile-following" onClick={() => openModal('followingModal')}>
+                                - {followingCount} following
                             </span>
                         </div>
                             { user === currentUser ? 
