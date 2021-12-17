@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BoardIndex from '../boards/BoardIndex'
-import ProfileModal from './ProfileModal';
+// import ProfileModal from './ProfileModal';
 
 class ProfileShow extends Component {
     constructor(props) {
@@ -9,7 +9,8 @@ class ProfileShow extends Component {
     }
 
     componentDidMount() {
-        const { fetchUser, fetchBoards, fetchFollows, userId } = this.props
+        const { fetchUser, fetchBoards, fetchFollows, userId, currentUser } = this.props
+        if (userId !== currentUser.id) fetchUser(currentUser.id);
         fetchFollows(userId);
         fetchBoards(userId);
         fetchUser(userId);
@@ -23,15 +24,41 @@ class ProfileShow extends Component {
             fetchUser(userId);
         } 
         if (prevProps.follows.length !== follows.length) {
-            fetchFollows(userId); 
+            fetchUser(userId);
         }
+    }
+
+    renderFollows() {
+        const { user, openModal } = this.props
+        const { followers, following } = user
+        let followerCount = followers ? followers.length : '0'
+        let followingCount = following ? following.length : '0'
+        return (
+            <div className="profile-follow-container">
+                <span className="profile-followers" onClick={() => openModal("followers")}
+                    >{followerCount} followers ·
+                </span>
+                <span className="profile-following" onClick={() => openModal("following")}
+                    > {followingCount} following
+                </span>
+            </div>
+        );
     }
 
     renderFollowButton() {
         const { follows, userId, currentUser } = this.props
+        const { following } = currentUser
         // debugger
+        // if (!currentUser.following || currentUser.following === undefined) {
+        //     return null
+        // } else if (following.filter(user => user[0].id === userId)) {
+        //     return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
+        // } else {
+        //     return <button onClick={() => this.handleFollow()} id='signup-button'>Follow</button>
+        // }
         if (follows.some(x => x.follower_id === currentUser.id)) {
-            const followId = follows.filter(e => e.followee_id === userId || e.follower_id === currentUser.id)[0]["id"]
+            // debugger
+            const followId = follows.filter(e => e.followee_id === userId && e.follower_id === currentUser.id)[0]["id"]
             return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
         } else {
             return <button onClick={() => this.handleFollow()}  id='signup-button'>Follow</button>
@@ -57,21 +84,20 @@ class ProfileShow extends Component {
         const { user, currentUser, userId, boards, openModal } = this.props
         if (!user) return null; 
 
-        let followerCount, followingCount
-        if (!user.followers || !user) {
-            followerCount = 0
-        } else {
-            followerCount = user.followers.length
-        }
-        if (!user.following || !user) {
-            followingCount = 0
-        } else {
-            followingCount = user.following.length
-        }
-
+        // let followerCount, followingCount
+        // if (!user.followers || !user) {
+        //     followerCount = 0
+        // } else {
+        //     followerCount = user.followers.length
+        // }
+        // if (!user.following || !user) {
+        //     followingCount = 0
+        // } else {
+        //     followingCount = user.following.length
+        // }
+// debugger
         return (
             <div className="profile-container">
-                <ProfileModal user={user}/>
                 <section className="profile-header">
                     <div className="ph-main">
                         <div className="profile-pic-container">
@@ -80,14 +106,15 @@ class ProfileShow extends Component {
                         <div className="profile-username">
                             <h2>@{user.username}</h2>
                         </div>
-                        <div className="profile-following">
-                            <span className="profile-followers" onClick={() => openModal('followerModal')}>
+                        {/* <div className="profile-following"> */}
+                            {this.renderFollows()}
+                            {/* <span className="profile-followers" onClick={() => openModal('followerModal')}>
                                 {followerCount} followers -
                             </span>
                             <span className="profile-following" onClick={() => openModal('followingModal')}>
                                 - {followingCount} following
-                            </span>
-                        </div>
+                            </span> */}
+                        {/* </div> */}
                             { user === currentUser ? 
                             <Link to={`/settings`}><button id='signup-button'>Edit Profile</button></Link> : 
                             <div>{this.renderFollowButton()}</div> }
@@ -109,6 +136,7 @@ import { fetchUser } from '../../actions/user_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
 import { openModal } from '../../actions/modal_actions';
+import { withRouter } from 'react-router';
 
 // const mapStateToProps = (state, ownProps) => {
 //     console.log(state.entities.users[state.session.id])
@@ -120,9 +148,10 @@ import { openModal } from '../../actions/modal_actions';
 const mapStateToProps = ({ session, entities: { users, boards, follows } }, {match}) => ({
     currentUser: users[session.id],
     user: users[match.params.userId],
-    userId: match.params.userId,
+    userId: parseInt(match.params.userId),
     boards: Object.values(boards),
     follows: Object.values(follows),
+    users
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -134,4 +163,4 @@ const mapDispatchToProps = (dispatch) => ({
     openModal: (modal) => dispatch(openModal(modal))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileShow);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileShow));
