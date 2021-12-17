@@ -5,6 +5,8 @@ import SessionFormSignup from '../session_form/SessionFormSignup'
 import SessionFormLogin from '../session_form/SessionFormLogin';
 import PinFormCreate from '../pins/PinFormCreate';
 import UpdatePicture from '../settings/UpdatePicture'
+import FollowerModal from '../profile_page/FollowerModal';
+import FollowingModal from '../profile_page/FollowingModal';
 
 const Modal = ({ modal, closeModal }) => {
     if (!modal) {
@@ -24,6 +26,12 @@ const Modal = ({ modal, closeModal }) => {
             break;
         case 'updatePicture':
             component = <UpdatePicture />;
+            break;
+        case 'followers':
+            component = <FollowerModal />;
+            break;
+        case 'following':
+            component = <FollowingModal />;
             break;
         default:
             return null;

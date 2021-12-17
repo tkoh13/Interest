@@ -17,7 +17,7 @@ const receiveBoard = (board) => ({
 const receiveBoardErrors = (errors) => ({
     type: RECEIVE_BOARD_ERRORS,
     errors
-})
+});
 
 
 export const fetchBoards = (userId) => dispatch => BoardApiUtil.fetchBoards(userId)

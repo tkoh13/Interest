@@ -7,13 +7,16 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :show, :update] do 
       resources :boards, only: [:index]
+      resources :follows, only: [:index]
     end
     
     resource :session, only: [:create, :destroy]
-    
-    resources :boards, only: [:create, :index, :show, :update, :destroy]
+
+    resources :boards, only: [:create, :show, :update, :destroy]
     
     resources :pins, only: [:create, :index, :show, :update, :destroy]
+
+    resources :follows, only: [:create, :destroy]
     
   end
 

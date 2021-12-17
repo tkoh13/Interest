@@ -14,7 +14,7 @@ const receiveUserErrors = errors => ({
     errors
 });
 
-const resetUserErrors = () => ({
+export const resetUserErrors = () => ({
     type: RESET_USER_ERRORS
 });
 

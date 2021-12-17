@@ -12,6 +12,14 @@ class User < ApplicationRecord
 
     has_many :boards
 
+    has_many :following,
+        class_name: :Follow,
+        foreign_key: :follower_id
+
+    has_many :followers,
+        class_name: :Follow,
+        foreign_key: :followee_id
+
     attr_reader :password
 
     def self.find_by_credentials(email, password)
