@@ -10,6 +10,8 @@ require "open-uri"
 User.destroy_all
 Pin.destroy_all
 Board.destroy_all
+BoardToPin.destroy_all
+Follow.destroy_all
 
 u1 = User.create!(email: "demo@demo.com", password: "demodemo", username: "demo_user")
 up1 = URI.open("https://interest-seed.s3.amazonaws.com/avatar-sergey-vinogradov.jpeg")
@@ -32,8 +34,6 @@ up5 = URI.open("https://interest-seed.s3.amazonaws.com/avatar-matthew-henry-2.jp
 u5.photo.attach(io: up5, filename: "avatar-matthew-henry-2.jpeg")
 
 uIds = [u1.id, u2.id, u3.id, u4.id, u5.id]
-
-
 
 b1 = Board.create!(creator_id: uIds[0], title: "Random", description: "Random")
 b2 = Board.create!(creator_id: uIds[1], title: "Home Decor", description: "Home Decor")
