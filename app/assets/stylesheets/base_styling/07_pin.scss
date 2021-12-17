@@ -176,6 +176,43 @@
 .pin-details-right {
     width: 50%;
     padding: 32px;
+    // padding-right: 32px;
+    // padding-left: 32px;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+}
+
+.pin-details-actions {
+    // padding-top: 64px;
+    display: flex;
+    flex-direction: row;
+    // margin-top: 64px; // maybe this instead of padding? 
+    // position: sticky;
+    // top: 64px; 
+    // z-index: 2;
+    justify-content: space-between;
+}
+
+.util-actions {
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+    // margin-left: 0;
+    // margin-right: 0;
+    width: 30%;
+    // max-width: 508px;
+    align-items: center;
+
+}
+
+.save-actions {
+    margin-left: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    // width: 236px;
+    overflow: hidden;
+    height: 60px;
 }

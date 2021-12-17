@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FollowButton from '../profile_page/FollowButton';
+import DropDownButton from '../dropdown/DropDownButton';
+import { FaEllipsisH } from 'react-icons/fa'
+import { FiShare } from 'react-icons/fi'
 
 class PinDetails extends Component{
     constructor(props) {
@@ -75,6 +78,19 @@ class PinDetails extends Component{
                             className='pin-details-img'/>
                     </div>
                     <div className='pin-details-right'>
+                        <div className='pin-details-actions'>
+                            <div className='util-actions'>
+                                <FaEllipsisH></FaEllipsisH>
+                                <FiShare></FiShare>
+                                <FaEllipsisH></FaEllipsisH>
+                            </div>
+                            <div className='save-actions'>
+                                <DropDownButton type='board' />
+
+
+                                <button id='login-button'>Quick Save</button>
+                            </div>
+                        </div>
                         <h1>{pin.title}</h1>
                         <h2>Published on {date.toDateString()}</h2>
                         <h2>{pin.description}</h2>
