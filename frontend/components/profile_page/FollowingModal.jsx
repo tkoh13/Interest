@@ -7,6 +7,15 @@ class FollowingModal extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        const { fetchFollows, fetchUser, user, currentUser } = this.props;
+        // debugger
+        if (currentUser.id !== user.id) {
+            console.log("follow modal mount")
+            fetchFollows(currentUser.id)
+        }
+    }
+
     renderUserList() {
         const { user, closeModal } = this.props
         const userList = Object.values(user.following).map((user,idx) => {

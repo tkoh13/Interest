@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import BoardIndex from '../boards/BoardIndex'
+import FollowButton from './FollowButton';
 // import ProfileModal from './ProfileModal';
 
 class ProfileShow extends Component {
@@ -11,6 +12,7 @@ class ProfileShow extends Component {
     componentDidMount() {
         const { fetchUser, fetchBoards, fetchFollows, userId, currentUser } = this.props
         if (userId !== currentUser.id) fetchUser(currentUser.id);
+        console.log("profile mount")
         fetchFollows(userId);
         fetchBoards(userId);
         fetchUser(userId);
@@ -19,11 +21,13 @@ class ProfileShow extends Component {
     componentDidUpdate(prevProps) {
         const { fetchUser, fetchBoards, fetchFollows, user, userId, follows } = this.props;
         if (prevProps.userId !== userId) {
+            console.log("profile update")
             fetchFollows(userId); 
             fetchBoards(userId);
             fetchUser(userId);
         } 
         if (prevProps.follows.length !== follows.length) {
+            console.log("follow length")
             fetchUser(userId);
         }
     }
@@ -46,23 +50,31 @@ class ProfileShow extends Component {
     }
 
     renderFollowButton() {
-        const { follows, userId, currentUser } = this.props
-        const { following } = currentUser
-        // debugger
-        // if (!currentUser.following || currentUser.following === undefined) {
-        //     return null
-        // } else if (following.filter(user => user[0].id === userId)) {
+        const { fetchUser, currentUser, user } = this.props;
+        if (currentUser.following && user) {
+            return <FollowButton user={user} />
+        } else {
+            fetchUser(currentUser.id)
+                .then(() => this.renderFollowButton())
+        }
+
+        // const { follows, userId, currentUser } = this.props
+        // const { following } = currentUser
+        // // debugger
+        // // if (!currentUser.following || currentUser.following === undefined) {
+        // //     return null
+        // // } else if (following.filter(user => user[0].id === userId)) {
+        // //     return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
+        // // } else {
+        // //     return <button onClick={() => this.handleFollow()} id='signup-button'>Follow</button>
+        // // }
+        // if (follows.some(x => x.follower_id === currentUser.id)) {
+        //     // const followId = follows.filter(e => e.followee_id === userId || e.follower_id === currentUser.id)[0]["id"]
+        //     const followId = follows.filter(e => e.follower_id === currentUser.id)[0]["id"]
         //     return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
         // } else {
-        //     return <button onClick={() => this.handleFollow()} id='signup-button'>Follow</button>
+        //     return <button onClick={() => this.handleFollow()}  id='signup-button'>Follow</button>
         // }
-        if (follows.some(x => x.follower_id === currentUser.id)) {
-            // const followId = follows.filter(e => e.followee_id === userId || e.follower_id === currentUser.id)[0]["id"]
-            const followId = follows.filter(e => e.follower_id === currentUser.id)[0]["id"]
-            return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
-        } else {
-            return <button onClick={() => this.handleFollow()}  id='signup-button'>Follow</button>
-        }
     }
 
     handleFollow() {

@@ -11,9 +11,16 @@ class FollowButton extends Component {
     }
 
     componentDidMount() {
-        const { user, currentUser } = this.props;
-        const { following } = currentUser
-        if (following.filter(u => u.id === user.id)[0]) {
+        const { fetchFollows, fetchUser, user, currentUser } = this.props;
+        // fetchUser(currentUser.id)
+        //     .then(() => currentUser.following.filter(u => u.id === user.id)[0] ? 
+        //     this.setState({ status: true }) :
+        //     console.log("not following"))
+        // debugger
+        // if (currentUser.id !== user.id) {
+        //     fetchFollows(currentUser.id)
+        // }
+        if (currentUser.following.filter(u => u.id === user.id)[0]) {
             this.setState({ status: true })
         }
     }
@@ -29,6 +36,8 @@ class FollowButton extends Component {
     }
 
     handleUnFollow() {
+        // need to figure out why id is undefined when in FollowerModal and FOllowingModal on other Profile Pages 
+        // probably need to fetch follows on other Profiles
         this.setState({ status: false })
         const { deleteFollow, follows, user, currentUser } = this.props
         const followId = follows.filter(e => e.followee_id === user.id && e.follower_id === currentUser.id)[0]["id"]        
@@ -65,6 +74,7 @@ class FollowButton extends Component {
 }
 
 import { connect } from 'react-redux';
+import { fetchUser } from '../../actions/user_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
 
 const mapStateToProps = ({ session, entities: { users, follows } }, ownProps) => {
@@ -77,6 +87,7 @@ const mapStateToProps = ({ session, entities: { users, follows } }, ownProps) =>
 };
 
 const mapDispatchToProps = dispatch => ({
+    fetchUser: (userId) => dispatch(fetchUser(userId)),
     fetchFollows: (userId) => dispatch(fetchFollows(userId)),
     createFollow: (follow) => dispatch(createFollow(follow)),
     deleteFollow: (followId) => dispatch(deleteFollow(followId)),

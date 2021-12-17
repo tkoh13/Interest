@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import FollowButton from '../profile_page/FollowButton';
 
 class PinDetails extends Component{
     constructor(props) {
@@ -12,18 +13,45 @@ class PinDetails extends Component{
     componentDidMount() {
         const { fetchPin, fetchFollows, pinId, currentUser } = this.props;
         fetchPin(pinId)
-        fetchFollows(currentUser.id) 
-        console.log(this.props.ownProps)
+        // fetchUser(currentUser.id)
+        // fetchFollows(currentUser.id) 
+        // console.log(this.props.ownProps)
     }
     
     componentDidUpdate(prevProps, prevState) {
-        const { fetchUser, fetchFollows, pin, users } = this.props;
+        const { fetchUser, fetchFollows, pin, users, follows } = this.props;
         if (prevProps.pin !== pin) {
-            fetchUser(pin.creator_id)
             fetchFollows(pin.creator_id)
+            fetchUser(pin.creator_id)
+                // .then(() => this.setState({ user: users[pin.creator_id] }))
         }
         if (prevProps.users !== users) {
             this.setState({ user: users[pin.creator_id] })
+        }
+        if (prevProps.follows.length !== follows.length) {
+            fetchUser(pin.creator_id);
+        }
+    }
+
+    renderFollows() {
+        const { user } = this.state;
+        const { followers } = user;
+        let followerCount = followers ? followers.length : '0'
+        return (
+            <div>
+                {followerCount} followers
+            </div>
+        )
+    }
+
+    renderFollowButton() {
+        const { fetchUser, currentUser } = this.props;
+        const { user } = this.state;
+        if (currentUser.following && user) {
+            return <FollowButton user={user} />
+        } else {
+            fetchUser(currentUser.id)
+                .then(() => this.renderFollowButton())
         }
     }
 
@@ -53,8 +81,12 @@ class PinDetails extends Component{
                         <img src={user.photoUrl} alt="user-photo"
                         style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }}/>
                         <h3>{user.username}</h3> 
-                        <div>follower_count</div>
-                        <div>Follow Button</div>
+                        <div>{this.renderFollows()}</div>
+                        <div>{this.renderFollowButton()}</div>
+                        {/* {!user ?
+                        <div>no user</div> :
+                        <FollowButton user={user} /> } */}
+                        
                     </div>
                 </div>
             </div>
@@ -73,8 +105,9 @@ const mapStateToProps = ({ session, entities: { users, pins, boards, follows } }
     pinId: ownProps.match.params.pinId,
     pin: pins[ownProps.match.params.pinId],
     boards: Object.values(boards),
-    following: Object.values(follows).map(follow => follow.following),
-    followers: Object.values(follows).map(follow => follow.follower),
+    follows: Object.values(follows),
+    // following: Object.values(follows).map(follow => follow.following),
+    // followers: Object.values(follows).map(follow => follow.follower),
     users,
     ownProps
 })
