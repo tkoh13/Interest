@@ -57,8 +57,8 @@ class ProfileShow extends Component {
         //     return <button onClick={() => this.handleFollow()} id='signup-button'>Follow</button>
         // }
         if (follows.some(x => x.follower_id === currentUser.id)) {
-            // debugger
-            const followId = follows.filter(e => e.followee_id === userId && e.follower_id === currentUser.id)[0]["id"]
+            // const followId = follows.filter(e => e.followee_id === userId || e.follower_id === currentUser.id)[0]["id"]
+            const followId = follows.filter(e => e.follower_id === currentUser.id)[0]["id"]
             return <button onClick={() => this.handleUnFollow(followId)} id='signup-button'>Following</button> 
         } else {
             return <button onClick={() => this.handleFollow()}  id='signup-button'>Follow</button>
