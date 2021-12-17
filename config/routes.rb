@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :pins, only: [:create, :index, :show, :update, :destroy]
 
     resources :follows, only: [:create, :destroy]
+
+    resources :boardtopins, only: [:create, :destroy]
     
   end
 
