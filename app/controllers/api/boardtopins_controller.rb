@@ -18,7 +18,12 @@ class BoardToPins < ApplicationController
     end
 
     def index
-        @board_to_pins = BoardToPin.all
+        @board_to_pins = BoardToPin.where("user.id = ?", params[:user_id])
+        if !@board_to_pins
+            render json: ["Nothing saved"]
+        else
+            render "api/boardtopins/index"
+        end
         render :index
     end
     
