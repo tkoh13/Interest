@@ -57,7 +57,7 @@ class FollowButton extends Component {
 
     render() {
         return(
-            <div className='follow-button'>
+            <div>
                 {this.renderButton()}
             </div>
         )

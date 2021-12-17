@@ -220,12 +220,42 @@
 }
 
 .rb-board-preview-image{
-  border-bottom-right-radius: 18px;
-  background-color: $varLightBluePair;
+    border-bottom-right-radius: 18px;
+    background-color: $varLightBluePair;
 }
 
 .rt-board-preview-image {
-  border-top-right-radius: 18px;
-  background-color: $varLightBlue;
-  border-bottom: 1px solid white;
+    border-top-right-radius: 18px;
+    background-color: $varLightBlue;
+    border-bottom: 1px solid white;
+}
+// FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~
+.follow-button {
+    font-family: $font;
+    border: none;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $varRed;
+    color: $varWhite;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.unfollow-button {
+    font-family: $font;
+    border: none;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $varGray;
+    color: $varBlack;
+    font-weight: 600;
+    font-size: 15px;
 }

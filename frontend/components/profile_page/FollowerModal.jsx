@@ -29,7 +29,7 @@ class FollowerModal extends Component {
     render() {
         return (
             <div>
-                Following
+                Followers
                 <ul>{this.renderUserList()}</ul>
             </div>
         )
