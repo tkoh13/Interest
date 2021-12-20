@@ -10,18 +10,19 @@ class ProfileShow extends Component {
     }
 
     componentDidMount() {
-        const { fetchUser, fetchBoards, fetchFollows, userId, currentUser } = this.props
+        const { fetchUser, fetchBoards, fetchFollows, fetchSaves, userId, currentUser } = this.props
         if (userId !== currentUser.id) fetchUser(currentUser.id);
-        console.log("profile mount")
+        // console.log("profile mount")
         fetchFollows(userId);
         fetchBoards(userId);
+        fetchSaves(userId);
         fetchUser(userId);
     }
 
     componentDidUpdate(prevProps) {
         const { fetchUser, fetchBoards, fetchFollows, user, userId, follows } = this.props;
         if (prevProps.userId !== userId) {
-            console.log("profile update")
+            // console.log("profile update")
             fetchFollows(userId); 
             fetchBoards(userId);
             fetchUser(userId);
@@ -93,7 +94,7 @@ class ProfileShow extends Component {
 
     render() {
         // debugger
-        const { user, currentUser, userId, boards, openModal } = this.props
+        const { user, currentUser, userId, boards, saves } = this.props
         if (!user) return null; 
 
         // let followerCount, followingCount
@@ -133,7 +134,7 @@ class ProfileShow extends Component {
                     </div>
                 </section>
                 <section className="profile-content">
-                    <BoardIndex currentUser={currentUser} user={user} userId={userId} boards={boards}/>
+                    <BoardIndex currentUser={currentUser} user={user} userId={userId} boards={boards} saves={saves}/>
                     {/* open create board or pin modal */}
                     {/* profile board display */}
                 </section>
@@ -147,6 +148,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
+import { fetchSaves, createSave, deleteSave } from '../../actions/save_actions';
 import { openModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router';
 
@@ -157,12 +159,13 @@ import { withRouter } from 'react-router';
 //         userId: ownProps.match.params.userId
 //     }
 // }
-const mapStateToProps = ({ session, entities: { users, boards, follows } }, {match}) => ({
+const mapStateToProps = ({ session, entities: { users, boards, follows, saves } }, {match}) => ({
     currentUser: users[session.id],
     user: users[match.params.userId],
     userId: parseInt(match.params.userId),
     boards: Object.values(boards),
     follows: Object.values(follows),
+    saves: Object.values(saves),
     users
 })
 
@@ -172,6 +175,9 @@ const mapDispatchToProps = (dispatch) => ({
     fetchFollows: (userId) => dispatch(fetchFollows(userId)),
     createFollow: (follow) => dispatch(createFollow(follow)),
     deleteFollow: (followId) => dispatch(deleteFollow(followId)),
+    fetchSaves: (userId) => dispatch(fetchSaves(userId)),
+    createSave: (save) => dispatch(createSave(save)),
+    deleteSave: (saveId) => dispatch(deleteSave(saveId)),
     openModal: (modal) => dispatch(openModal(modal))
 })
 
