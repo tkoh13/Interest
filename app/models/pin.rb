@@ -7,10 +7,10 @@ class Pin < ApplicationRecord
         foreign_key: :creator_id
 
 
-    has_many :board_to_pin
+    has_many :board_to_pins
 
     has_many :boards, 
-        through: :board_to_pin
+        through: :board_to_pins
 
 
     def unique_key

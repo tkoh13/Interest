@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
     has_many :boards
 
-    has_many :boardtopins, :through => :boards, :source => :board_to_pin
+    has_many :board_to_pins, :through => :boards, :source => :board_to_pins
 
     has_many :following,
         class_name: :Follow,
