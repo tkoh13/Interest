@@ -1,13 +1,13 @@
 export const fetchSaves = (userId) => (
     $.ajax({
-        url: `/api/users/${userId}/boardtopins`,
+        url: `/api/users/${userId}/board_to_pins`,
         method: 'GET'
     })
 );
 
 export const createSave = (save) => (
     $.ajax({
-        url: `/api/boardtopins`,
+        url: `/api/board_to_pins`,
         method: 'POST',
         data: { save }
     })
@@ -15,7 +15,7 @@ export const createSave = (save) => (
 
 export const deleteSave = (saveId) => (
     $.ajax({
-        url: `/api/boardtopins/${saveId}`,
+        url: `/api/board_to_pins/${saveId}`,
         method: 'DELETE'
     })
 );
