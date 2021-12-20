@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create, :show, :update] do 
       resources :boards, only: [:index]
       resources :follows, only: [:index]
-      resources :boardtopins, only: [:index]
+      resources :board_to_pins, only: [:index]
     end
     
     resource :session, only: [:create, :destroy]
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
     resources :follows, only: [:create, :destroy]
 
-    resources :boardtopins, only: [:create, :destroy]
+    resources :board_to_pins, only: [:create, :destroy]
     
   end
 
