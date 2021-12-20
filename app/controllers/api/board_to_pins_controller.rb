@@ -1,4 +1,4 @@
-class BoardToPins < ApplicationController
+class Api::BoardToPinsController < ApplicationController
     def create
         @board_to_pin = BoardToPin.new(board_to_pin_params)
         if @board_to_pin.save
@@ -9,13 +9,13 @@ class BoardToPins < ApplicationController
     end
 
     def index
-        @board_to_pins = BoardToPin.where("user.id = ?", params[:user_id])
+        @board_to_pins = BoardToPin.joins(:user).where(:users => { :id => params[:user_id] })
+        # @board_to_pins = BoardToPin.joins(:board).where(:boards => { :creator_id => params[:user_id] })
         if !@board_to_pins
             render json: ["Nothing saved"]
         else
             render "api/boardtopins/index"
         end
-        render :index
     end
     
     def destroy
