@@ -113,11 +113,7 @@
     justify-content: flex-end;
 }
 
-.create-board:hover {
-  background-color: $varDarkGray;
-}
-
-.create-board {
+.profile-create {
     width: 35px;
     height: 35px;
     border-radius: 100%;
@@ -126,9 +122,64 @@
     align-items: center;
     cursor: pointer;
 }
-.create-board-icon {
-    width: 20px;
-    height: 20px;
+
+.profile-create:hover {
+  background-color: $varDarkGray;
+}
+
+// .profile-create .dropdown-button{
+//     display: flex;
+//     position: relative;
+//     align-items: center;
+//     justify-content: space-between;
+//     border-radius: 100px;
+//     right: 1%;
+//     margin-right: 15px;
+//     height: 22px;
+//     padding: 0px 5px;
+//     cursor: pointer;
+// }
+
+.profile-container .dropdown-menu {
+    z-index: 1000;
+    position: absolute;
+    right: 5%;
+    margin-top: 5px;
+    // top: 50%;
+    background-color: $varOffWhite;
+    border-radius: 8px;
+    width: 180px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
+}
+
+.profile-create .dropdown-header {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 8px 8px 8px 8px;
+    border-radius: 8px;
+    min-height: 20px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.profile-create .dropdown-item {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin: 0px 8px 8px 8px;
+    border-radius: 8px;
+    min-height: 35px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.profile-create .dropdown-item:hover {
+    background: $varDarkGray;
 }
 
 .board-grid {
@@ -142,19 +193,35 @@
     overflow: hidden;
 }
 
+.all-pins-container{
+    box-sizing: border-box;
+    display: block;
+    // display: flex;
+    // flex-direction: row;
+    cursor: pointer;
+}
+
+.all-pins-preview {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
 .board-preview-container {
     box-sizing: border-box;
     // justify-content: space-between;
     display: block;
     padding: 8px;
     position: relative;
+    cursor: pointer;
+    // width: 236px;
+    // height: 157px;
 //   display:flex;
 //   justify-content: center;
 //   flex-direction: column;
 //   margin:0;
 //   padding-left: 5px;
 //   padding-right: 5px;
-//   width: 245px;
 }
 
 .board-preview-image {
@@ -229,6 +296,8 @@
     background-color: $varLightBlue;
     border-bottom: 1px solid white;
 }
+
+
 // FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~
 .follow-button {
     font-family: $font;
