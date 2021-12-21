@@ -9,6 +9,7 @@ import HomePage from './home/HomePage';
 import ProfilePage from './profile_page/ProfilePage';
 import UserSettings from './settings/UserSettings';
 import PinDetails from './pins/PinDetails';
+import BoardShow from './boards/BoardShow';
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
         {/* <Route exact path="/pins" component={HomeDisplay}/> */}
             {/* <HomeDisplay /> */}
             <Switch>
+                <ProtectedRoute exact path='/boards/:boardId' component={BoardShow} />
                 <ProtectedRoute exact path='/users/:userId' component={ProfilePage} />
                 <ProtectedRoute exact path='/pins/:pinId' component={PinDetails} />
                 <ProtectedRoute exact path='/settings' component={UserSettings} />
