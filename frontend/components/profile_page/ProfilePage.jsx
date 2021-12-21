@@ -94,7 +94,7 @@ class ProfileShow extends Component {
 
     render() {
         // debugger
-        const { user, currentUser, userId, boards, saves } = this.props
+        const { user, currentUser, userId, boards, saves, openModal } = this.props
         if (!user) return null; 
 
         // let followerCount, followingCount
@@ -134,7 +134,7 @@ class ProfileShow extends Component {
                     </div>
                 </section>
                 <section className="profile-content">
-                    <BoardIndex currentUser={currentUser} user={user} userId={userId} boards={boards} saves={saves}/>
+                    <BoardIndex currentUser={currentUser} user={user} userId={userId} boards={boards} saves={saves} openModal={openModal}/>
                     {/* open create board or pin modal */}
                     {/* profile board display */}
                 </section>

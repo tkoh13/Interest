@@ -85,7 +85,7 @@ class PinDetails extends Component{
                                 <FaEllipsisH></FaEllipsisH>
                             </div>
                             <div className='save-actions'>
-                                <DropDownButton type='board' />
+                                <DropDownButton type='boardSave' />
 
 
                                 <button id='login-button'>Quick Save</button>

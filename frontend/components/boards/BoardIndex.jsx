@@ -1,9 +1,10 @@
 import React from 'react';
 import BoardPreview from './BoardPreview';
+import DropDownButton from '../dropdown/DropDownButton';
 import { BsPlusLg } from 'react-icons/bs';
 
 const BoardIndex = (props) => {
-    const { currentUser, user, userId, boards, saves } = props
+    const { currentUser, user, userId, boards, saves, openModal } = props
 
     let allPins
     !saves.length ? allPins = null : 
@@ -17,23 +18,13 @@ const BoardIndex = (props) => {
     ) : (
         null
     )
-    // const renderAllPins = () => {
-    //     // if (props.saves) return null; 
-    //     const { saves } = props
-    //     let allPins
-    //     !saves ? allPins = null : 
-    //         allPins = {
-    //             title: allPins,
-    //             pins: saves.map(pin => Object.values(pin)[0])
-    //         }
-        
-    // }
 
     return (
         <div className='board-index-container'>  
             <div className='board-index-create'>
-                <div className='create-board'>
-                    <BsPlusLg className="create-board-icon" />
+                <div className='profile-create'>
+                    <DropDownButton type="profileCreate" actions={{ openModal, currentUser }} />
+                    {/* <BsPlusLg className="create-board-icon" /> */}
                 </div>
             </div>              
             <div className='board-grid'>

@@ -5,7 +5,7 @@ import { closeOnEscape, closeOnOutsideClick } from '../../utils/close_util';
 
 const DropDownMenu = (props) => {
     const { actions, setShowDropDown, type } = props
-    const { currentUser, logout } = actions
+    const { currentUser, logout, openModal } = actions
     // actions.logout(), actions.openModal(modal), actions.currentUser
     const popupRef = useRef();
 
@@ -17,7 +17,7 @@ const DropDownMenu = (props) => {
 
     switch (type) {
         case 'nav':          
-            console.log(Object.values(actions)) 
+            // console.log(Object.values(actions)) 
             values = ['Settings', 'About', 'Log out'];
             component =
             <div className="dropdown-menu" ref={popupRef} >
@@ -27,6 +27,19 @@ const DropDownMenu = (props) => {
             </div>
             // values = Object.keys(actions);
             break;
+        // case 'boardSave':
+
+        //     break;
+        case 'profileCreate':
+            component =
+            <div className="dropdown-menu" ref={popupRef} >
+                <div className="dropdown-header">Create</div>
+                <div className="dropdown-item" onClick={() => openModal('createPin')}>Pin</div>
+                <div className="dropdown-item" onClick={() => openModal('createBoard')}>Board</div>
+            </div>
+            break;
+        default: 
+            return null;
     }
 
     return (
