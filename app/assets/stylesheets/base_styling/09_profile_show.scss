@@ -264,36 +264,36 @@
   border-bottom-left-radius: 18px;
   border-top-left-radius: 18px;
   object-fit: cover;
-  background-color: $varLightBlue;
+  background-color: $varLightPurple;
   border-right: 1px solid white;
 }
 
 .right-images{
-  display:flex; 
-  flex-direction: column;
+    display:flex; 
+    flex-direction: column;
 }
 
 .rt-board-preview-image, .rb-board-preview-image{
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-  width:80px;
-  height: 80px;
-//   padding:0;
-  margin-left: 1px;
-  margin-bottom: 1px;
-//   margin:0;
-  object-fit: cover;
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    width:80px;
+    height: 80px;
+    //   padding:0;
+    margin-left: 1px;
+    margin-bottom: 1px;
+    //   margin:0;
+    object-fit: cover;
 }
 
 .rb-board-preview-image{
     border-bottom-right-radius: 18px;
-    background-color: $varLightBluePair;
+    background-color: $varPinkPair;
 }
 
 .rt-board-preview-image {
     border-top-right-radius: 18px;
-    background-color: $varLightBlue;
+    background-color: $varPink;
     border-bottom: 1px solid white;
 }
 
