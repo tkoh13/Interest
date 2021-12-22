@@ -14,7 +14,7 @@ const BoardIndex = (props) => {
     }
     
     const allPinsBoard = allPins ? (
-        <BoardPreview board={allPins} pins={allPins.pins} />
+        <BoardPreview board={allPins} pins={allPins.pins} user={user} />
     ) : (
         null
     )
@@ -22,15 +22,12 @@ const BoardIndex = (props) => {
     return (
         <div className='board-index-container'>  
             <div className='board-index-create'>
-                <div className='profile-create'>
-                    <DropDownButton type="profileCreate" actions={{ openModal, currentUser }} />
-                    {/* <BsPlusLg className="create-board-icon" /> */}
-                </div>
+                {user === currentUser ? <div className='profile-create'><DropDownButton type="profileCreate" actions={{ openModal, currentUser }} /></div> : <div></div>}
             </div>              
             <div className='board-grid'>
-                {/* {allPinsBoard} */}
+                {allPinsBoard}
                 {boards.map((board) => (
-                        <BoardPreview board={board} pins={board.pins} key={board.id}/>
+                    <BoardPreview board={board} pins={board.pins} user={user} key={board.id}/>
                 ))}
             </div>
         </div>

@@ -67,7 +67,7 @@ class BoardForm extends Component {
         // const history = useHistory()
         // history.back().then(() => deleteBoard(boardId))
         deleteBoard(board.id)
-            // .then(() => closeModal())
+            .then(() => closeModal())
             // .then(() => history.back())
             // .then(() => this.handleBack())
             // .then(() => history.push(`/users/${board.creator_id}`))
