@@ -4,6 +4,7 @@ import FollowButton from '../profile_page/FollowButton';
 import DropDownButton from '../dropdown/DropDownButton';
 import { FaEllipsisH } from 'react-icons/fa'
 import { FiShare } from 'react-icons/fi'
+import { BsTrash } from 'react-icons/bs'
 
 class PinDetails extends Component{
     constructor(props) {
@@ -11,11 +12,14 @@ class PinDetails extends Component{
         this.state = {
             user: null
         }
+        // this.handleSave = this.handleSave.bind(this);
     }
 
     componentDidMount() {
-        const { fetchPin, fetchFollows, pinId, currentUser } = this.props;
+        const { fetchPin, fetchBoards, fetchSaves, fetchFollows, pinId, currentUser } = this.props;
         fetchPin(pinId)
+        fetchBoards(currentUser.id)
+        fetchSaves(currentUser.id)
         // fetchUser(currentUser.id)
         // fetchFollows(currentUser.id) 
         // console.log(this.props.ownProps)
@@ -23,6 +27,7 @@ class PinDetails extends Component{
     
     componentDidUpdate(prevProps, prevState) {
         const { fetchUser, fetchFollows, pin, users, follows } = this.props;
+        // debugger
         if (prevProps.pin !== pin) {
             fetchFollows(pin.creator_id)
             fetchUser(pin.creator_id)
@@ -48,9 +53,10 @@ class PinDetails extends Component{
     }
 
     renderFollowButton() {
-        const { fetchUser, currentUser } = this.props;
+        const { fetchUser, currentUser, pin } = this.props;
         const { user } = this.state;
-        if (currentUser.following && user) {
+        if (currentUser.following && pin) {
+        // if (currentUser.following && user) {
             return <FollowButton user={user} />
         } else {
             fetchUser(currentUser.id)
@@ -58,12 +64,51 @@ class PinDetails extends Component{
         }
     }
 
+    renderSaveActions() {
+        const { saves, pin, boards, currentUser } = this.props;
+        if (saves.filter(save => save.pin_id === pin.id).length) {
+            return (
+                <div className='save-actions'>
+                    <div className='icon-container'>
+                        <BsTrash onClick={() => this.handleUnSave()} />
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className='save-actions'>
+                    <DropDownButton type='boardSave' boards={boards} actions={{ boards, currentUser }} />
+                    <button id='login-button' onClick={() => this.handleSave()}>Save</button>
+                </div>
+            )
+        }
+        
+    }
+
     handleBack() {
         this.props.history.goBack()
     }
 
+    handleSave() {
+        const { createSave, pin, boards } = this.props; 
+        // console.log(boards[0].id)
+        // console.log(pin.id)
+        const save = {
+            board_id: boards[0].id,
+            pin_id: pin.id
+        }
+        createSave(save);
+    }
+
+    handleUnSave() {
+        const { deleteSave, saves, pin } = this.props; 
+        const save = saves.filter(save => save.pin_id === pin.id)[0]
+        deleteSave(save.id)
+    }
+
     render() {
-        const { pin } = this.props;
+        const { pin, currentUser, boards, saves } = this.props;
+        // debugger
         
         if(!pin || !this.state.user) {
             return null
@@ -88,18 +133,20 @@ class PinDetails extends Component{
                                 <FiShare></FiShare>
                                 <FaEllipsisH></FaEllipsisH>
                             </div>
-                            <div className='save-actions'>
-                                <DropDownButton type='boardSave' />
+                            {this.renderSaveActions()}
+                            {/* <div className='save-actions'>
+                                <DropDownButton type='boardSave' boards={boards} actions={{ boards, currentUser }} />
 
+                                <button id='login-button' onClick={() => this.handleSave()}>Save</button>
 
-                                <button id='login-button'>Quick Save</button>
-                            </div>
+                            </div> */}
                         </div>
                         <h1>{pin.title}</h1>
                         <h2>Published on {date.toDateString()}</h2>
                         <h2>{pin.description}</h2>
-                        <img src={user.photoUrl} alt="user-photo"
-                        style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }}/>
+                        <Link to={`/users/${user.id}`}><img src={user.photoUrl} alt="user-photo"
+                            style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} /></Link>
+                        
                         <h3>{user.username}</h3> 
                         <div>{this.renderFollows()}</div>
                         <div>{this.renderFollowButton()}</div>
@@ -118,14 +165,17 @@ class PinDetails extends Component{
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchPin } from '../../actions/pin_actions';
+import { fetchBoards } from '../../actions/board_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
+import { fetchSaves, createSave, deleteSave } from '../../actions/save_actions';
 
-const mapStateToProps = ({ session, entities: { users, pins, boards, follows } }, ownProps) => ({
+const mapStateToProps = ({ session, entities: { users, pins, boards, follows, saves } }, ownProps) => ({
     currentUser: users[session.id],
     pinId: ownProps.match.params.pinId,
     pin: pins[ownProps.match.params.pinId],
     boards: Object.values(boards),
     follows: Object.values(follows),
+    saves: Object.values(saves),
     // following: Object.values(follows).map(follow => follow.following),
     // followers: Object.values(follows).map(follow => follow.follower),
     users,
@@ -135,9 +185,13 @@ const mapStateToProps = ({ session, entities: { users, pins, boards, follows } }
 const mapDispatchToProps = (dispatch) => ({
     fetchUser: (userId) => dispatch(fetchUser(userId)),
     fetchPin: (pinId) => dispatch(fetchPin(pinId)),
+    fetchBoards: (userId) => dispatch(fetchBoards(userId)),
     fetchFollows: (userId) => dispatch(fetchFollows(userId)),
     createFollow: (follow) => dispatch(createFollow(follow)),
-    deleteFollow: (followId) => dispatch(deleteFollow(followId))
+    deleteFollow: (followId) => dispatch(deleteFollow(followId)),
+    fetchSaves: (userId) => dispatch(fetchSaves(userId)),
+    createSave: (save) => dispatch(createSave(save)),
+    deleteSave: (saveId) => dispatch(deleteSave(saveId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PinDetails)
