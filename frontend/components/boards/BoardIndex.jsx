@@ -28,7 +28,7 @@ const BoardIndex = (props) => {
                 </div>
             </div>              
             <div className='board-grid'>
-                {allPinsBoard}
+                {/* {allPinsBoard} */}
                 {boards.map((board) => (
                         <BoardPreview board={board} pins={board.pins} key={board.id}/>
                 ))}
