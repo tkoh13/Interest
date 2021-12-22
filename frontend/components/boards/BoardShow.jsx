@@ -22,10 +22,11 @@ class BoardShow extends Component {
 
     componentDidUpdate(prevProps) {
         const { fetchUser, board, users } = this.props
-        if (prevProps.board !== board) {
+        if (prevProps.board !== board && board) {
             this.buildPinsDisplay();
             fetchUser(board.creator_id)
                 .then(() => this.setState({ user: users[board.creator_id]}))
+                .then(() => this.setState({ board: board}))
         }
     }
 
@@ -41,6 +42,7 @@ class BoardShow extends Component {
             return array;
         }
         const { board } = this.props;
+        if (!board) return null
         if (!board.pins.length) return null;
         const size = ["small", "medium", "large"]
         const pinsToDisplay = shuffle(board.pins).map((content) => {

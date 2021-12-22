@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class BoardPreview extends Component {
     constructor(props) {
@@ -12,6 +13,7 @@ class BoardPreview extends Component {
         const { title } = board;
         if (!pins.length) {
             return (
+                <Link to={`/boards/${board.id}`}>
                 <div className='all-pins-container'>
                     {/* Link to /boards/boardId passing in board.pins as props */}
                     {/* <div className='all-pins-preview'>
@@ -29,9 +31,11 @@ class BoardPreview extends Component {
                         <h2 className='board-preview-count'>{pins.length} Pins</h2>
                     </div>
                 </div>
+                </Link>
             )
         } else if (board.title === 'All Pins') {
             return (
+                <Link to={`/boards/${board.id}`}>
                 <div className='all-pins-container'>
                     {/* Link to /boards/boardId passing in board.pins as props */}
                     {/* <div className='all-pins-preview'>
@@ -58,9 +62,11 @@ class BoardPreview extends Component {
                         <h2 className='board-preview-count'>{pins.length} Pins</h2>
                     </div>
                 </div>
+                </Link>
             )
         } else {
             return (
+                <Link to={`/boards/${board.id}`}>
                 <div className='all-pins-container'>
                     {/* Link to /boards/boardId passing in board.pins as props */}
                     {/* <div className='all-pins-preview'>
@@ -87,6 +93,7 @@ class BoardPreview extends Component {
                         <h2 className='board-preview-count'>{pins.length} Pins</h2>
                     </div>
                 </div>
+                </Link>
             )
         }
         
