@@ -330,6 +330,17 @@
     font-weight: 600;
 }
 
+.bs-description {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.bs-secret {
+    font-size: 16px;
+    font-weight: 400;
+    color: $varDarkestGray;
+}
+
 .bs-none {
     display: flex;
     justify-content: center;

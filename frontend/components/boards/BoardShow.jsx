@@ -79,6 +79,7 @@ class BoardShow extends Component {
                     <div className="bs-profile-pic-container">
                         {user.photoUrl ? <img src={user.photoUrl} /> : <img src={window.userIcon} />}
                     </div>
+                    {board.description ? <div className='bs-description'>{board.description}</div> : <div></div>}
                     {board.private ? <div className='bs-secret'><CgLock /> Secret board</div> : <div></div>}
                 </header>
                 <section>
