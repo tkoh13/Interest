@@ -9,7 +9,7 @@ class BoardPreview extends Component {
 
     render() {
         // debugger
-        const { board, pins } = this.props;
+        const { board, pins, user } = this.props;
         const { title } = board;
         if (!pins.length) {
             return (
@@ -35,7 +35,8 @@ class BoardPreview extends Component {
             )
         } else if (board.title === 'All Pins') {
             return (
-                <Link to={`/boards/${board.id}`}>
+                <Link to={`/users/${user.id}/pins`}>
+                {/* <Link to={`/boards/${board.id}`}> */}
                 <div className='all-pins-container'>
                     {/* Link to /boards/boardId passing in board.pins as props */}
                     {/* <div className='all-pins-preview'>

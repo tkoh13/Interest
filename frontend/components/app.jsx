@@ -10,6 +10,7 @@ import ProfilePage from './profile_page/ProfilePage';
 import UserSettings from './settings/UserSettings';
 import PinDetails from './pins/PinDetails';
 import BoardShow from './boards/BoardShow';
+import AllPinsShow from './boards/AllPinsShow';
 
 const App = () => {
     
@@ -31,8 +32,9 @@ const App = () => {
             {/* <HomeDisplay /> */}
             <Switch>
                 <ProtectedRoute exact path='/boards/:boardId' component={BoardShow} />
-                <ProtectedRoute exact path='/users/:userId' component={ProfilePage} />
                 <ProtectedRoute exact path='/pins/:pinId' component={PinDetails} />
+                <ProtectedRoute exact path='/users/:userId/pins' component={AllPinsShow} />
+                <ProtectedRoute exact path='/users/:userId' component={ProfilePage} />
                 <ProtectedRoute exact path='/settings' component={UserSettings} />
                 <ProtectedRoute exact path='/' component={HomePage} />
                 {/* <AuthRoute exact path='/' component={Splash} /> */}
