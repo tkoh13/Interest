@@ -76,9 +76,9 @@ class BoardShow extends Component {
                             <MdOutlineModeEditOutline className='bs-edit-icon' size={20} />
                         </span>
                             </h1>
-                    <div className="bs-profile-pic-container">
+                    <Link to={`/users/${board.creator_id}`} className="bs-profile-pic-container">
                         {user.photoUrl ? <img src={user.photoUrl} /> : <img src={window.userIcon} />}
-                    </div>
+                    </Link>
                     {board.description ? <div className='bs-description'>{board.description}</div> : <div></div>}
                     {board.private ? <div className='bs-secret'><CgLock /> Secret board</div> : <div></div>}
                 </header>

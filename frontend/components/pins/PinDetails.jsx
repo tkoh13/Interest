@@ -58,6 +58,10 @@ class PinDetails extends Component{
         }
     }
 
+    handleBack() {
+        this.props.history.goBack()
+    }
+
     render() {
         const { pin } = this.props;
         
@@ -69,9 +73,9 @@ class PinDetails extends Component{
 
         return(
             <div>
-                <Link to='/'>
-                    <div className='pin-details-overlay'></div>
-                </Link>
+                {/* <Link to='/'> */}
+                    <div className='pin-details-overlay' onClick={() => this.handleBack()}></div>
+                {/* </Link> */}
                 <div className='pin-details-container'>
                     <div className='pin-details-left'>
                             <img src={pin.photoUrl} alt={pin.title} 
