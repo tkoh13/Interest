@@ -14,8 +14,8 @@ const mapStateToProps = ({ session, errors, entities: { users, boards}}) => ({
     formType: 'Create'
 });
 
-const mapDispatchToProps = dispatch => ({
-    createBoard: board => dispatch(createBoard(board)),
+const mapDispatchToProps = (dispatch) => ({
+    submitBoard: board => dispatch(createBoard(board)),
     deleteBoard: boardId => dispatch(deleteBoard(boardId)),
     closeModal: () => dispatch(closeModal()),
 })
