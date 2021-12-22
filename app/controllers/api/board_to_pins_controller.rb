@@ -2,7 +2,7 @@ class Api::BoardToPinsController < ApplicationController
     def create
         @board_to_pin = BoardToPin.new(board_to_pin_params)
         if @board_to_pin.save
-            render json: ["Saved pin to board"], status: 200
+            render "api/boardtopins/show"
         else
             render json: @board_to_pin.errors.full_messages, status: 422
         end
@@ -29,6 +29,6 @@ class Api::BoardToPinsController < ApplicationController
     end
 
     def board_to_pin_params
-        params.require(:board_to_pin).permit(:id, :board_id, :pin_id)
+        params.require(:board_to_pin).permit(:board_id, :pin_id)
     end
 end
