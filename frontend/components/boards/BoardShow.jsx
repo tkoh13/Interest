@@ -15,18 +15,31 @@ class BoardShow extends Component {
     }
 
     componentDidMount() {
-        const { fetchBoard, match: { params} } = this.props
+        const { fetchBoard, fetchUser, board, match: { params} } = this.props
         fetchBoard(params.boardId)
             .then(() => this.setState({ board: this.props.board }))
+            // .then(() => fetchUser(board.creator_id)) // can't do that since board isn't there yet
     }
 
     componentDidUpdate(prevProps) {
         const { fetchUser, board, users } = this.props
         if (prevProps.board !== board && board) {
+            this.setState({ board: board })
             this.buildPinsDisplay();
+            // debugger
+            // fetchUser(board.creator_id)
+            //     .then(() => this.setState({ user: users[board.creator_id]}))
+            //     .then(() => this.setState({ board: board}))
+            //     .then(() => console.log("updating state"))
+                // console.log(this.props)
+        }
+        if (!this.state.user && this.state.board) {
+            // console.log(board.creator_id)
+            // this.setState({ user: users[board.creator_id] })
+                // .then(() => console.log("updating state"))
+            // debugger
             fetchUser(board.creator_id)
-                .then(() => this.setState({ user: users[board.creator_id]}))
-                .then(() => this.setState({ board: board}))
+                .then(() => this.setState({ user: users[board.creator_id] }))
         }
     }
 
