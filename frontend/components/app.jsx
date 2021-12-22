@@ -11,9 +11,6 @@ import UserSettings from './settings/UserSettings';
 import PinDetails from './pins/PinDetails';
 import BoardShow from './boards/BoardShow';
 
-
-
-
 const App = () => {
     
     // const [isOpen, setIsOpen] = useState(false);
