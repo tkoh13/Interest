@@ -8,6 +8,7 @@ import UpdatePicture from '../settings/UpdatePicture'
 import FollowerModal from '../profile_page/FollowerModal';
 import FollowingModal from '../profile_page/FollowingModal';
 import BoardFormCreate from '../boards/BoardFormCreate';
+import BoardFormEdit from '../boards/BoardFormEdit';
 
 const Modal = ({ modal, closeModal }) => {
     if (!modal) {
@@ -36,6 +37,9 @@ const Modal = ({ modal, closeModal }) => {
             break;
         case 'createBoard':
             component = <BoardFormCreate />;
+            break;
+        case 'editBoard':
+            component = <BoardFormEdit />;
             break;
         default:
             return null;
