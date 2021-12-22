@@ -5,11 +5,11 @@ export const fetchSaves = (userId) => (
     })
 );
 
-export const createSave = (save) => (
+export const createSave = (board_to_pin) => (
     $.ajax({
         url: `/api/board_to_pins`,
         method: 'POST',
-        data: { save }
+        data: { board_to_pin }
     })
 );
 
