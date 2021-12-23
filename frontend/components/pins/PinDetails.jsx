@@ -5,6 +5,7 @@ import DropDownButton from '../dropdown/DropDownButton';
 import { FaEllipsisH } from 'react-icons/fa'
 import { FiShare } from 'react-icons/fi'
 import { BsTrash } from 'react-icons/bs'
+import { BsPlusLg } from 'react-icons/bs';
 
 class PinDetails extends Component{
     constructor(props) {
@@ -61,11 +62,12 @@ class PinDetails extends Component{
         } else {
             fetchUser(currentUser.id)
                 .then(() => this.renderFollowButton())
+                .then(() => console.log("renderFollowButton"))
         }
     }
 
     renderSaveActions() {
-        const { saves, pin, boards, currentUser } = this.props;
+        const { saves, pin, boards, currentUser, openModal } = this.props;
         if (saves.filter(save => save.pin_id === pin.id).length) {
             return (
                 <div className='save-actions'>
@@ -74,11 +76,20 @@ class PinDetails extends Component{
                     </div>
                 </div>
             )
-        } else {
+        } else if (boards.length){
             return (
                 <div className='save-actions'>
                     <DropDownButton type='boardSave' boards={boards} actions={{ boards, currentUser }} />
                     <button id='login-button' onClick={() => this.handleSave()}>Save</button>
+                </div>
+            )
+        } else { 
+            return (
+                <div className='save-actions' onClick={() => openModal('createBoard')}>
+                    Create a board
+                    <div className='icon-container'>
+                        <BsPlusLg />
+                    </div>
                 </div>
             )
         }
@@ -168,6 +179,7 @@ import { fetchPin } from '../../actions/pin_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
 import { fetchSaves, createSave, deleteSave } from '../../actions/save_actions';
+import { openModal } from '../../actions/modal_actions';
 
 const mapStateToProps = ({ session, entities: { users, pins, boards, follows, saves } }, ownProps) => ({
     currentUser: users[session.id],
@@ -192,6 +204,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchSaves: (userId) => dispatch(fetchSaves(userId)),
     createSave: (save) => dispatch(createSave(save)),
     deleteSave: (saveId) => dispatch(deleteSave(saveId)),
+    openModal: modal => dispatch(openModal(modal)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PinDetails)

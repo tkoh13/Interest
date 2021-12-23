@@ -27,9 +27,14 @@ const DropDownMenu = (props) => {
             </div>
             // values = Object.keys(actions);
             break;
-        // case 'boardSave':
-
-        //     break;
+        case 'boardSave':
+            component = 
+            <div className="dropdown-menu" ref={popupRef} >
+                {props.boards.map(board => (
+                    <div className="dropdown-item" key={board.id}>{board.title}</div>
+                ))}
+            </div>
+            break;
         case 'profileCreate':
             component =
             <div className="dropdown-menu" ref={popupRef} >

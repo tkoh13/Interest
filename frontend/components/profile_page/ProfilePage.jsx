@@ -18,17 +18,16 @@ class ProfileShow extends Component {
         fetchSaves(userId);
         fetchUser(userId);
     }
-
+    
     componentDidUpdate(prevProps) {
-        const { fetchUser, fetchBoards, fetchFollows, user, userId, follows } = this.props;
+        const { fetchUser, fetchBoards, fetchFollows, fetchSaves, user, userId, boards, follows } = this.props;
         if (prevProps.userId !== userId) {
-            // console.log("profile update")
             fetchFollows(userId); 
             fetchBoards(userId);
             fetchUser(userId);
+            fetchSaves(userId);
         } 
         if (prevProps.follows.length !== follows.length) {
-            console.log("follow length")
             fetchUser(userId);
         }
     }
@@ -149,6 +148,7 @@ import { fetchUser } from '../../actions/user_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
 import { fetchSaves, createSave, deleteSave } from '../../actions/save_actions';
+import { createBoard } from '../../actions/board_actions';
 import { openModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router';
 
@@ -178,7 +178,8 @@ const mapDispatchToProps = (dispatch) => ({
     fetchSaves: (userId) => dispatch(fetchSaves(userId)),
     createSave: (save) => dispatch(createSave(save)),
     deleteSave: (saveId) => dispatch(deleteSave(saveId)),
-    openModal: (modal) => dispatch(openModal(modal))
+    openModal: (modal) => dispatch(openModal(modal)),
+    createBoard: board => dispatch(createBoard(board)),
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileShow));
