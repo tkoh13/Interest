@@ -21,25 +21,40 @@
 //   min-height: 500px;
 }
 
-.pin-details, .upload-img-container {
+.upload-img-container {
     width: 50%;
-    height: 100%;
+    // height: 100%;
     // margin: 1%;
 }
 
-.img-preview {
-    height: 100%;
-    background-color: $varGray;
-    margin: 5%;
-    height: 500px;
+.pin-details {
+  width: 50%;
 }
 
+.img-preview {
+    // height: 100%;
+    
+    margin: 5%;
+    height: 500px;
+    // height: 500px;
+}
+
+.pfc .img-preview input {
+  display: none;
+}
 // .upload-img-container {
 //     width: 50%;
 //     height: 100%;
 // }
 // .pin-form, .pin-details {
 // }
+
+.create-pin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .pfc .icon-container {
     width: 50px;
@@ -65,20 +80,120 @@
     border-radius: 50%;
 }
 
+.pfc-click-to-upload {
+  // padding: 0 0 100px 0;
+}
+
+.pfc-recommendation {
+  padding: 100px 0 0 0;
+}
+
 #dotted-border {
-  width: 100%;
-  height: 100%;
+  // width: auto;
+  height: inherit;
+  background-color: $varGray;
   border-radius: 8px;
   border: 2px dashed $varDarkGray;
-
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 2px;
+  box-sizing: border-box;
 }
 
+.create-pin-preview-container {
+  width: 350px;
+  height: 500px;
+
+}
 .create-pin-preview {
-  width: 98%;
-  height: 98%;
+  // width: 98%;
+  // height: 98%;
+  box-sizing: border-box;
+  object-fit: cover;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  border-radius: 15px;
+}
+
+.pfc .pin-header-title {
+  padding: 25px 5px 2px 5px;
+}
+
+.pfc .details-input {
+  box-sizing: border-box;
+  // min-height: 50px;
+  // width: 500px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: $varDarkGray;
+  // border-radius: 16px;
+  // border-width: 2px;
+  // border: 2px solid;
+  // border-color: $varGray;
+  // background-color: $varLightGray;
+  font-size: 16px;
+}
+
+.pin-title-input {
+  height: 45px;
+  font-size: 32px;
+  font-weight: 600;
+  background-color: transparent;
+  border: none;
+  border-radius: 0%;
+  border-bottom: 2px solid $varGray;
+  vertical-align: top;
+  margin-bottom: 10px;
+  -webkit-font-smoothing: antialiased;
+  outline: none;
+}
+
+.pf-profile-details-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 5px;
+}
+
+.pf-profile-pic-container img {
+    border-radius: 100px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    // padding: 0 4px 0 4px;
+    flex: 0 0 auto; 
+}
+
+.pf-profile-details {
+  display: block;
+  padding: 0 10px 0 10px;
+}
+
+.pin-description-input {
+  height: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: transparent;
+  border: none;
+  border-radius: 0%;
+  border-bottom: 2px solid $varGray;
+  vertical-align: top;
+  margin-bottom: 10px;
+  -webkit-font-smoothing: antialiased;
+  outline: none;
+}
+
+.pf-username {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.pf-followers {
+  font-size: 16px;
+  font-weight: 400;
 }

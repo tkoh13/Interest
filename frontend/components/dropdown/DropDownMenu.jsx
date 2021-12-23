@@ -43,6 +43,14 @@ const DropDownMenu = (props) => {
                 <div className="dropdown-item" onClick={() => openModal('createBoard')}>Board</div>
             </div>
             break;
+        case 'pinCreate':
+            component =
+            <div className="dropdown-menu" ref={popupRef} >
+                <div className="dropdown-header">Create</div>
+                <div className="dropdown-item" onClick={() => openModal('createPin')}>Pin</div>
+                {/* <div className="dropdown-item" onClick={() => openModal('createBoard')}>Board</div> */}
+            </div>
+            break;
         default: 
             return null;
     }

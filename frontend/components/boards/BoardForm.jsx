@@ -52,7 +52,7 @@ class BoardForm extends Component {
         return (
             <Link to={`/users/${board.creator_id}`}>
                 <button
-                    className='delete-button edit-form'
+                    id='login-button'
                     onClick={this.handleBoardDelete}>Delete
                 </button>
             </Link>

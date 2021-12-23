@@ -32,6 +32,13 @@ const DropDownButton = (props) => {
                 {showDropDown ? <DropDownMenu type={type} actions={actions} setShowDropDown={setShowDropDown} /> : null}
             </div>
             break;
+        case 'pinCreate':
+            component = 
+            <div className={`dropdown-button-${type}`} onClick={toggleDropDown}>
+                <BsPlusLg size={20} />
+                {showDropDown ? <DropDownMenu type={type} actions={actions} setShowDropDown={setShowDropDown} /> : null}
+            </div>
+            break;
         default:
             break;
     }
