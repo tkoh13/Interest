@@ -128,39 +128,59 @@ class BoardForm extends Component {
                 <h1>{formType === 'Create' ? 'Create board' : 'Edit your board'}</h1>
                 <form onSubmit={this.handleSubmit} className='bf-form'>
                     {this.renderErrors()}
-                    <label>Name
-                        <input 
-                            type='text' 
-                            className='bf-input'
-                            placeholder="Like 'Places to Go' or 'Recipes to Make'"
-                            value={this.state.title}
-                            onChange={this.update('title')}
-                        />
-                    </label>
-                    <label>Description
-                        <input 
-                            type='textarea' 
-                            className='bf-input'
-                            placeholder="What's your board about?"
-                            value={this.state.description}
-                            onChange={this.update('description')}
-                        />
-                    </label>
-                    <label>
-                        <div>Keep this board secret</div> 
-                        <div>So only you and collaborators can see it.</div>
-                        <input 
-                            type='checkbox' 
-                            value={this.state.private}
-                            checked={!!this.state.private}
-                            // name={this.state.private}
-                            onChange={this.update('private')}
-                        />
-                    </label>
-                    <button>
+                    <div className='bf-input-name'>Name
+                        <div className='bf-label'>
+                            <label>
+                                <input
+                                    type='text'
+                                    className='bf-input'
+                                    placeholder="Like 'Places to Go' or 'Recipes to Make'"
+                                    value={this.state.title}
+                                    onChange={this.update('title')}
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    <div className='bf-input-name'>Description
+                        <div className='bf-label'>
+                            <label>
+                                <input
+                                    type='textarea'
+                                    className='bf-input'
+                                    placeholder="What's your board about?"
+                                    value={this.state.description}
+                                    onChange={this.update('description')}
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    <div className='bf-input-name'>
+                        <div>
+                            <label className='bf-checkbox'>
+                                <span>
+                                <input
+                                    type='checkbox'
+                                    value={this.state.private}
+                                    checked={!!this.state.private}
+                                    // name={this.state.private}
+                                    onChange={this.update('private')}
+                                    />
+                                </span>
+                                <span className='checkbox-description'>
+                                <div className='checkbox-description-1'>Keep this board secret</div>
+                                <div className='checkbox-description-2'>So only you and collaborators can see it.</div>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    
+                    <div className='bf-button'>
+                    <button id='signup-button'>
                         {formType === 'Create' ? 'Create' : 'Edit'}
                     </button>
                     {this.renderDelete()}
+                    </div>
                 </form>
             </div>
         )

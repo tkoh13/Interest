@@ -379,3 +379,75 @@
     font-weight: 600;
     font-size: 15px;
 }
+// BOARD FORM STYLES ~~~~~ BOARD FORM STYLES ~~~~~ BOARD FORM STYLES ~~~~~ BOARD FORM STYLES ~~~~~
+.bf-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 16px 0 16px;
+    width: 540px; 
+    position: relative;
+    overflow: auto;
+
+}
+
+.bf-container h1 {
+    padding: 15px 0 15px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.bf-form{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    padding: 0 15px 0 15px;
+}
+
+.bf-input-name{
+    padding: 5px 0 5px 0;
+}
+
+.bf-label {
+    margin-top: 5px;
+}
+
+.bf-input {
+    box-sizing: border-box;
+    min-height: 50px;
+    width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $varDarkGray;
+    border-radius: 16px;
+    // border-width: 2px;
+    border: 2px solid;
+    border-color: $varGray;
+    // background-color: $varLightGray;
+    font-size: 16px;
+}
+.bf-checkbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.checkbox-description {
+    padding: 0 5px 0 5px;
+}
+
+.checkbox-description-1 {
+    font-weight: 600;
+}
+
+.checkbox-description-2 {
+    color: $varDarkestGray;
+    font-weight: 300;
+}
+
+.bf-button {
+    display: flex;
+    justify-content: flex-end;
+}
