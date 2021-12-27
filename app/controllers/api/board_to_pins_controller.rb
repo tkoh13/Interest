@@ -10,6 +10,7 @@ class Api::BoardToPinsController < ApplicationController
 
     def index
         @board_to_pins = BoardToPin.joins(:user).where(:users => { :id => params[:user_id] })
+        @pins = Pin.where("creator_id = ?", params[:user_id]).select { |p| p.board_to_pins == []}
         # @board_to_pins = BoardToPin.joins(:board).where(:boards => { :creator_id => params[:user_id] })
         if !@board_to_pins
             render json: ["Nothing saved"]
