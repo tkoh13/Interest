@@ -11,15 +11,16 @@ class PinDetails extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            user: null
+            user: null,
+            selectedBoard: null,
         }
-        // this.handleSave = this.handleSave.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     componentDidMount() {
-        const { fetchPin, fetchBoards, fetchSaves, fetchFollows, pinId, currentUser } = this.props;
+        const { fetchPin, fetchBoards, fetchSaves, fetchFollows, pinId, currentUser, boards } = this.props;
         fetchPin(pinId)
-        fetchBoards(currentUser.id)
+        fetchBoards(currentUser.id) //.then(() => this.setState({board: boards[0].id}))
         fetchSaves(currentUser.id)
         // fetchUser(currentUser.id)
         // fetchFollows(currentUser.id) 
@@ -27,7 +28,7 @@ class PinDetails extends Component{
     }
     
     componentDidUpdate(prevProps, prevState) {
-        const { fetchUser, fetchFollows, pin, users, follows } = this.props;
+        const { fetchUser, fetchFollows, pin, users, follows, boards, currentUser } = this.props;
         // debugger
         if (prevProps.pin !== pin) {
             fetchFollows(pin.creator_id)
@@ -35,7 +36,8 @@ class PinDetails extends Component{
                 // .then(() => this.setState({ user: users[pin.creator_id] }))
         }
         if (prevProps.users !== users) {
-            this.setState({ user: users[pin.creator_id] })
+            this.setState({ user: users[pin.creator_id], board: boards[0].id });
+            // this.setState({ board: boards[0].id });
         }
         if (prevProps.follows.length !== follows.length) {
             fetchUser(pin.creator_id);
@@ -67,19 +69,24 @@ class PinDetails extends Component{
     }
 
     renderSaveActions() {
-        const { saves, pin, boards, currentUser, openModal } = this.props;
+        const { saves, pin, boards, currentUser, openModal, createSave } = this.props;
+        // debugger
+        // const _boardTitle = boards.filter(board => board.id === _save.board_id)
         if (saves.filter(save => save.pin_id === pin.id).length) {
             return (
-                <div className='save-actions'>
+                <div className='save-actions' onClick={() => this.handleUnSave()} >
+                    {`Remove from ${boards.filter((board) => board.id === saves.filter(save => save.pin_id === pin.id)[0].board_id)[0].title} board`}
                     <div className='icon-container'>
-                        <BsTrash onClick={() => this.handleUnSave()} />
+                        <BsTrash />
                     </div>
                 </div>
             )
         } else if (boards.length){
+            // debugger
             return (
                 <div className='save-actions'>
-                    <DropDownButton type='boardSave' boards={boards} actions={{ boards, currentUser }} />
+                    {boards.filter(b => b.id === this.state.board)[0].title}
+                    <DropDownButton type='boardSave' boards={boards} pin={pin} actions={{ boards, currentUser, openModal, createSave }} />
                     <button id='login-button' onClick={() => this.handleSave()}>Save</button>
                 </div>
             )
@@ -96,6 +103,13 @@ class PinDetails extends Component{
         
     }
 
+    renderDeletePin() {
+        const { saves, pin, boards, currentUser, deletePin } = this.props;
+        if (pin.creator_id === currentUser.id) {
+            return <Link to={`/users/${currentUser.id}/pins`}><div onClick={() => deletePin(pin.id)}>Delete Pin</div></Link> 
+        }
+    }
+
     handleBack() {
         this.props.history.goBack()
     }
@@ -105,7 +119,8 @@ class PinDetails extends Component{
         // console.log(boards[0].id)
         // console.log(pin.id)
         const save = {
-            board_id: boards[0].id,
+            board_id: this.state.board,
+            // board_id: boards[0].id,
             pin_id: pin.id
         }
         createSave(save);
@@ -140,9 +155,8 @@ class PinDetails extends Component{
                     <div className='pin-details-right'>
                         <div className='pin-details-actions'>
                             <div className='util-actions'>
-                                <FaEllipsisH></FaEllipsisH>
-                                <FiShare></FiShare>
-                                <FaEllipsisH></FaEllipsisH>
+                                {/* <FaEllipsisH></FaEllipsisH>
+                                <FiShare></FiShare> */}
                             </div>
                             {this.renderSaveActions()}
                             {/* <div className='save-actions'>
@@ -164,7 +178,7 @@ class PinDetails extends Component{
                         {/* {!user ?
                         <div>no user</div> :
                         <FollowButton user={user} /> } */}
-                        
+                        {this.renderDeletePin()}
                     </div>
                 </div>
             </div>
@@ -175,7 +189,7 @@ class PinDetails extends Component{
 
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
-import { fetchPin } from '../../actions/pin_actions';
+import { fetchPin, deletePin } from '../../actions/pin_actions';
 import { fetchBoards } from '../../actions/board_actions';
 import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
 import { fetchSaves, createSave, deleteSave } from '../../actions/save_actions';
@@ -197,6 +211,7 @@ const mapStateToProps = ({ session, entities: { users, pins, boards, follows, sa
 const mapDispatchToProps = (dispatch) => ({
     fetchUser: (userId) => dispatch(fetchUser(userId)),
     fetchPin: (pinId) => dispatch(fetchPin(pinId)),
+    deletePin: (pinId) => dispatch(deletePin(pinId)),
     fetchBoards: (userId) => dispatch(fetchBoards(userId)),
     fetchFollows: (userId) => dispatch(fetchFollows(userId)),
     createFollow: (follow) => dispatch(createFollow(follow)),

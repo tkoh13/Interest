@@ -124,7 +124,7 @@ class PinForm extends Component {
                             </div>
                             <div className='pf-profile-details'>
                                 <div className='pf-username'>{currentUser.username}</div>
-                                <div className='pf-followers'>{currentUser.followers.length} {currentUser.followers.length === 1 ? "follower" : "followers"}</div>
+                                {/* <div className='pf-followers'>{currentUser.followers.length} {currentUser.followers.length === 1 ? "follower" : "followers"}</div> */}
                             </div>
                         </div>
                         <label className="pfc details-input">

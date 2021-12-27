@@ -21,8 +21,9 @@ const DropDownButton = (props) => {
         case 'boardSave':
             component = 
             <div className={`dropdown-button ${type}`} onClick={toggleDropDown}>
-                {props.boards[0].title} <FaChevronDown size={13} />
-                {showDropDown ? <DropDownMenu type={type} actions={actions} boards={props.boards} setShowDropDown={setShowDropDown} /> : null}
+                <FaChevronDown size={13} />
+                {/* {props.boards[0].title} <FaChevronDown size={13} /> */}
+                {showDropDown ? <DropDownMenu type={type} actions={actions} boards={props.boards} pin={props.pin} setShowDropDown={setShowDropDown} /> : null}
             </div>
             break;
         case 'profileCreate':

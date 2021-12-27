@@ -2,6 +2,7 @@ import * as PinApiUtil from '../utils/pin_api_util';
 
 export const RECEIVE_PINS = 'RECEIVE_PINS';
 export const RECEIVE_PIN = 'RECEIVE_PIN';
+export const REMOVE_PIN = 'REMOVE_PIN';
 export const RECEIVE_PIN_ERRORS = 'RECEIVE_PIN_ERRORS';
 
 const receivePins = (pins) => ({
@@ -12,6 +13,11 @@ const receivePin = (pin) => ({
     type: RECEIVE_PIN,
     pin
 })
+
+const removePin = (pinId) => ({
+    type: REMOVE_PIN,
+    pinId,
+});
 
 const receivePinErrors = (errors) => ({
     type: RECEIVE_PIN_ERRORS,
@@ -32,4 +38,6 @@ export const createPin = (formData) => dispatch => PinApiUtil.createPin(formData
     .then(createdPin => dispatch(receivePin(createdPin)),
     errors => dispatch(receivePinErrors(errors)));
 
-// delete pin
+export const deletePin = (pinId) => (dispatch) => PinApiUtil.deletePin(pinId)
+    .then(() => dispatch(removePin(pinId)),
+    (errors) => dispatch(receivePinErrors(errors))); 

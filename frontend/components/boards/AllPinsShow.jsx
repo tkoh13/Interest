@@ -27,9 +27,12 @@ class AllPins extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { saves } = this.props; 
+        const { fetchSaves, saves, pins, match } = this.props; 
         if (prevProps.saves.length !== saves.length) {
             this.buildPinsDisplay(); 
+        }
+        if (prevProps.pins.length !== pins.length) {
+            fetchSaves(match.params.userId).then(() => this.buildPinsDisplay()); 
         }
     //     const { fetchUser, board, users } = this.props
     //     if (prevProps.board !== board && board) {
@@ -123,11 +126,12 @@ import { openModal } from '../../actions/modal_actions'
 import { fetchSaves, createSave, deleteSave } from '../../actions/save_actions';
 
 
-const mapStateToProps = ({ session, entities: { saves, users } }, { match }) => {
+const mapStateToProps = ({ session, entities: { saves, users, pins } }, { match }) => {
 // const mapStateToProps = ({ session, entities: { boards, users } }, { match }) => {
     return ({
         user: users[match.params.userId],
         saves: Object.values(saves),
+        pins: Object.values(pins),
         match
 
         // board: boards[match.params.boardId],
