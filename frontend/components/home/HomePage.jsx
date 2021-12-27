@@ -17,7 +17,7 @@ class HomePage extends Component {
                 {/* <Switch>
                     <Redirect to='/home' />
                 </Switch> */}
-                {/* <HomeDisplay /> */}
+                <HomeDisplay />
             </div>
         )
     }

@@ -19,6 +19,11 @@ class PinForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        const { fetchUser, userId } = this.props;
+        fetchUser(userId);
+    }
+
     update(field) {
         return e => {
             this.setState({
@@ -74,13 +79,15 @@ class PinForm extends Component {
 
     
     render() {
-        const preview = this.state.photoUrl ? <img src={this.state.photoUrl} className="create-pin-preview"/> : 
-        <div className="icon-container">
-            <img src={window.arrowUp} className="icon"/>
-            <div>Click to upload</div>
-            <div>Recommendation: Use high-quality .jpg less than 20MB</div>
-        </div>;
-        const { formType } = this.props
+        const preview = this.state.photoUrl ? <div className='create-pin-preview-container'><img src={this.state.photoUrl} className="create-pin-preview" /></div> : 
+            <div className="create-pin-container">
+            <div className="icon-container">
+                <img src={window.arrowUp} className="icon"/>
+            </div>
+                <div className='pfc-click-to-upload'>Click to upload</div>
+                <div className='pfc-recommendation'>Recommendation: Use high-quality .jpg less than 20MB</div>
+        </div>
+        const { formType, currentUser } = this.props
         return (
             <div className="pfc">
                 <form className="pfc pin-form" onSubmit={this.handleSubmit}>
@@ -89,13 +96,12 @@ class PinForm extends Component {
                             <div className="pfc img-preview">
                                 <div id="dotted-border">
                                     {preview}
-                                    
-                                        <input
-                                            type="file"
-                                            field="photo"
-                                            className="pin-file-input"
-                                            onChange={this.handleFile}
-                                        />
+                                    <input
+                                        type="file"
+                                        field="photo"
+                                        className="pin-file-input"
+                                        onChange={this.handleFile}
+                                    />
                                 </div>
                             </div>
                         </label>
@@ -107,12 +113,26 @@ class PinForm extends Component {
                             </h1>
                         </header>
                         <label className="pfc details-input">
+                            {/* <textarea id="pfc-title-input" rows="1" placeholder="Add your title" onChange={this.update("title")}>
+
+                            </textarea> */}
                             <input type="text" field="title" className="pin-title-input" value={this.state.title} placeholder="Add your title" onChange={this.update("title")}/>
+                        </label>
+                        <div className='pf-profile-details-container'>
+                            <div className="pf-profile-pic-container">
+                                {currentUser.photoUrl ? <img src={currentUser.photoUrl} /> : <img src={window.currentUserIcon} />}
+                            </div>
+                            <div className='pf-profile-details'>
+                                <div className='pf-username'>{currentUser.username}</div>
+                                {/* <div className='pf-followers'>{currentUser.followers.length} {currentUser.followers.length === 1 ? "follower" : "followers"}</div> */}
+                            </div>
+                        </div>
+                        <label className="pfc details-input">
                             <input type="textarea" field="description" className="pin-description-input" value={this.state.description} placeholder="Tell everyone what your Pin is about" onChange={this.update("description")}/>
                         </label>
                         {this.renderErrors()}
                     </section>
-                    <button className="button-link">{this.props.formType}</button>
+                    <button id='login-button'>{this.props.formType}</button>
                 </form>
             </div>
         );

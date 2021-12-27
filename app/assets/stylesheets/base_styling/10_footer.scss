@@ -35,6 +35,49 @@
     cursor: pointer;
 }
 
-.create-pin-icon {
-    // width: 50%;
+.dropdown-button-pinCreate  {
+  bottom: 10%;
+  left: 90%;
 }
+
+.create-pin .dropdown-menu {
+  z-index: 1000;
+  position: absolute;
+  right: 5%;
+  margin-top: 5px;
+  top: -175%;
+  background-color: $varOffWhite;
+  border-radius: 8px;
+  width: 180px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
+    }
+    
+    .create-pin .dropdown-header {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-left: 8px;
+        padding-right: 8px;
+        margin: 8px 8px 8px 8px;
+        border-radius: 8px;
+        min-height: 20px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    
+    .create-pin .dropdown-item {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-left: 8px;
+        padding-right: 8px;
+        margin: 0px 8px 8px 8px;
+        border-radius: 8px;
+        min-height: 35px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    
+    .create-pin .dropdown-item:hover {
+        background: $varDarkGray;
+    }

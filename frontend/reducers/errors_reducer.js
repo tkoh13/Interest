@@ -4,13 +4,15 @@ import pinErrorsReducer from './pin_errors_reducer';
 import boardsErrorsReducer from './board_errors_reducer';
 import userErrorsReducer from './user_errors_reducer';
 import followErrorsReducer from './follow_errors_reducer';
+import saveErrorsReducer from './save_errors_reducer';
 
 const errorsReducer = combineReducers({
     session: sessionErrorsReducer,
     pins: pinErrorsReducer,
     board: boardsErrorsReducer,
     user: userErrorsReducer,
-    follow: followErrorsReducer
+    follow: followErrorsReducer,
+    save: saveErrorsReducer
 });
 
 export default errorsReducer;

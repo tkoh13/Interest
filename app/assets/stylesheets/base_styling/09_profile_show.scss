@@ -1,10 +1,10 @@
 @import './base_styling/01_variables.scss';
 
-.profile-container {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: center;
-}
+// .profile-container {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+// }
 
 .profile-header {
     display: flex;
@@ -22,20 +22,26 @@
     // display: flex;
     // flex-direction: column;
 }
-.profile-pic {
-    // margin-top: 5px;
-    // margin-bottom: 5px;
-    // display: flex;
-    // justify-content: center;
-    // flex-direction: row;
-}
 
-.profile-pic-container {
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
+.profile-username {
+    font-size: 30px;
+    font-weight: 400;
+    margin: 5px;
 }
+// .profile-pic {
+//     margin-top: 5px;
+//     margin-bottom: 5px;
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: row;
+// }
+
+// .profile-pic-container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
 
 .profile-pic-container img {
     // border-radius: 50%;
@@ -57,6 +63,7 @@
     // font-size: 30px;
     // font-weight: 700;
 }
+
 
 .change-photo-container {
     display: flex;
@@ -109,15 +116,11 @@
     display: flex;
     padding-left: 16px;
     padding-right: 16px;
-
+    
     justify-content: flex-end;
 }
 
-.create-board:hover {
-  background-color: $varDarkGray;
-}
-
-.create-board {
+.profile-create {
     width: 35px;
     height: 35px;
     border-radius: 100%;
@@ -126,109 +129,226 @@
     align-items: center;
     cursor: pointer;
 }
-.create-board-icon {
-    width: 20px;
-    height: 20px;
+
+.profile-create:hover {
+    background-color: $varDarkGray;
 }
 
-.board-grid {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-evenly;
-    // align-items: center;
-    margin-left: 0;
-    margin-right: 0;
-    overflow: hidden;
+// .profile-create .dropdown-button{
+    //     display: flex;
+    //     position: relative;
+    //     align-items: center;
+    //     justify-content: space-between;
+    //     border-radius: 100px;
+    //     right: 1%;
+    //     margin-right: 15px;
+    //     height: 22px;
+    //     padding: 0px 5px;
+    //     cursor: pointer;
+    // }
+    
+    .profile-container .dropdown-menu {
+        z-index: 1000;
+        position: absolute;
+        right: 5%;
+        margin-top: 5px;
+        // top: 50%;
+        background-color: $varOffWhite;
+        border-radius: 8px;
+        width: 180px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
+    }
+    
+    .profile-create .dropdown-header {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-left: 8px;
+        padding-right: 8px;
+        margin: 8px 8px 8px 8px;
+        border-radius: 8px;
+        min-height: 20px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    
+    .profile-create .dropdown-item {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-left: 8px;
+        padding-right: 8px;
+        margin: 0px 8px 8px 8px;
+        border-radius: 8px;
+        min-height: 35px;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    
+    .profile-create .dropdown-item:hover {
+        background: $varDarkGray;
+    }
+    
+    .board-grid {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-evenly;
+        // align-items: center;
+        margin-left: 0;
+        margin-right: 0;
+        overflow: hidden;
+    }
+    
+    .all-pins-container{
+        box-sizing: border-box;
+        display: block;
+        // display: flex;
+        // flex-direction: row;
+        cursor: pointer;
+    }
+    
+    .all-pins-preview {
+        display: flex;
+        flex-direction: row;
+        box-sizing: border-box;
+    }
+    
+    .board-preview-container {
+        box-sizing: border-box;
+        // justify-content: space-between;
+        display: block;
+        padding: 8px;
+        position: relative;
+        cursor: pointer;
+        // width: 236px;
+        // height: 157px;
+        //   display:flex;
+        //   justify-content: center;
+        //   flex-direction: column;
+        //   margin:0;
+        //   padding-left: 5px;
+        //   padding-right: 5px;
+    }
+    
+    .board-preview-image {
+        display:flex;
+        flex-direction: row;
+        // justify-content: center;
+        // padding: 5px;
+        //   margin-bottom: 10px;
+    }
+    
+    .board-preview-title{
+        // padding:0; 
+        padding-bottom:10px;
+        padding-left:10px;
+        font-weight: 600;
+        font-size: 19px;
+    }
+    
+    .board-preview-count{
+        // padding:0;
+        padding-left:10px;
+        padding-bottom: 10px;
+        font-size: 12px;
+        font-weight: 300;
+    }
+    
+    // .board-preview-image {
+        //     display: flex;
+        
+        // }
+        
+        .left-board-preview-image{
+            //   display: flex; 
+            //   justify-content: center;
+            //   align-items: center;
+            width:160px;
+            height: 160px;
+            //   padding:0;
+            //   margin:0;
+            border-bottom-left-radius: 18px;
+            border-top-left-radius: 18px;
+            object-fit: cover;
+            background-color: $varLightPurple;
+            border-right: 1px solid white;
+        }
+        
+        .right-images{
+            display:flex; 
+            flex-direction: column;
+        }
+        
+        .rt-board-preview-image, .rb-board-preview-image{
+            //   display: flex;
+            //   justify-content: center;
+            //   align-items: center;
+            width:80px;
+            height: 80px;
+            //   padding:0;
+            margin-left: 1px;
+            margin-bottom: 1px;
+            //   margin:0;
+            object-fit: cover;
+        }
+        
+        .rb-board-preview-image{
+            border-bottom-right-radius: 18px;
+            background-color: $varPinkPair;
+        }
+        
+        .rt-board-preview-image {
+            border-top-right-radius: 18px;
+            background-color: $varPink;
+            border-bottom: 1px solid white;
+        }
+// BOARD SHOW STYLES ~~~~~ BOARD SHOW STYLES ~~~~~ BOARD SHOW STYLES ~~~~~ BOARD SHOW STYLES ~~~~~        
+.bs-profile-pic-container img {
+    border-radius: 100px;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
 }
 
-.board-preview-container {
-    box-sizing: border-box;
-    // justify-content: space-between;
-    display: block;
-    padding: 8px;
-    position: relative;
-//   display:flex;
-//   justify-content: center;
-//   flex-direction: column;
-//   margin:0;
-//   padding-left: 5px;
-//   padding-right: 5px;
-//   width: 245px;
+.bs-edit-icon-container {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
 }
 
-.board-preview-image {
-    display:flex;
-    flex-direction: row;
-    // justify-content: center;
-    // padding: 5px;
-//   margin-bottom: 10px;
+.bs-edit-icon-container:hover {
+    background-color: $varDarkGray;
 }
 
-.board-preview-title{
-    // padding:0; 
-    padding-bottom:10px;
-    padding-left:10px;
+.bs-count {
+    margin-left: 50px;
+    font-size: 18px;
     font-weight: 600;
-    font-size: 19px;
 }
 
-.board-preview-count{
-    // padding:0;
-    padding-left:10px;
-    padding-bottom: 10px;
-    font-size: 12px;
+.bs-description {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.bs-secret {
+    font-size: 16px;
+    font-weight: 400;
+    color: $varDarkestGray;
+}
+
+.bs-none {
+    display: flex;
+    justify-content: center;
+    margin: 100px;
+    font-size: 18px;
     font-weight: 300;
 }
 
-// .board-preview-image {
-//     display: flex;
-
-// }
-
-.left-board-preview-image{
-//   display: flex; 
-//   justify-content: center;
-//   align-items: center;
-  width:160px;
-  height: 160px;
-//   padding:0;
-//   margin:0;
-  border-bottom-left-radius: 18px;
-  border-top-left-radius: 18px;
-  object-fit: cover;
-  background-color: $varLightBlue;
-  border-right: 1px solid white;
-}
-
-.right-images{
-  display:flex; 
-  flex-direction: column;
-}
-
-.rt-board-preview-image, .rb-board-preview-image{
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-  width:80px;
-  height: 80px;
-//   padding:0;
-  margin-left: 1px;
-  margin-bottom: 1px;
-//   margin:0;
-  object-fit: cover;
-}
-
-.rb-board-preview-image{
-    border-bottom-right-radius: 18px;
-    background-color: $varLightBluePair;
-}
-
-.rt-board-preview-image {
-    border-top-right-radius: 18px;
-    background-color: $varLightBlue;
-    border-bottom: 1px solid white;
-}
 // FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~ FOLLOW STYLES ~~~~~
 .follow-button {
     font-family: $font;
@@ -258,4 +378,76 @@
     color: $varBlack;
     font-weight: 600;
     font-size: 15px;
+}
+// BOARD FORM STYLES ~~~~~ BOARD FORM STYLES ~~~~~ BOARD FORM STYLES ~~~~~ BOARD FORM STYLES ~~~~~
+.bf-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 16px 0 16px;
+    width: 540px; 
+    position: relative;
+    overflow: auto;
+
+}
+
+.bf-container h1 {
+    padding: 15px 0 15px 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 28px;
+}
+
+.bf-form{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
+    padding: 0 15px 0 15px;
+}
+
+.bf-input-name{
+    padding: 5px 0 5px 0;
+}
+
+.bf-label {
+    margin-top: 5px;
+}
+
+.bf-input {
+    box-sizing: border-box;
+    min-height: 50px;
+    width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $varDarkGray;
+    border-radius: 16px;
+    // border-width: 2px;
+    border: 2px solid;
+    border-color: $varGray;
+    // background-color: $varLightGray;
+    font-size: 16px;
+}
+.bf-checkbox {
+    display: flex;
+    flex-direction: row;
+}
+
+.checkbox-description {
+    padding: 0 5px 0 5px;
+}
+
+.checkbox-description-1 {
+    font-weight: 600;
+}
+
+.checkbox-description-2 {
+    color: $varDarkestGray;
+    font-weight: 300;
+}
+
+.bf-button {
+    display: flex;
+    justify-content: flex-end;
 }

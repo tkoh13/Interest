@@ -1,11 +1,15 @@
 import React from 'react';
 import { BsPlusLg } from 'react-icons/bs';
+import DropDownButton from '../dropdown/DropDownButton';
 
 const Footer = ({ currentUser, openModal }) => {
 
     const footer = currentUser ? (
-        <div onClick={() => openModal('createPin')} className="create-pin">
-            <BsPlusLg className="create-pin-icon"/>
+        <div  className="create-pin">
+        {/* <div onClick={() => openModal('createPin')} className="create-pin"> */}
+            {/* <BsPlusLg className="create-pin-icon"/> */}
+
+            <div className='pin-create'><DropDownButton type="pinCreate" actions={{ openModal, currentUser }} /></div>
             {/* <img src={window.plus} alt="create-pin" className="create-pin-icon" /> */}
         </div >
     ) : (

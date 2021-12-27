@@ -12,6 +12,8 @@ class User < ApplicationRecord
 
     has_many :boards
 
+    has_many :board_to_pins, :through => :boards, :source => :board_to_pins
+
     has_many :following,
         class_name: :Follow,
         foreign_key: :follower_id
