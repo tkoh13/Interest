@@ -12,7 +12,7 @@ class PinDetails extends Component{
         super(props)
         this.state = {
             user: null,
-            selectedBoard: null,
+            board: null,
         }
         this.handleSave = this.handleSave.bind(this);
     }

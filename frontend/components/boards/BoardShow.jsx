@@ -15,9 +15,10 @@ class BoardShow extends Component {
     }
 
     componentDidMount() {
-        const { fetchBoard, fetchUser, board, match: { params} } = this.props
+        const { fetchBoard, fetchUser, fetchSaves, board, currentUser, match: { params} } = this.props
         fetchBoard(params.boardId)
             .then(() => this.setState({ board: this.props.board }))
+        fetchSaves(currentUser.id);
             // .then(() => fetchUser(board.creator_id)) // can't do that since board isn't there yet
     }
 
@@ -54,13 +55,13 @@ class BoardShow extends Component {
             }
             return array;
         }
-        const { board } = this.props;
+        const { board, boards, saves } = this.props;
         if (!board) return null
         if (!board.pins.length) return null;
         const size = ["small", "medium", "large"]
         const pinsToDisplay = shuffle(board.pins).map((content) => {
             return (
-                <PinDisplay content={content} key={content.id} size={size[Math.floor(Math.random() * size.length)]} />
+                <PinDisplay content={content} key={content.id} size={size[Math.floor(Math.random() * size.length)] } boards={boards} saves={saves} />
             )
         })
         this.setState({
@@ -109,7 +110,7 @@ import { withRouter } from 'react-router-dom'
 import { fetchBoard } from '../../actions/board_actions'
 import { fetchUser } from '../../actions/user_actions'
 import { openModal } from '../../actions/modal_actions'
-
+import { fetchSaves, createSave, deleteSave } from "../../actions/save_actions";
 
 const mapStateToProps = ({ session, entities: { boards, users }}, { match }) => {
     return ({
@@ -121,10 +122,13 @@ const mapStateToProps = ({ session, entities: { boards, users }}, { match }) => 
     })
 };
 
-const mapDispatchToProps = dispatch => ({
-    fetchBoard: boardId => dispatch(fetchBoard(boardId)),
-    fetchUser: userId => dispatch(fetchUser(userId)),
-    openModal: modal => dispatch(openModal(modal)),
+const mapDispatchToProps = (dispatch) => ({
+  fetchBoard: (boardId) => dispatch(fetchBoard(boardId)),
+  fetchUser: (userId) => dispatch(fetchUser(userId)),
+  openModal: (modal) => dispatch(openModal(modal)),
+  fetchSaves: (userId) => dispatch(fetchSaves(userId)),
+  createSave: (save) => dispatch(createSave(save)),
+  deleteSave: (saveId) => dispatch(deleteSave(saveId)),
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BoardShow))

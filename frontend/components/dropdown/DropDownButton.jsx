@@ -26,6 +26,14 @@ const DropDownButton = (props) => {
                 {showDropDown ? <DropDownMenu type={type} actions={actions} boards={props.boards} pin={props.pin} setShowDropDown={setShowDropDown} /> : null}
             </div>
             break;
+        case 'boardSave-pd':
+            component = 
+            <div className={`dropdown-button ${type}`} onClick={toggleDropDown}>
+                {/* <FaChevronDown size={13} /> */}
+                {/* {props.boards[0].title} <FaChevronDown size={13} /> */}
+                {/* {showDropDown ? <DropDownMenu type={type} actions={actions} boards={props.boards} pin={props.pin} setShowDropDown={setShowDropDown} /> : null} */}
+            </div>
+            break;
         case 'profileCreate':
             component = 
             <div className={`dropdown-button ${type}`} onClick={toggleDropDown}>
