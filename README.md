@@ -1,10 +1,9 @@
-# Interest
-
 ## Overview
-![ss_1](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_1.jpg)
-
 Interest is a fullstack clone of Pinterest, a place of visual discovery and inspiration. Built on Ruby on Rails and Postgres on the backend with JavaScript and React on the front end, users can share images as pins and curate boards to group and organize pins. 
 [Live Site](https://interest-fsp.herokuapp.com/)
+
+![ss_1](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_1.jpg)
+
 
 ## Key Features
 ### User Authentication / Demo User
