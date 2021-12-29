@@ -15,23 +15,11 @@ class Splash extends Component {
         // window.addEventListener("scroll", this.handleScroll)
     }
 
-    // componentWillUnmount() {
-    //     window.removeEventListener("scroll", this.handleScroll);
-    // }
 
-    // handleScroll = (event) => {
-    //     console.log(event)
-    //     let scrollTop = event.srcElement.body.scrollTop
-    //     let itemScroll = 100
-    //     this.setState({scroll: scrollTop})
-    // }
-// const Splash = ({ loggedIn }) => {
     renderSplash = () => {
     // const renderSplash = () => {
         const { pins, openModal } = this.props;
         if (!pins || !pins.length) return null
-        // if (pins.every(!pin)) return null
-        // console.log(pins)
         return(
             <div className='splash-body' onScroll={() => openModal('login')}>
                 <h1>Get your next</h1>

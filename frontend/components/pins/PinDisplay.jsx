@@ -80,8 +80,6 @@ class PinDisplay extends Component {
 
   handleSave() {
     const { createSave, content, boards } = this.props;
-    // console.log(boards[0].id)
-    // console.log(content.id)
     const save = {
       board_id: this.state.board,
       // board_id: boards[0].id,

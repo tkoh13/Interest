@@ -24,7 +24,6 @@ class PinDetails extends Component{
         fetchSaves(currentUser.id)
         // fetchUser(currentUser.id)
         // fetchFollows(currentUser.id) 
-        // console.log(this.props.ownProps)
     }
     
     componentDidUpdate(prevProps, prevState) {
@@ -64,7 +63,6 @@ class PinDetails extends Component{
         } else {
             fetchUser(currentUser.id)
                 .then(() => this.renderFollowButton())
-                .then(() => console.log("renderFollowButton"))
         }
     }
 
@@ -116,8 +114,6 @@ class PinDetails extends Component{
 
     handleSave() {
         const { createSave, pin, boards } = this.props; 
-        // console.log(boards[0].id)
-        // console.log(pin.id)
         const save = {
             board_id: this.state.board,
             // board_id: boards[0].id,

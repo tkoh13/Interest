@@ -12,14 +12,6 @@ class FollowButton extends Component {
 
     componentDidMount() {
         const { fetchFollows, fetchUser, user, currentUser } = this.props;
-        // fetchUser(currentUser.id)
-        //     .then(() => currentUser.following.filter(u => u.id === user.id)[0] ? 
-        //     this.setState({ status: true }) :
-        //     console.log("not following"))
-        // debugger
-        // if (currentUser.id !== user.id) {
-        //     fetchFollows(currentUser.id)
-        // }
         if (currentUser.following.filter(u => u.id === user.id)[0]) {
             this.setState({ status: true })
         }

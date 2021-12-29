@@ -11,7 +11,6 @@ class FollowerModal extends Component {
         const { fetchFollows, fetchUser, user, currentUser } = this.props;
         // debugger
         if (currentUser.id !== user.id) {
-            console.log("follow modal mount")
             fetchFollows(currentUser.id)
         }
     }

@@ -18,8 +18,10 @@ class ContentDisplay extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.pins.length !== this.props.pins.length) {
-            this.buildPinsDisplay();
+        // debugger
+        const { pins, boards } = this.props;
+        if (prevProps.pins !== pins && prevProps.boards !== boards) {
+          this.buildPinsDisplay();
         }
     }
 

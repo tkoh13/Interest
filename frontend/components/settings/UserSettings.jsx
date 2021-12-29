@@ -3,8 +3,6 @@ import { useState, useRef, useEffect } from 'react';
 import React from 'react';
 
 const UserSettings = ({currentUser, ownProps, openModal}) => {
-    console.log(currentUser)
-    console.log(ownProps)
     return (
         <div className="setting-container">
             <section>

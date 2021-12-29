@@ -5,7 +5,6 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 class HomePage extends Component {
     constructor(props) {
         super(props)
-    // console.log(props.history)
         // this.state = {
              
         // }

@@ -12,7 +12,6 @@ class ProfileShow extends Component {
     componentDidMount() {
         const { fetchUser, fetchBoards, fetchFollows, fetchSaves, userId, currentUser } = this.props
         if (userId !== currentUser.id) fetchUser(currentUser.id);
-        // console.log("profile mount")
         fetchFollows(userId);
         fetchBoards(userId);
         fetchSaves(userId);
@@ -152,13 +151,7 @@ import { createBoard } from '../../actions/board_actions';
 import { openModal } from '../../actions/modal_actions';
 import { withRouter } from 'react-router';
 
-// const mapStateToProps = (state, ownProps) => {
-//     console.log(state.entities.users[state.session.id])
-//     return{
-//         currentUser: state.entities.users[state.session.id],
-//         userId: ownProps.match.params.userId
-//     }
-// }
+
 const mapStateToProps = ({ session, entities: { users, boards, follows, saves } }, {match}) => ({
     currentUser: users[session.id],
     user: users[match.params.userId],

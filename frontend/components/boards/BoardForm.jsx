@@ -34,16 +34,6 @@ class BoardForm extends Component {
         }
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     const { fetchBoard, formType, board, boardId } = this.props
-    //     if (formType === 'Edit') {
-    //         if (prevProps.board !== board) {
-    //             console.log("prevState", prevState)
-    //             console.log("this.state", this.state)
-    //             this.setState(board)
-    //         }
-    //     }
-    // }
 
     renderDelete() {
         // debugger

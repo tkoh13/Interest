@@ -30,18 +30,8 @@ class BoardShow extends Component {
         if (prevProps.board !== board && board) {
             this.setState({ board: board })
             this.buildPinsDisplay();
-            // debugger
-            // fetchUser(board.creator_id)
-            //     .then(() => this.setState({ user: users[board.creator_id]}))
-            //     .then(() => this.setState({ board: board}))
-            //     .then(() => console.log("updating state"))
-                // console.log(this.props)
         }
         if (!this.state.user && this.state.board) {
-            // console.log(board.creator_id)
-            // this.setState({ user: users[board.creator_id] })
-                // .then(() => console.log("updating state"))
-            // debugger
             fetchUser(board.creator_id)
                 .then(() => this.setState({ user: users[board.creator_id] }))
         }

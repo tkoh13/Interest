@@ -19,7 +19,7 @@ const DropDownMenu = (props) => {
 
     switch (type) {
         case 'nav':          
-            // console.log(Object.values(actions)) 
+
             values = ['Settings', 'About', 'Log out'];
             component =
             <div className="dropdown-menu" ref={popupRef} >
