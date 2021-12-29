@@ -16,9 +16,9 @@ const NavBar = ({ currentUser, logout, openModal }) => {
       <NavLink to="/" className={isActive => "nav-link" + (!isActive ? "" : "selected")}>
         <div className="home-link">Home</div>
       </NavLink>
-      <NavLink to="/" className={isActive => "nav-link" + (!isActive ? "" : "selected")}>
+      {/* <NavLink to="/" className={isActive => "nav-link" + (!isActive ? "" : "selected")}>
         <div className="today-link">Today</div>
-      </NavLink>
+      </NavLink> */}
     </section>
   ) : (
     <section className="nb nb-content-left">
@@ -57,8 +57,9 @@ const NavBar = ({ currentUser, logout, openModal }) => {
     </section>
   ) : (
     <section className="nb nb-content-right">
-      <div className="about-link">
-        <NavLink to="/about">About</NavLink>
+      <div className="about-link" onClick={() => openModal('about')}>
+        About
+        {/* <NavLink to="/about">About</NavLink> */}
       </div>      
       <div>
         <button onClick={() => openModal('login')} id="login-button">Log In</button>

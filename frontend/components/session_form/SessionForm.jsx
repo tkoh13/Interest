@@ -38,7 +38,7 @@ class SessionForm extends Component {
     return(
       <ul>
         {errors.map((error, i) => (
-          <li key={`error-${i}`}>
+          <li key={`error-${i}`} className='session-errors'>
             {error}
           </li>
         ))}
