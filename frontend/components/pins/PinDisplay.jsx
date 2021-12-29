@@ -8,7 +8,7 @@ class PinDisplay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        user: null,
+        // user: null,
         board: null,
     }
   }
@@ -20,8 +20,11 @@ class PinDisplay extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    const { boards } = this.props
+    if (!boards) return null
     if (prevProps.content !== this.props.content) {
-        this.setState({ user: users[content.creator_id], board: boards[0].id });
+        this.setState({ board: boards[0].id });
+        // this.setState({ user: users[content.creator_id], board: boards[0].id });
     }
   }
 
