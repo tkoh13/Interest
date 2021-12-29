@@ -9,6 +9,7 @@ import FollowerModal from '../profile_page/FollowerModal';
 import FollowingModal from '../profile_page/FollowingModal';
 import BoardFormCreate from '../boards/BoardFormCreate';
 import BoardFormEdit from '../boards/BoardFormEdit';
+import About from '../about/About';
 
 const Modal = ({ modal, closeModal }) => {
     if (!modal) {
@@ -17,6 +18,9 @@ const Modal = ({ modal, closeModal }) => {
 // on signup welcome to interest (edit username) -> How do you identify? (gender) -> region and language -> topics
     let component;
     switch (modal) {
+        case 'about':
+            component = <About />;
+            break;
         case 'login':
             component = <SessionFormLogin />;
             break;
