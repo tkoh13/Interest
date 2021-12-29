@@ -190,3 +190,62 @@ input {
     background-image: linear-gradient(RGB(255, 255, 255, 0), RGB(255, 255, 255));
     opacity: 1;
 }
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-container h1 {
+  margin: 5px;
+  font-size: 30px;
+  font-weight: 400;
+  // color: $varRed;
+}
+
+.about-interest-logo-name {
+  color: $varRed;
+  font-weight: 600;
+  font-size: 30px;
+  padding: 0 5px 0 5px;
+}
+
+.about-container h2 {
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 400;
+  // color: $varRed;
+}
+
+.about-container h3 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 400;
+  // color: $varRed;
+}
+
+.about-container h4 {
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 400;
+  // color: $varRed;
+}
+
+.built-with {
+  margin-top: 20px;
+  margin: 5px;
+}
+
+.about-links {
+  display: flex;
+  flex-direction: row;
+}
+
+.about-links a {
+  margin: 8px;
+}
