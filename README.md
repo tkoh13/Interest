@@ -6,11 +6,18 @@ Interest is a fullstack clone of Pinterest, a place of visual discovery and insp
 
 
 ## Key Features
-### User Authentication / Demo User
+### User Authentication / Demo User: 
+Using the BCrypt gem, create an account to interact with other users and pins
 ![ss_2](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_2.jpg)
 
-### Pins Creation
+### Pins: 
+Create/delete and save pins to boards
 ![ss_3](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_3.jpg)
+![ss_4](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_4.jpg)
+
+### Board: 
+Create a collection of your favorite pins 
+![ss_5](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_5.jpg)
 
 ## Technologies
 - Javascript
