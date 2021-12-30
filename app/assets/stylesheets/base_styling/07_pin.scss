@@ -86,14 +86,14 @@
     align-items: center;
 }
 
-.pd-action-container .dropdown-menu {
+.dropdown-menu-boardSave {
     z-index: 1500;
-    position: absolute;
+    position: fixed;
     right: 5%;
     margin-top: 5px;
-    // top: 50%;
-    // background-color: $varOffWhite;
-    background-color: rgba(0, 0, 0, 0.1);
+    top: 10%;
+    background-color: $varOffWhite;
+    // background-color: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     width: 220px;
     box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
@@ -112,8 +112,9 @@
     //     font-weight: 400;
     // }
     
-    .pd-action-container .dropdown-item {
+.dropdown-item-boardSave {
         display: flex;
+        flex-direction: row;
         cursor: pointer;
         align-items: center;
         padding-left: 8px;
@@ -234,6 +235,11 @@
     box-sizing: border-box;
 }
 
+.pin-details-right h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
 .pin-details-actions {
     // padding-top: 64px;
     display: flex;
@@ -266,6 +272,7 @@
     // width: 236px;
     overflow: hidden;
     height: 60px;
+    cursor: pointer;
 }
 
 .save-actions .icon-container {
@@ -282,30 +289,30 @@
     background-color: $varDarkGray;
 }
 
-// .pin-details-container .dropdown-button{
-    //     display: flex;
-    //     position: relative;
-    //     align-items: center;
-    //     justify-content: space-between;
-    //     border-radius: 100px;
-    //     right: 1%;
-    //     margin-right: 15px;
-    //     height: 22px;
-    //     padding: 0px 5px;
-    //     cursor: pointer;
-    // }
-    
-    .pin-details-container .dropdown-menu {
-        z-index: 1000;
-        position: absolute;
-        right: 5%;
-        margin-top: 5px;
-        // top: 50%;
-        background-color: $varOffWhite;
-        border-radius: 8px;
-        width: 180px;
-        box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
+.pin-details-container .dropdown-button{
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 100px;
+        right: 1%;
+        margin-right: 15px;
+        height: 22px;
+        padding: 0px 5px;
+        cursor: pointer;
     }
+    
+    // .pin-details-container .dropdown-menu {
+    //     z-index: 3000;
+    //     position: absolute;
+    //     right: 5%;
+    //     margin-top: 5px;
+    //     // top: 50%;
+    //     background-color: $varOffWhite;
+    //     border-radius: 8px;
+    //     width: 180px;
+    //     box-shadow: 0 0 8px rgba(0, 0, 0, 10%);
+    // }
     
     .pin-details-container .dropdown-header {
         display: flex;
@@ -336,3 +343,19 @@
     .pin-details-container .dropdown-item:hover {
         background: $varDarkGray;
     }
+
+.delete-pin {
+    font-family: $font;
+    border: none;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 30px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: $varGray;
+    color: $varBlack;
+    font-weight: 600;
+    font-size: 15px;
+    width: 80px;
+}
