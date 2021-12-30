@@ -24,7 +24,7 @@ class BoardShow extends Component {
 
     componentDidUpdate(prevProps) {
         const { fetchUser, board, users, saves } = this.props
-        if (prevProps.saves.length !== saves.length) {
+        if (prevProps.saves !== saves) {
             this.buildPinsDisplay(); 
         }
         if (prevProps.board !== board && board) {

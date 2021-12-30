@@ -8,7 +8,7 @@ const DropDownButton = (props) => {
     const [showDropDown, setShowDropDown] = useState(false);
     const toggleDropDown = () => setShowDropDown(!showDropDown);
     const { type, actions } = props
-
+    // debugger
     let component;
     switch (type) {
         case 'nav':
@@ -28,7 +28,8 @@ const DropDownButton = (props) => {
             break;
         case 'boardSave-pd':
             component = 
-            <div className={`dropdown-button ${type}`} onClick={toggleDropDown}>
+            <div className={`dropdown-button ${type}`}>
+            {/* <div className={`dropdown-button ${type}`} onClick={toggleDropDown}> */}
                 {/* <FaChevronDown size={13} /> */}
                 {/* {props.boards[0].title} <FaChevronDown size={13} /> */}
                 {/* {showDropDown ? <DropDownMenu type={type} actions={actions} boards={props.boards} pin={props.pin} setShowDropDown={setShowDropDown} /> : null} */}

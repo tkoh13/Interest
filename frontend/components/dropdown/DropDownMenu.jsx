@@ -31,14 +31,14 @@ const DropDownMenu = (props) => {
             break;
         case 'boardSave':
             component = 
-            <div className="dropdown-menu" ref={popupRef} >
+            <div className={`dropdown-menu-${type}`} ref={popupRef} >
                 {props.boards.map(board => (
-                    <div key={board.id}>
-                        <div className="dropdown-item" key={board.id}>{board.title}</div>
-                        <button id='login-button' onClick={() => createSave({board_id: board.id, pin_id: props.pin.id})}>Save</button>
+                    <div key={board.id} className={`dropdown-item-${type}`}>
+                        <div className={`dropdown-item-${type}`} key={board.id}>{board.title}</div>
+                        <span><button id='login-button' onClick={() => createSave({board_id: board.id, pin_id: props.pin.id})}>Save</button></span>
                     </div>
                 ))}
-                <div className="dropdown-item" onClick={() => openModal('createBoard')}>
+                <div className={`dropdown-item-${type}`} onClick={() => openModal('createBoard')}>
                     <span>Create a board <BsPlusLg /></span> 
                 </div>
             </div>
