@@ -104,7 +104,7 @@ class PinDetails extends Component{
     renderDeletePin() {
         const { saves, pin, boards, currentUser, deletePin } = this.props;
         if (pin.creator_id === currentUser.id) {
-            return <Link to={`/users/${currentUser.id}/pins`}><div onClick={() => deletePin(pin.id)}>Delete Pin</div></Link> 
+            return <Link to={`/users/${currentUser.id}/pins`}><div className='delete-pin' onClick={() => deletePin(pin.id)}>Delete Pin</div></Link> 
         }
     }
 
@@ -164,7 +164,7 @@ class PinDetails extends Component{
                         </div>
                         <h1>{pin.title}</h1>
                         <h2>Published on {date.toDateString()}</h2>
-                        <h2>{pin.description}</h2>
+                        <h2>Description: {pin.description}</h2>
                         <Link to={`/users/${user.id}`}><img src={user.photoUrl} alt="user-photo"
                             style={{ width: "30px", height: "30px", borderRadius: "100%", objectFit: "cover" }} /></Link>
                         
