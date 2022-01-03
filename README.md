@@ -15,9 +15,13 @@ Create/delete and save pins to boards
 ![ss_3](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_3.jpg)
 ![ss_4](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_4.jpg)
 
-### Board: 
+### Boards: 
 Create a collection of your favorite pins 
 ![ss_5](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_5.jpg)
+
+### Follows: 
+![ss_6](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_6.jpg)
+![ss_7](https://github.com/tkoh13/Interest/blob/main/app/assets/images/SS_7.jpg)
 
 ## Technologies
 - Javascript
